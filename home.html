@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>خانه</title>
+</head>
+<body style="background:#07070c;color:white;font-family:sans-serif;text-align:center;padding-top:100px">
+
+<h1>خوش آمدید به ویرا استایل ✨</h1>
+
+<button onclick="logout()">خروج</button>
+
+<script>
+function logout(){
+    localStorage.removeItem("vira_session");
+    location.href="index.html";
+}
+</script>
+
+</body>
+</html>
