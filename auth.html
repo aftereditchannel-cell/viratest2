@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ورود | ویراستایل</title>
+<title>ورود | ویرا استایل</title>
 
 <link rel="stylesheet" href="auth.css">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -20,12 +20,13 @@
     <h1>ویرا استایل</h1>
     <p class="subtitle">همراه هوشمند انتخاب استایل شما</p>
 
-    <button class="btn google" id="googleLogin">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
+    <!-- دکمه گوگل ویرایش شده برای ورود واقعی -->
+    <button class="btn google" onclick="window.location.href='/auth/google'">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Logo">
         ثبت نام با گوگل
     </button>
 
-    <div class="divider"><span>---------------</span></div>
+    <div class="divider"><span>یا</span></div>
     
     <button class="btn guest" id="guestLogin">
         ورود آزمایشی (مهمان)
@@ -40,8 +41,3 @@
 <script src="auth.js"></script>
 </body>
 </html>
-
-
-
-
-
