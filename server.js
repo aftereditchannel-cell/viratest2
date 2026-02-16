@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
@@ -5,56 +6,45 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const app = express();
 
-// ---------------------
-// تنظیمات OAuth گوگل
-// ---------------------
+// تنظیم Google OAuth
 passport.use(new GoogleStrategy({
-    clientID: '262062257189-0i4cdos5t0249h5ig4p00c6rfmk5g78u', // Client ID شما
-    clientSecret: '262062257189-0i4cdos5t0249h5ig4p00c6rfmk5g78u.apps.googleusercontent.com',                        // Client Secret شما
-    callbackURL: 'http://localhost:3000/auth/google/callback'  // مسیر Redirect
-},
-(accessToken, refreshToken, profile, done) => {
-    // profile اطلاعات کاربر گوگل
-    console.log(profile); // برای تست
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL
+}, (accessToken, refreshToken, profile, done) => {
     return done(null, profile);
 }));
 
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
+// تنظیم Session
 app.use(session({
     secret: 'vira_secret',
     resave: false,
     saveUninitialized: true
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ---------------------
-// مسیرهای OAuth گوگل
-// ---------------------
+// مسیر اصلی (optional) برای نمایش پیام
+app.get('/', (req, res) => {
+    res.send('<h2>در حال هدایت به سایت...</h2>');
+});
 
-// شروع ورود با گوگل
+// مسیر ورود با گوگل
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// مسیر callback گوگل
+// مسیر callback بعد از ورود گوگل
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        // اطلاعات کاربر گوگل را در session یا localStorage منتقل کنید
-        // برای نمونه، می‌توانیم به home.html منتقل کنیم
-        res.redirect('/home.html'); 
+        // redirect به GitHub Pages بعد از ورود موفق
+        const githubHome = 'https://aftereditchannel-cell.github.io/home.html';
+        res.redirect(`${githubHome}?user=${encodeURIComponent(JSON.stringify(req.user))}`);
     }
 );
 
-// مسیر برای تست ورود کاربر
-app.get('/home.html', (req, res) => {
-    if (!req.user) return res.send('لطفاً ابتدا وارد شوید.');
-    res.send(`<h1>خوش آمدید ${req.user.displayName}</h1><pre>${JSON.stringify(req.user, null, 2)}</pre>`);
-});
-
-// فایل‌های استاتیک
-app.use(express.static(__dirname));
-
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+// سرور گوش می‌دهد
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
