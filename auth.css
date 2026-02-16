@@ -66,8 +66,8 @@ body{
     justify-content:center;
     gap:10px;
     transition:.25s;
-    width:100%;          /* همه دکمه‌ها عرض یکسان */
-    padding:12px 0;      /* ارتفاع هماهنگ */
+    width:100%;
+    padding:12px 0;
     max-width:100%;
     box-sizing:border-box;
 }
