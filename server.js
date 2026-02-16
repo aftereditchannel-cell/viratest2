@@ -18,7 +18,6 @@ passport.use(new GoogleStrategy({
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
-// تنظیم Session
 app.use(session({
     secret: 'vira_secret',
     resave: false,
@@ -27,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// مسیر اصلی (optional) برای نمایش پیام
+// مسیر اصلی
 app.get('/', (req, res) => {
     res.send('<h2>در حال هدایت به سایت...</h2>');
 });
@@ -39,9 +38,18 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'em
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        // redirect به GitHub Pages بعد از ورود موفق
-        const githubHome = 'https://aftereditchannel-cell.github.io/home.html';
-        res.redirect(`${githubHome}?user=${encodeURIComponent(JSON.stringify(req.user))}`);
+        // redirect به GitHub Pages درست
+        const githubHome = 'https://aftereditchannel-cell.github.io/viratest2/home.html';
+
+        // فقط فیلدهای مهم را می‌فرستیم تا URL خیلی طولانی نشود
+        const userData = {
+            id: req.user.id,
+            displayName: req.user.displayName,
+            email: req.user.emails[0].value,
+            photo: req.user.photos[0].value
+        };
+
+        res.redirect(`${githubHome}?user=${encodeURIComponent(JSON.stringify(userData))}`);
     }
 );
 
