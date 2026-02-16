@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ورود | ویرا استایل</title>
+
 <link rel="stylesheet" href="auth.css">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -16,15 +18,15 @@
     <h1>ویرا استایل</h1>
     <p class="subtitle">همراه هوشمند انتخاب استایل شما</p>
 
-    <!-- دکمه گوگل واقعی -->
-    <button class="btn google" onclick="window.location.href='https://viratest2.onrender.com'">
+    <!-- دکمه گوگل واقعی متصل به Render -->
+    <button class="btn google" onclick="window.location.href='https://viratest2.onrender.com/auth/google'">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Logo">
         ثبت نام با گوگل
     </button>
 
     <div class="divider"><span>یا</span></div>
     
-    <!-- ورود مهمان همچنان JS -->
+    <!-- ورود مهمان -->
     <button class="btn guest" id="guestLogin">
         ورود آزمایشی (مهمان)
     </button>
@@ -35,6 +37,36 @@
 </div>
 
 <script src="auth.js"></script>
+
+<script>
+// ورود مهمان
+document.getElementById("guestLogin").onclick = () => {
+    const user = {
+        type: "guest",
+        name: "کاربر مهمان",
+        id: "guest_" + Date.now(),
+        login: new Date().toISOString()
+    };
+    localStorage.setItem("vira_session", JSON.stringify(user));
+    window.location.href = "home.html";
+};
+
+// خواندن اطلاعات کاربر واقعی گوگل بعد از Redirect از Render
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userStr = urlParams.get('user');
+    if(userStr){
+        try {
+            const user = JSON.parse(decodeURIComponent(userStr));
+            localStorage.setItem("vira_session", JSON.stringify(user));
+            // بعد از ذخیره، به صفحه اصلی بروید
+            window.location.href = "home.html";
+        } catch(e){
+            console.error("مشکل در خواندن اطلاعات کاربر گوگل:", e);
+        }
+    }
+});
+</script>
+
 </body>
 </html>
-
