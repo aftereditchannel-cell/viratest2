@@ -10,7 +10,7 @@ const app = express();
 // ---------------------
 passport.use(new GoogleStrategy({
     clientID: '262062257189-0i4cdos5t0249h5ig4p00c6rfmk5g78u', // Client ID شما
-    clientSecret: 'YOUR_CLIENT_SECRET',                        // Client Secret شما
+    clientSecret: '262062257189-0i4cdos5t0249h5ig4p00c6rfmk5g78u.apps.googleusercontent.com',                        // Client Secret شما
     callbackURL: 'http://localhost:3000/auth/google/callback'  // مسیر Redirect
 },
 (accessToken, refreshToken, profile, done) => {
