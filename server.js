@@ -6,7 +6,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const app = express();
 
-// تنظیم Google OAuth
+// Google OAuth
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -31,17 +31,14 @@ app.get('/', (req, res) => {
     res.send('<h2>در حال هدایت به سایت...</h2>');
 });
 
-// مسیر ورود با گوگل
+// ورود با گوگل
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// مسیر callback بعد از ورود گوگل
+// callback گوگل
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        // redirect به GitHub Pages درست
-        const githubHome = 'https://aftereditchannel-cell.github.io/viratest2/home.html';
-
-        // فقط فیلدهای مهم را می‌فرستیم تا URL خیلی طولانی نشود
+        // اطلاعات ضروری کاربر
         const userData = {
             id: req.user.id,
             displayName: req.user.displayName,
@@ -49,10 +46,11 @@ app.get('/auth/google/callback',
             photo: req.user.photos[0].value
         };
 
+        // redirect به GitHub Pages
+        const githubHome = 'https://aftereditchannel-cell.github.io/viratest2/home.html';
         res.redirect(`${githubHome}?user=${encodeURIComponent(JSON.stringify(userData))}`);
     }
 );
 
-// سرور گوش می‌دهد
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
