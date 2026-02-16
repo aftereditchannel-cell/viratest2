@@ -18,8 +18,7 @@ if(params.has('user')){
     window.history.replaceState({}, document.title, "home.html"); // پاک کردن query از URL
 }
 
-// گزینه جایگزین JS برای موبایل (در صورت block شدن لینک <a>)
-document.getElementById("googleLogin").addEventListener("click", (e) => {
-    e.preventDefault(); // جلوگیری از رفتار پیش‌فرض مرورگر
+// لینک امن گوگل برای موبایل و دسکتاپ
+document.getElementById("googleLogin").addEventListener("click", () => {
     window.location.assign("https://viratest2.onrender.com/auth/google");
 });
