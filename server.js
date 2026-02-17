@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // callback گوگل
-app.get('/auth/google/callback',
+app.get('/https://viratest2-nlnzxw.fly.dev/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
         // اطلاعات ضروری کاربر
@@ -54,3 +54,4 @@ app.get('/auth/google/callback',
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
