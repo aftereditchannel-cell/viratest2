@@ -1,41 +1,202 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فرم اطلاعات | ویرااستایل</title>
-<link rel="stylesheet" href="auth.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اطلاعات بدنی</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Vazirmatn, sans-serif;
+    }
+
+    body {
+      background: #0b0d17;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #1a1d2b;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      width: 33%;
+      height: 100%;
+      background: linear-gradient(90deg, #7b61ff, #5b7cff);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      opacity: 0.7;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 8px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #2a2e44;
+      background: #0f1220;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .body-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .type-btn {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid #2a2e44;
+      background: #0f1220;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .type-btn.active {
+      border-color: #7b61ff;
+      background: #171a2f;
+    }
+
+    .next-btn {
+      margin-top: 28px;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 18px;
+      background: #3a4580;
+      color: #cfd6ff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .next-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
+    <div class="progress-text">مرحله 1 از 3</div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
 
-<div class="auth-card">
-    <h1>اطلاعات تکمیلی</h1>
-    <p class="subtitle">لطفا اطلاعات خود را وارد کنید</p>
-    
-    <input type="text" id="fullname" placeholder="نام و نام خانوادگی" />
-    <input type="email" id="email" placeholder="ایمیل" />
-    
-    <button class="btn guest" id="submitForm">ثبت اطلاعات</button>
-</div>
+    <h1>اطلاعات بدنی</h1>
+    <div class="subtitle">برای پیشنهادات دقیق‌تر به ما بگو</div>
 
-<script>
-const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+    <label>قد (سانتی‌متر)</label>
+    <input id="height" type="number" placeholder="مثلاً 175" />
 
-if (!session.id) {
-    // اگر کسی وارد نشده → برگرد به auth.html
-    window.location.href = "auth.html";
-}
+    <label>وزن (کیلوگرم)</label>
+    <input id="weight" type="number" placeholder="مثلاً 70" />
 
-// بعد پر کردن فرم
-document.getElementById("submitForm").onclick = () => {
-    session.fullname = document.getElementById("fullname").value;
-    session.email = document.getElementById("email").value;
-    session.formFilled = true;
+    <label>سن (اختیاری)</label>
+    <input id="age" type="number" placeholder="مثلاً 25" />
 
-    localStorage.setItem("vira_session", JSON.stringify(session));
-    window.location.href = "home.html";
-};
-</script>
+    <label>فرم بدن</label>
+    <div class="body-types">
+      <div class="type-btn" data-type="لاغر">لاغر</div>
+      <div class="type-btn" data-type="متوسط">متوسط</div>
+      <div class="type-btn" data-type="ورزشکاری">ورزشکاری</div>
+      <div class="type-btn" data-type="پلاس‌سایز">پلاس‌سایز</div>
+    </div>
 
+    <button id="nextBtn" class="next-btn" disabled>بعدی</button>
+  </div>
+
+  <script>
+    const typeButtons = document.querySelectorAll('.type-btn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let selectedType = null;
+
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        typeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedType = btn.dataset.type;
+        checkForm();
+      });
+    });
+
+    const inputs = ['height', 'weight'];
+
+    inputs.forEach(id => {
+      document.getElementById(id).addEventListener('input', checkForm);
+    });
+
+    function checkForm() {
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+
+      if (height && weight && selectedType) {
+        nextBtn.disabled = false;
+      } else {
+        nextBtn.disabled = true;
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      const data = {
+        height: document.getElementById('height').value,
+        weight: document.getElementById('weight').value,
+        age: document.getElementById('age').value,
+        bodyType: selectedType
+      };
+
+      localStorage.setItem('bodyInfo', JSON.stringify(data));
+
+      alert('اطلاعات ذخیره شد — آماده رفتن به مرحله بعد');
+
+      // در آینده:
+      // window.location.href = "step2.html";
+    });
+  </script>
 </body>
 </html>
