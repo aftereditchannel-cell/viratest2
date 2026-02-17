@@ -21,6 +21,7 @@ if(params.has('user')){
 // گزینه جایگزین JS برای موبایل (در صورت block شدن لینک <a>)
 document.getElementById("googleLogin").addEventListener("click", (e) => {
     e.preventDefault(); // جلوگیری از رفتار پیش‌فرض مرورگر
-    window.location.assign("https://viratest2-nlnzxw.fly.dev/auth/google");
+    window.location.assign("https://viratest2-nlnzxw.vercel.app/api/auth/google");
 });
+
 
