@@ -28,35 +28,32 @@ body{
 
 /* کارت */
 .auth-card{
-    width:90%;
-    max-width:380px;
+    width:380px;
     padding:45px 35px;
     border-radius:28px;
     background:rgba(255,255,255,.05);
     backdrop-filter:blur(25px);
     text-align:center;
     box-shadow:0 0 70px rgba(0,0,0,.5);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
 }
 
 /* لوگو */
 .logo{
-    width:85px;
-    height:85px;
-    margin-bottom:25px;
+    width:85px;height:85px;margin:auto;
     border-radius:22px;
     background:linear-gradient(135deg,#b84cff,#ff66c4);
     display:flex;align-items:center;justify-content:center;
-    font-size:34px;font-weight:bold;
+    font-size:34px;font-weight:bold;margin-bottom:25px;
     box-shadow:0 0 50px rgba(210,90,255,.5);
 }
 
 .subtitle{opacity:.7;margin-bottom:30px}
 
-/* دکمه‌ها */
+/* دکمه ها */
 .btn{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
     border:none;
     border-radius:16px;
     font-size:15px;
@@ -66,36 +63,24 @@ body{
     justify-content:center;
     gap:10px;
     transition:.25s;
-    width:100%;
-    padding:12px 0;
-    max-width:100%;
-    box-sizing:border-box;
 }
 
 /* گوگل */
-.btn.google{
+.google{
     background:#ffffff12;
     color:white;
-    gap:8px;
 }
-
-.btn.google img{
-    width:20px;
-    height:20px;
-}
-
-.btn.google:hover{
+.google:hover{
     background:#ffffff22;
-    transform:translateY(-1px);
+    transform:translateY(-2px);
 }
 
 /* مهمان */
-.btn.guest{
+.guest{
     background:linear-gradient(135deg,#b84cff,#ff66c4);
     color:white;
 }
-
-.btn.guest:hover{
+.guest:hover{
     transform:translateY(-2px);
     filter:brightness(1.1);
 }
@@ -109,21 +94,4 @@ body{
     opacity:.5;
     font-size:13px;
     margin-top:20px;
-    text-align:center;
-}
-
-/* ریسپانسیو: موبایل */
-@media (max-width:480px){
-    .auth-card{
-        padding:35px 25px;
-    }
-    .btn{
-        font-size:14px;
-        padding:10px 0;
-    }
-    .logo{
-        width:70px;
-        height:70px;
-        font-size:28px;
-    }
 }
