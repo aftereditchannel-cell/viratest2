@@ -1,203 +1,105 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>اطلاعات بدنی</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فرم اطلاعات | ویرا استایل</title>
+<link rel="stylesheet" href="auth.css">
+<style>
+/* اسلایدها */
+.slide {
+    display: none;
+    text-align: center;
+    padding: 50px 20px;
+    color: white;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Vazirmatn, sans-serif;
-    }
+.slide.active {
+    display: block;
+}
 
-    body {
-      background: #0b0d17;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+input {
+    display: block;
+    width: 80%;
+    margin: 15px auto;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    box-sizing: border-box;
+}
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 24px;
-    }
-
-    .progress-text {
-      text-align: center;
-      margin-bottom: 12px;
-      opacity: 0.7;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: #1a1d2b;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 28px;
-    }
-
-    .progress-fill {
-      width: 33%;
-      height: 100%;
-      background: linear-gradient(90deg, #7b61ff, #5b7cff);
-    }
-
-    h1 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .subtitle {
-      opacity: 0.7;
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
-
-    label {
-      display: block;
-      margin: 16px 0 8px;
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid #2a2e44;
-      background: #0f1220;
-      color: #fff;
-      font-size: 15px;
-      outline: none;
-    }
-
-    .body-types {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .type-btn {
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid #2a2e44;
-      background: #0f1220;
-      color: #fff;
-      cursor: pointer;
-      text-align: center;
-      transition: 0.2s;
-      font-size: 14px;
-    }
-
-    .type-btn.active {
-      border-color: #7b61ff;
-      background: #171a2f;
-    }
-
-    .next-btn {
-      margin-top: 28px;
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: 18px;
-      background: linear-gradient(90deg, #7b61ff, #5b7cff);
-      color: #ffffff;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .next-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  </style>
+.btn-next {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg,#b84cff,#ff66c4);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.btn-next:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="progress-text">مرحله 1 از 3</div>
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
+
+<div class="auth-card">
+
+    <h1>اطلاعات تکمیلی</h1>
+    
+    <!-- اسلاید 1 -->
+    <div class="slide active" id="slide1">
+        <p>نام و نام خانوادگی خود را وارد کنید</p>
+        <input type="text" id="fullname" placeholder="نام و نام خانوادگی" />
+        <button class="btn-next" onclick="nextSlide()">بعدی</button>
     </div>
 
-    <h1>اطلاعات بدنی</h1>
-    <div class="subtitle">برای پیشنهادات دقیق‌تر به ما بگو</div>
-
-    <label>قد (سانتی‌متر)</label>
-    <input id="height" type="number" placeholder="مثلاً 175" />
-
-    <label>وزن (کیلوگرم)</label>
-    <input id="weight" type="number" placeholder="مثلاً 70" />
-
-    <label>سن (اختیاری)</label>
-    <input id="age" type="number" placeholder="مثلاً 25" />
-
-    <label>فرم بدن</label>
-    <div class="body-types">
-      <div class="type-btn" data-type="لاغر">لاغر</div>
-      <div class="type-btn" data-type="متوسط">متوسط</div>
-      <div class="type-btn" data-type="ورزشکاری">ورزشکاری</div>
-      <div class="type-btn" data-type="پلاس‌سایز">پلاس‌سایز</div>
+    <!-- اسلاید 2 -->
+    <div class="slide" id="slide2">
+        <p>ایمیل خود را وارد کنید</p>
+        <input type="email" id="email" placeholder="ایمیل" />
+        <button class="btn-next" onclick="finishSlides()">ثبت و ادامه</button>
     </div>
 
-    <button id="nextBtn" class="next-btn" disabled>&lt; بعدی>/button>
-  </div>
+</div>
 
-  <script>
-    const typeButtons = document.querySelectorAll('.type-btn');
-    const nextBtn = document.getElementById('nextBtn');
+<script>
+// بررسی session
+const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
 
-    let selectedType = null;
+if (!session.id) {
+    window.location.href = "auth.html"; // اگر کسی وارد نشده → برگرد
+}
 
-    typeButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        typeButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedType = btn.dataset.type;
-        checkForm();
-      });
-    });
+// مدیریت اسلایدها
+let currentSlide = 1;
+const totalSlides = 2;
 
-    const inputs = ['height', 'weight'];
+function nextSlide() {
+    document.getElementById(`slide${currentSlide}`).classList.remove("active");
+    currentSlide++;
+    if (currentSlide > totalSlides) currentSlide = totalSlides;
+    document.getElementById(`slide${currentSlide}`).classList.add("active");
+}
 
-    inputs.forEach(id => {
-      document.getElementById(id).addEventListener('input', checkForm);
-    });
+function finishSlides() {
+    // ذخیره اطلاعات فرم
+    session.fullname = document.getElementById("fullname").value || session.name;
+    session.email = document.getElementById("email").value;
+    session.formFilled = true;
 
-    function checkForm() {
-      const height = document.getElementById('height').value;
-      const weight = document.getElementById('weight').value;
+    localStorage.setItem("vira_session", JSON.stringify(session));
 
-      if (height && weight && selectedType) {
-        nextBtn.disabled = false;
-      } else {
-        nextBtn.disabled = true;
-      }
-    }
+    // هدایت به home.html
+    window.location.href = "home.html";
+}
+</script>
 
-    nextBtn.addEventListener('click', () => {
-      const data = {
-        height: document.getElementById('height').value,
-        weight: document.getElementById('weight').value,
-        age: document.getElementById('age').value,
-        bodyType: selectedType
-      };
-
-      localStorage.setItem('bodyInfo', JSON.stringify(data));
-
-      alert('اطلاعات ذخیره شد — آماده رفتن به مرحله بعد');
-
-      // در آینده:
-      // window.location.href = "step2.html";
-    });
-  </script>
 </body>
 </html>
+
