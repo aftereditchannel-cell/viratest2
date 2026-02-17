@@ -1,140 +1,129 @@
-
-You said:
 *{box-sizing:border-box}
 body{
-margin:0;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#07070c;
-font-family:'Vazirmatn',sans-serif;
-color:white;
-overflow:hidden;
+    margin:0;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#07070c;
+    font-family:'Vazirmatn',sans-serif;
+    color:white;
+    overflow:hidden;
 }
 
 /* نور پس زمینه */
 .bg-glow{
-position:fixed;
-width:900px;
-height:900px;
-background:radial-gradient(circle,#7a2cff55,transparent 70%);
-filter:blur(80px);
-animation:moveGlow 12s infinite alternate ease-in-out;
+    position:fixed;
+    width:900px;
+    height:900px;
+    background:radial-gradient(circle,#7a2cff55,transparent 70%);
+    filter:blur(80px);
+    animation:moveGlow 12s infinite alternate ease-in-out;
 }
 
 @keyframes moveGlow{
-from{transform:translate(-20%,-10%)}
-to{transform:translate(20%,10%)}
+    from{transform:translate(-20%,-10%)}
+    to{transform:translate(20%,10%)}
 }
 
 /* کارت */
 .auth-card{
-width:380px;
-padding:45px 35px;
-border-radius:28px;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(25px);
-text-align:center;
-box-shadow:0 0 70px rgba(0,0,0,.5);
+    width:90%;
+    max-width:380px;
+    padding:45px 35px;
+    border-radius:28px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(25px);
+    text-align:center;
+    box-shadow:0 0 70px rgba(0,0,0,.5);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 /* لوگو */
 .logo{
-width:85px;height:85px;margin:auto;
-border-radius:22px;
-background:linear-gradient(135deg,#b84cff,#ff66c4);
-display:flex;align-items:center;justify-content:center;
-font-size:34px;font-weight:bold;margin-bottom:25px;
-box-shadow:0 0 50px rgba(210,90,255,.5);
+    width:85px;
+    height:85px;
+    margin-bottom:25px;
+    border-radius:22px;
+    background:linear-gradient(135deg,#b84cff,#ff66c4);
+    display:flex;align-items:center;justify-content:center;
+    font-size:34px;font-weight:bold;
+    box-shadow:0 0 50px rgba(210,90,255,.5);
 }
 
 .subtitle{opacity:.7;margin-bottom:30px}
 
-/* دکمه ها */
+/* دکمه‌ها */
 .btn{
-width:100%;
-padding:15px;
-margin:10px 0;
-border:none;
-border-radius:16px;
-font-size:15px;
-cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-transition:.25s;
+    border:none;
+    border-radius:16px;
+    font-size:15px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    transition:.25s;
+    width:100%;          /* همه دکمه‌ها عرض یکسان */
+    padding:12px 0;      /* ارتفاع هماهنگ */
+    max-width:100%;
+    box-sizing:border-box;
 }
 
 /* گوگل */
-.google{
-background:#ffffff12;
-color:white;
+.btn.google{
+    background:#ffffff12;
+    color:white;
+    gap:8px;
 }
-.google:hover{
-background:#ffffff22;
-transform:translateY(-2px);
+
+.btn.google img{
+    width:20px;
+    height:20px;
+}
+
+.btn.google:hover{
+    background:#ffffff22;
+    transform:translateY(-1px);
 }
 
 /* مهمان */
-.guest{
-background:linear-gradient(135deg,#b84cff,#ff66c4);
-color:white;
+.btn.guest{
+    background:linear-gradient(135deg,#b84cff,#ff66c4);
+    color:white;
 }
-.guest:hover{
-transform:translateY(-2px);
-filter:brightness(1.1);
+
+.btn.guest:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.1);
 }
 
 .divider{
-margin:22px 0;
-opacity:.4;
+    margin:22px 0;
+    opacity:.4;
 }
 
 .terms{
-opacity:.5;
-font-size:13px;
-margin-top:20px;
-}             <!DOCTYPE html>
-<html lang="fa">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ورود | ویرا استایل</title>
+    opacity:.5;
+    font-size:13px;
+    margin-top:20px;
+    text-align:center;
+}
 
-<link rel="stylesheet" href="auth.css">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-</head>
-<body>
-
-<div class="bg-glow"></div>
-
-<div class="auth-card">
-
-    <div class="logo">V</div>
-
-    <h1>ویرا استایل</h1>
-    <p class="subtitle">همراه هوشمند انتخاب استایل شما</p>
-
-    <button class="btn google" id="googleLogin">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
-        ثبت نام با گوگل
-    </button>
-
-    <div class="divider"><span>یا</span></div>
-
-    <button class="btn guest" id="guestLogin">
-        ورود آزمایشی (مهمان)
-    </button>
-
-    <p class="terms">
-        با ادامه شما قوانین و حریم خصوصی را می‌پذیرید
-    </p>
-
-</div>
-
-<script src="auth.js"></script>
-</body>
-</html> 
+/* ریسپانسیو: موبایل */
+@media (max-width:480px){
+    .auth-card{
+        padding:35px 25px;
+    }
+    .btn{
+        font-size:14px;
+        padding:10px 0;
+    }
+    .logo{
+        width:70px;
+        height:70px;
+        font-size:28px;
+    }
+}
