@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فرم اطلاعات | ویرااستایل</title>
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-card">
+    <h1>اطلاعات تکمیلی</h1>
+    <p class="subtitle">لطفا اطلاعات خود را وارد کنید</p>
+    
+    <input type="text" id="fullname" placeholder="نام و نام خانوادگی" />
+    <input type="email" id="email" placeholder="ایمیل" />
+    
+    <button class="btn guest" id="submitForm">ثبت اطلاعات</button>
+</div>
+
+<script>
+const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+
+if (!session.id) {
+    // اگر کسی وارد نشده → برگرد به auth.html
+    window.location.href = "auth.html";
+}
+
+// بعد پر کردن فرم
+document.getElementById("submitForm").onclick = () => {
+    session.fullname = document.getElementById("fullname").value;
+    session.email = document.getElementById("email").value;
+    session.formFilled = true;
+
+    localStorage.setItem("vira_session", JSON.stringify(session));
+    window.location.href = "home.html";
+};
+</script>
+
+</body>
+</html>
