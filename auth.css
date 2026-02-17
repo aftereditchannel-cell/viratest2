@@ -11,19 +11,23 @@ body{
     overflow:hidden;
 }
 
-/* نور پس زمینه */
+/* نور پس زمینه (Glow واقعی) */
 .bg-glow{
     position:fixed;
-    width:900px;
-    height:900px;
+    top:0;
+    left:0;
+    width:250%;
+    height:250%;
     background:radial-gradient(circle,#7a2cff55,transparent 70%);
-    filter:blur(80px);
-    animation:moveGlow 12s infinite alternate ease-in-out;
+    filter:blur(150px);
+    z-index:-1;
+    animation:moveGlow 15s infinite alternate ease-in-out;
 }
 
 @keyframes moveGlow{
-    from{transform:translate(-20%,-10%)}
-    to{transform:translate(20%,10%)}
+    0% { transform:translate(-25%,-25%) rotate(0deg);}
+    50% { transform:translate(0%,0%) rotate(45deg);}
+    100% { transform:translate(25%,25%) rotate(90deg);}
 }
 
 /* کارت */
@@ -39,6 +43,7 @@ body{
     display:flex;
     flex-direction:column;
     align-items:center;
+    z-index:1;
 }
 
 /* لوگو */
@@ -66,8 +71,8 @@ body{
     justify-content:center;
     gap:10px;
     transition:.25s;
-    width:100%;          /* همه دکمه‌ها عرض یکسان */
-    padding:12px 0;      /* ارتفاع هماهنگ */
+    width:100%;
+    padding:12px 0;
     max-width:100%;
     box-sizing:border-box;
 }
@@ -78,12 +83,10 @@ body{
     color:white;
     gap:8px;
 }
-
 .btn.google img{
     width:20px;
     height:20px;
 }
-
 .btn.google:hover{
     background:#ffffff22;
     transform:translateY(-1px);
@@ -94,7 +97,6 @@ body{
     background:linear-gradient(135deg,#b84cff,#ff66c4);
     color:white;
 }
-
 .btn.guest:hover{
     transform:translateY(-2px);
     filter:brightness(1.1);
@@ -112,7 +114,7 @@ body{
     text-align:center;
 }
 
-/* ریسپانسیو: موبایل */
+/* ریسپانسیو موبایل */
 @media (max-width:480px){
     .auth-card{
         padding:35px 25px;
