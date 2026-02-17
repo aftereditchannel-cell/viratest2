@@ -32,7 +32,7 @@ app.get("/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-app.get("/auth/google/callback",
+app.get("https://viratest2-nlnzxw.vercel.app/api/auth/google",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     const user = encodeURIComponent(JSON.stringify(req.user));
@@ -43,3 +43,4 @@ app.get("/auth/google/callback",
 // ✅ مهم: استفاده از process.env.PORT و گوش دادن روی 0.0.0.0
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
+
