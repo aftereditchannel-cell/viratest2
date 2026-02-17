@@ -14,16 +14,20 @@ body{
 /* نور پس زمینه */
 .bg-glow{
     position:fixed;
-    width:900px;
-    height:900px;
+    width:120vmin;   /* همیشه بزرگتر از صفحه */
+    height:120vmin;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     background:radial-gradient(circle,#7a2cff55,transparent 70%);
     filter:blur(80px);
+    z-index:-1;
     animation:moveGlow 12s infinite alternate ease-in-out;
 }
 
 @keyframes moveGlow{
-    from{transform:translate(-20%,-10%)}
-    to{transform:translate(20%,10%)}
+    from{transform:translate(calc(-50% - 20%),calc(-50% - 10%))}
+    to{transform:translate(calc(-50% + 20%),calc(-50% + 10%))}
 }
 
 /* کارت */
@@ -39,6 +43,7 @@ body{
     display:flex;
     flex-direction:column;
     align-items:center;
+    z-index:1;
 }
 
 /* لوگو */
@@ -66,8 +71,8 @@ body{
     justify-content:center;
     gap:10px;
     transition:.25s;
-    width:100%;          /* همه دکمه‌ها عرض یکسان */
-    padding:12px 0;      /* ارتفاع هماهنگ */
+    width:100%;          
+    padding:12px 0;      
     max-width:100%;
     box-sizing:border-box;
 }
