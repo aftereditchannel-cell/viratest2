@@ -1,105 +1,276 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فرم اطلاعات | ویرا استایل</title>
-<link rel="stylesheet" href="auth.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>فرم چندمرحله‌ای</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-/* اسلایدها */
-.slide {
-    display: none;
-    text-align: center;
-    padding: 50px 20px;
-    color: white;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+
+body{
+background:#0b0d17;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+overflow:hidden;
 }
 
-.slide.active {
-    display: block;
+.container{
+width:100%;
+max-width:420px;
+padding:24px;
 }
 
-input {
-    display: block;
-    width: 80%;
-    margin: 15px auto;
-    padding: 12px;
-    border-radius: 12px;
-    border: none;
-    font-size: 15px;
-    box-sizing: border-box;
+.progress-bar{
+width:100%;
+height:6px;
+background:#1a1d2b;
+border-radius:999px;
+overflow:hidden;
+margin-bottom:28px;
 }
 
-.btn-next {
-    margin-top: 20px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg,#b84cff,#ff66c4);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.25s;
+.progress-fill{
+height:100%;
+background:linear-gradient(90deg,#7b61ff,#5b7cff);
+width:33%;
+transition:.3s;
 }
-.btn-next:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
+
+.step{
+display:none;
+animation:fade .3s ease;
+}
+
+.step.active{
+display:block;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateX(10px)}
+to{opacity:1;transform:translateX(0)}
+}
+
+h1{font-size:22px;margin-bottom:6px}
+.subtitle{opacity:.7;margin-bottom:24px;font-size:14px}
+label{display:block;margin:16px 0 8px;font-size:14px;opacity:.9}
+
+input{
+width:100%;
+padding:14px;
+border-radius:14px;
+border:1px solid #2a2e44;
+background:#0f1220;
+color:#fff;
+font-size:15px;
+outline:none;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.btn{
+padding:12px;
+border-radius:14px;
+border:1px solid #2a2e44;
+background:#0f1220;
+color:#fff;
+cursor:pointer;
+text-align:center;
+transition:.2s;
+font-size:14px;
+}
+
+.btn.active{
+border-color:#7b61ff;
+background:#171a2f;
+}
+
+.next-btn{
+margin-top:28px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+background:linear-gradient(90deg,#7b61ff,#5b7cff);
+color:#fff;
+font-size:16px;
+cursor:pointer;
+}
+
+.next-btn:disabled{
+opacity:.5;
+cursor:not-allowed;
+}
+
+.back{
+margin-bottom:14px;
+opacity:.6;
+cursor:pointer;
+font-size:14px;
 }
 </style>
 </head>
+
 <body>
+<div class="container">
 
-<div class="auth-card">
+<div class="progress-bar">
+<div class="progress-fill" id="progress"></div>
+</div>
 
-    <h1>اطلاعات تکمیلی</h1>
-    
-    <!-- اسلاید 1 -->
-    <div class="slide active" id="slide1">
-        <p>نام و نام خانوادگی خود را وارد کنید</p>
-        <input type="text" id="fullname" placeholder="نام و نام خانوادگی" />
-        <button class="btn-next" onclick="nextSlide()">بعدی</button>
-    </div>
+<!-- STEP 1 -->
+<div class="step active" id="step1">
+<h1>اطلاعات بدنی</h1>
+<div class="subtitle">برای پیشنهاد دقیق‌تر</div>
 
-    <!-- اسلاید 2 -->
-    <div class="slide" id="slide2">
-        <p>ایمیل خود را وارد کنید</p>
-        <input type="email" id="email" placeholder="ایمیل" />
-        <button class="btn-next" onclick="finishSlides()">ثبت و ادامه</button>
-    </div>
+<label>قد</label>
+<input id="height" type="number">
+
+<label>وزن</label>
+<input id="weight" type="number">
+
+<label>فرم بدن</label>
+<div class="grid" id="bodyTypes">
+<div class="btn">لاغر</div>
+<div class="btn">متوسط</div>
+<div class="btn">ورزشکاری</div>
+<div class="btn">پلاس‌سایز</div>
+</div>
+
+<button id="next1" class="next-btn" disabled>بعدی</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="step" id="step2">
+<div class="back" onclick="prevStep()">← بازگشت</div>
+
+<h1>هویت و سبک</h1>
+<div class="subtitle">انتخاب کن</div>
+
+<label>جنسیت</label>
+<div class="grid" id="gender">
+<div class="btn">مرد</div>
+<div class="btn">زن</div>
+<div class="btn">غیردودویی</div>
+<div class="btn">ترجیح می‌دهم نگویم</div>
+</div>
+
+<label>سبک (چند انتخاب)</label>
+<div class="grid" id="styles">
+<div class="btn">مینیمال</div>
+<div class="btn">خیابانی</div>
+<div class="btn">رسمی</div>
+<div class="btn">کژوال</div>
+<div class="btn">اسپرت</div>
+<div class="btn">لاکچری</div>
+</div>
+
+<button id="next2" class="next-btn" disabled>بعدی</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="step" id="step3">
+<div class="back" onclick="prevStep()">← بازگشت</div>
+
+<h1>پایان</h1>
+<div class="subtitle">اطلاعات ثبت شد</div>
+
+<button class="next-btn" onclick="submitForm()">ثبت نهایی</button>
+</div>
 
 </div>
 
 <script>
-// بررسی session
-const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+let currentStep=1
+const progress=document.getElementById("progress")
 
-if (!session.id) {
-    window.location.href = "auth.html"; // اگر کسی وارد نشده → برگرد
+function showStep(step){
+document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"))
+document.getElementById("step"+step).classList.add("active")
+progress.style.width=(step*33)+"%"
+currentStep=step
 }
 
-// مدیریت اسلایدها
-let currentSlide = 1;
-const totalSlides = 2;
+function nextStep(){showStep(currentStep+1)}
+function prevStep(){showStep(currentStep-1)}
 
-function nextSlide() {
-    document.getElementById(`slide${currentSlide}`).classList.remove("active");
-    currentSlide++;
-    if (currentSlide > totalSlides) currentSlide = totalSlides;
-    document.getElementById(`slide${currentSlide}`).classList.add("active");
+/* STEP 1 LOGIC */
+let selectedBody=null
+const bodyBtns=document.querySelectorAll("#bodyTypes .btn")
+const next1=document.getElementById("next1")
+
+bodyBtns.forEach(btn=>{
+btn.onclick=()=>{
+bodyBtns.forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+selectedBody=btn.textContent
+checkStep1()
+}
+})
+
+document.getElementById("height").oninput=checkStep1
+document.getElementById("weight").oninput=checkStep1
+
+function checkStep1(){
+const h=document.getElementById("height").value
+const w=document.getElementById("weight").value
+next1.disabled=!(h&&w&&selectedBody)
 }
 
-function finishSlides() {
-    // ذخیره اطلاعات فرم
-    session.fullname = document.getElementById("fullname").value || session.name;
-    session.email = document.getElementById("email").value;
-    session.formFilled = true;
+next1.onclick=nextStep
 
-    localStorage.setItem("vira_session", JSON.stringify(session));
+/* STEP 2 LOGIC */
+let selectedGender=null
+let selectedStyles=[]
+const next2=document.getElementById("next2")
 
-    // هدایت به home.html
-    window.location.href = "home.html";
+document.querySelectorAll("#gender .btn").forEach(btn=>{
+btn.onclick=()=>{
+document.querySelectorAll("#gender .btn").forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+selectedGender=btn.textContent
+checkStep2()
+}
+})
+
+document.querySelectorAll("#styles .btn").forEach(btn=>{
+btn.onclick=()=>{
+btn.classList.toggle("active")
+const val=btn.textContent
+selectedStyles.includes(val)?
+selectedStyles=selectedStyles.filter(v=>v!==val):
+selectedStyles.push(val)
+checkStep2()
+}
+})
+
+function checkStep2(){
+next2.disabled=!(selectedGender&&selectedStyles.length)
+}
+
+next2.onclick=nextStep
+
+function submitForm(){
+const data={
+height:height.value,
+weight:weight.value,
+body:selectedBody,
+gender:selectedGender,
+styles:selectedStyles
+}
+localStorage.setItem("formData",JSON.stringify(data))
+alert("ثبت شد 🚀")
 }
 </script>
 
 </body>
 </html>
-
