@@ -2,18 +2,37 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>خانه</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خانه | ویرا استایل</title>
+<link rel="stylesheet" href="auth.css">
 </head>
-<body style="background:#07070c;color:white;font-family:sans-serif;text-align:center;padding-top:100px">
+<body style="background:#07070c;color:white;font-family:'Vazirmatn',sans-serif;text-align:center;padding-top:100px">
 
 <h1>خوش آمدید به ویرا استایل ✨</h1>
+<p id="welcomeText"></p>
 
-<button onclick="logout()">خروج</button>
+<button onclick="logout()" class="btn guest" style="margin-top:20px; padding:12px 20px;">خروج</button>
 
 <script>
+// بررسی session
+const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+
+// اگر کاربر وارد نشده یا فرم پر نکرده → هدایت به صفحه مناسب
+if (!session.id) {
+    window.location.href = "auth.html";
+} else if (!session.formFilled) {
+    window.location.href = "form.html";
+} else {
+    // خوش آمدگویی با نام یا گوگل/مهمان
+    const welcomeText = document.getElementById("welcomeText");
+    welcomeText.innerText = `سلام ${session.fullname || session.name}!`;
+}
+
+// تابع خروج
 function logout(){
     localStorage.removeItem("vira_session");
-    location.href="index.html";
+    window.location.href = "auth.html";
 }
 </script>
 
