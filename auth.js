@@ -1,27 +1,45 @@
+// بررسی وضعیت ورود قبلی
+const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+
+// اگر کاربر قبلا فرم پر کرده → مستقیم به home
+if (session.id && session.formFilled) {
+    window.location.href = "home.html";
+}
+
+// لینک دکمه گوگل روی موبایل و دسکتاپ
+const googleLoginBtn = document.getElementById("googleLogin");
+
+// برای موبایل لینک مستقیم Render
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+    googleLoginBtn.href = "https://viratest2.onrender.com/auth/google";
+}
+
 // ورود مهمان
 document.getElementById("guestLogin").onclick = () => {
     const user = {
         type: "guest",
         name: "کاربر مهمان",
         id: "guest_" + Date.now(),
-        login: new Date().toISOString()
+        login: new Date().toISOString(),
+        formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
-    window.location.href = "home.html";
+    window.location.href = "form.html";
 };
 
-// پردازش گوگل: اگر URL حاوی user باشد
-const params = new URLSearchParams(window.location.search);
-if(params.has('user')){
-    const user = JSON.parse(decodeURIComponent(params.get('user')));
+// ثبت نام با گوگل (شبیه‌سازی)
+googleLoginBtn.onclick = (e) => {
+    // اگر موبایل هست، لینک مستقیم Render رو باز کن
+    if (/Mobi|Android/i.test(navigator.userAgent)) return;
+    
+    e.preventDefault();
+    const user = {
+        type: "google",
+        name: "کاربر گوگل",
+        id: "google_" + Date.now(),
+        login: new Date().toISOString(),
+        formFilled: false
+    };
     localStorage.setItem("vira_session", JSON.stringify(user));
-    window.history.replaceState({}, document.title, "home.html"); // پاک کردن query از URL
-}
-
-// گزینه جایگزین JS برای موبایل (در صورت block شدن لینک <a>)
-document.getElementById("googleLogin").addEventListener("click", (e) => {
-    e.preventDefault(); // جلوگیری از رفتار پیش‌فرض مرورگر
-    window.location.assign("https://viratest2-nlnzxw.vercel.app/api/auth/google");
-});
-
-
+    window.location.href = "form.html";
+};
