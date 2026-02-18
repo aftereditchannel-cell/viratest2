@@ -9,7 +9,7 @@
     body {
       margin:0;
       padding:0;
-      font-family: 'Vazirmatn', sans-serif;
+      font-family:'Vazirmatn', sans-serif;
       background-color:#1a1a1a;
       color:#fff;
       min-height:100vh;
@@ -23,18 +23,28 @@
       overflow-y:auto;
     }
 
+    /* Greeting */
     .text-muted-foreground {
       font-size:14px;
       line-height:20px;
       color:rgb(135,135,146);
-      margin-bottom:12px;
+      margin-bottom:4px;
+    }
+
+    /* Main heading */
+    .main-title {
+      font-family: Vazirmatn, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 32px;
+      color: rgb(242, 242, 242);
+      margin: 4px 0 16px;
     }
 
     .quick-actions {
       display:grid;
       grid-template-columns:1fr;
       gap:12px;
-      margin-top:8px;
       margin-bottom:24px;
     }
 
@@ -123,7 +133,12 @@
       سلام، امیر! 👋
     </p>
 
-    <!-- Quick Actions FIRST -->
+    <!-- New Title -->
+    <h1 class="main-title">
+      امروز چیکار کنیم؟
+    </h1>
+
+    <!-- Quick Actions -->
     <div class="quick-actions">
       <button class="gradient-btn">
         ✨
@@ -141,7 +156,7 @@
       </button>
     </div>
 
-    <!-- Outfit Card AFTER buttons -->
+    <!-- Outfit Card -->
     <div class="outfit-card">
       <h3>استایل روزانه</h3>
       <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
