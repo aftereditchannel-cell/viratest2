@@ -50,11 +50,10 @@
 
     /* Buttons */
     .gradient-btn {
-      width:100%;
       height:52px;
       display:flex;
       align-items:center;
-      justify-content:flex-start;
+      justify-content:flex-end; /* راست چین متن */
       gap:16px;
       padding:16px;
       border:none;
@@ -71,24 +70,50 @@
       transform:scale(0.98);
     }
 
-    /* Outfit Cards */
+    /* اختصاصی دکمه‌ها */
+    .btn-today {
+      background-image: linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245));
+      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
+    }
+
+    .btn-party {
+      background-image: linear-gradient(to left, rgb(61, 122, 245), rgb(115, 90, 242));
+      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
+    }
+
+    .btn-surprise {
+      background-image: linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245)); /* درست شد */
+      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
+    }
+
+    /* پیشنهاد امروز */
+    .today-suggestion {
+      font-family: Vazirmatn, sans-serif;
+      font-size:18px;
+      font-weight:700;
+      line-height:28px;
+      color: rgb(242,242,242);
+      margin:0 0 12px;
+    }
+
+    /* Outfit Cards Container */
     .outfit-cards-container {
       display:flex;
       gap:16px;
-      flex-wrap:wrap;
       margin-bottom:20px;
     }
 
     .outfit-card {
-      flex:1;
-      min-width:220px;
-      max-width:320px;
+      flex:1 1 calc((100% - 32px)/3); /* تقسیم عرض صفحه بر سه، با فاصله */
+      min-width:0; /* جلوگیری از overflow */
       background-color: rgb(20, 20, 26);
       border: 0.8px solid rgba(34, 34, 42, 0.5);
       border-radius:12px;
       overflow:hidden;
       color: rgb(242, 242, 242);
       box-shadow: rgba(0, 0, 0, 0.05) 0 1px 2px 0px;
+      display:flex;
+      flex-direction:column;
     }
 
     .outfit-top-gradient {
@@ -144,35 +169,6 @@
       color:#4f46e5;
     }
 
-    /* اختصاصی دکمه‌ها */
-    .btn-today {
-      background-image: linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245));
-      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
-      justify-content:center;
-    }
-
-    .btn-party {
-      background-image: linear-gradient(to left, rgb(61, 122, 245), rgb(115, 90, 242));
-      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
-      justify-content:center;
-    }
-
-    .btn-surprise {
-      background-image: linear-gradient(to left, rgba(115,90,242,0.3), rgba(61,122,245,0.3));
-      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
-      justify-content:center;
-    }
-
-    /* پیشنهاد امروز */
-    .today-suggestion {
-      font-family: Vazirmatn, sans-serif;
-      font-size:18px;
-      font-weight:700;
-      line-height:28px;
-      color: rgb(242,242,242);
-      margin:0 0 12px;
-    }
-
   </style>
 </head>
 <body>
@@ -211,34 +207,28 @@
     <div class="outfit-cards-container">
       <!-- Card 1 -->
       <div class="outfit-card">
-        <div class="outfit-top-gradient">
-          🌟 استایل ویژه امروز 🌟
-        </div>
+        <div class="outfit-top-gradient">🌟 استایل ویژه امروز 🌟</div>
         <h3>استایل روزانه</h3>
         <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-        <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <p>تناسب با شکل بدن و سبک انتخاب شده</p>
         <button class="gradient-btn save-btn">⭐ ذخیره</button>
       </div>
 
       <!-- Card 2 -->
       <div class="outfit-card">
-        <div class="outfit-top-gradient">
-          🌟 استایل ویژه امروز 🌟
-        </div>
+        <div class="outfit-top-gradient">🌟 استایل ویژه امروز 🌟</div>
         <h3>استایل روزانه</h3>
         <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-        <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <p>تناسب با شکل بدن و سبک انتخاب شده</p>
         <button class="gradient-btn save-btn">⭐ ذخیره</button>
       </div>
 
       <!-- Card 3 -->
       <div class="outfit-card">
-        <div class="outfit-top-gradient">
-          🌟 استایل ویژه امروز 🌟
-        </div>
+        <div class="outfit-top-gradient">🌟 استایل ویژه امروز 🌟</div>
         <h3>استایل روزانه</h3>
         <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-        <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <p>تناسب با شکل بدن و سبک انتخاب شده</p>
         <button class="gradient-btn save-btn">⭐ ذخیره</button>
       </div>
     </div>
