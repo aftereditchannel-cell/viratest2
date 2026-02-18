@@ -31,11 +31,11 @@
     .outfit-card h3 { font-size:1.2rem; font-weight:bold; margin-bottom:8px; }
     .outfit-card p { color:#ccc; margin-bottom:6px; }
 
-    /* Gradient Glow Buttons */
+    /* Gradient Button (عمومی) */
     .gradient-btn {
       display:flex;
       align-items:center;
-      justify-content:flex-start; /* متن سمت راست، آیکون سمت چپ */
+      justify-content:flex-start;
       border:none;
       border-radius:16px;
       padding:16px;
@@ -47,26 +47,33 @@
       box-shadow: 0 0 60px -10px rgba(115,90,242,0.3);
       transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
       width:100%;
+      gap:12px;
     }
 
     .gradient-btn:active { transform: scale(0.98); }
 
-    /* Grid container for buttons */
-    .quick-actions {
-      display:grid;
-      grid-template-columns:1fr; /* یک ستون */
-      gap:12px;
-      margin-top:24px;
-      height:180px; /* ارتفاع ثابت کل grid */
-    }
-
-    /* Style for SVG icon inside button */
     .gradient-btn svg {
       width:20px;
       height:20px;
       fill:#fff;
-      margin-right:8px; /* فاصله از متن سمت راست */
       flex-shrink:0;
+    }
+
+    /* استایل اختصاصی دو دکمه پایین */
+    .special-btn {
+      background-image: linear-gradient(to left, rgb(61,122,245), rgb(115,90,242));
+      box-shadow: rgba(115, 90, 242, 0.3) 0px 0px 60px -10px;
+      height:52px;
+      border-radius:16px;
+      gap:16px; /* فاصله بیشتر متن و آیکون */
+    }
+
+    /* Grid container */
+    .quick-actions {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:24px;
     }
 
     /* Bottom Navigation */
@@ -92,6 +99,7 @@
 
     .bottom-nav button span:first-child { font-size:1.5rem; margin-bottom:4px; }
     .bottom-nav button.active { color:#4f46e5; }
+
   </style>
 </head>
 <body>
@@ -105,7 +113,6 @@
       <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
       <p style="font-size:0.85rem; color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
       <button class="gradient-btn">
-        <!-- SVG سمت چپ -->
         <svg viewBox="0 0 24 24">
           <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
         </svg>
@@ -113,26 +120,30 @@
       </button>
     </div>
 
-    <!-- Quick Action Buttons in Grid -->
+    <!-- Quick Actions -->
     <div class="quick-actions">
+
       <button class="gradient-btn">
         <svg viewBox="0 0 24 24">
           <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
         </svg>
         امروز چی بپوشم؟
       </button>
-      <button class="gradient-btn">
+
+      <button class="gradient-btn special-btn">
         <svg viewBox="0 0 24 24">
           <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
         </svg>
         یه مهمانی دارم
       </button>
-      <button class="gradient-btn">
+
+      <button class="gradient-btn special-btn">
         <svg viewBox="0 0 24 24">
           <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
         </svg>
         سورپرایزم کن
       </button>
+
     </div>
   </div>
 
