@@ -1,276 +1,244 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>فرنم چندمرحله‌ای</title>
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+const bodyShapes = [
+  { value: "slim", label: "لاغر" },
+  { value: "athletic", label: "ورزشکاری" },
+  { value: "average", label: "متوسط" },
+  { value: "plus-size", label: "پلاس‌سایز" },
+];
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+const genderOptions = [
+  { value: "male", label: "مرد" },
+  { value: "female", label: "زن" },
+  { value: "non-binary", label: "غیر‌دودویی" },
+  { value: "prefer-not", label: "ترجیح می‌دهم نگویم" },
+];
 
-body{
-background:#0b0d17;
-color:#fff;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-overflow:hidden;
-}
+const styleOptions = [
+  { value: "minimal", label: "مینیمال", icon: "✨" },
+  { value: "streetwear", label: "خیابانی", icon: "🔥" },
+  { value: "formal", label: "رسمی", icon: "👔" },
+  { value: "casual", label: "کژوال", icon: "😎" },
+  { value: "sporty", label: "اسپرت", icon: "🏃" },
+  { value: "luxury", label: "لاکچری", icon: "💎" },
+  { value: "experimental", label: "تجربی", icon: "🎨" },
+];
 
-.container{
-width:100%;
-max-width:420px;
-padding:24px;
-}
+const goalOptions = [
+  { value: "daily", label: "لباس روزانه", icon: "☀️" },
+  { value: "party", label: "استایل مهمانی", icon: "🎉" },
+  { value: "date", label: "شب قرار", icon: "💕" },
+  { value: "fashion-show", label: "فشن شو", icon: "💃" },
+  { value: "closet", label: "مدیریت کمد", icon: "👚" },
+  { value: "ai-stylist", label: "استایلیست هوشمند", icon: "🤖" },
+];
 
-.progress-bar{
-width:100%;
-height:6px;
-background:#1a1d2b;
-border-radius:999px;
-overflow:hidden;
-margin-bottom:28px;
-}
+const Onboarding = () => {
+  const navigate = useNavigate();
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState({
+    height: "",
+    weight: "",
+    age: "",
+    bodyShape: "",
+    gender: "",
+    styles: [] as string[],
+    goals: [] as string[],
+  });
 
-.progress-fill{
-height:100%;
-background:linear-gradient(90deg,#7b61ff,#5b7cff);
-width:33%;
-transition:.3s;
-}
+  const totalSteps = 3;
+  const progress = ((step + 1) / totalSteps) * 100;
 
-.step{
-display:none;
-animation:fade .3s ease;
-}
+  const toggleArray = (key: "styles" | "goals", value: string) => {
+    setData((prev) => ({
+      ...prev,
+      [key]: prev[key].includes(value)
+        ? prev[key].filter((v) => v !== value)
+        : [...prev[key], value],
+    }));
+  };
 
-.step.active{
-display:block;
-}
+  const handleFinish = () => {
+    // TODO: save to database
+    navigate("/app", { replace: true });
+  };
 
-@keyframes fade{
-from{opacity:0;transform:translateX(10px)}
-to{opacity:1;transform:translateX(0)}
-}
+  const canNext = () => {
+    if (step === 0) return data.height && data.weight && data.bodyShape;
+    if (step === 1) return data.gender && data.styles.length > 0;
+    if (step === 2) return data.goals.length > 0;
+    return false;
+  };
 
-h1{font-size:22px;margin-bottom:6px}
-.subtitle{opacity:.7;margin-bottom:24px;font-size:14px}
-label{display:block;margin:16px 0 8px;font-size:14px;opacity:.9}
+  const slideVariants = {
+    enter: { x: -30, opacity: 0 },
+    center: { x: 0, opacity: 1 },
+    exit: { x: 30, opacity: 0 },
+  };
 
-input{
-width:100%;
-padding:14px;
-border-radius:14px;
-border:1px solid #2a2e44;
-background:#0f1220;
-color:#fff;
-font-size:15px;
-outline:none;
-}
+  return (
+    <div className="fixed inset-0 flex flex-col bg-background">
+      {/* Header */}
+      <div className="px-4 pt-6 pb-2">
+        <div className="flex items-center justify-between mb-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => step > 0 && setStep(step - 1)}
+            className={step === 0 ? "opacity-0 pointer-events-none" : ""}
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            مرحله {step + 1} از {totalSteps}
+          </span>
+          <div className="w-10" />
+        </div>
+        <Progress value={progress} className="h-1.5 rounded-full" />
+      </div>
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto px-5 pt-6 pb-24">
+        <AnimatePresence mode="wait">
+          {step === 0 && (
+            <motion.div key="step0" variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3 }}>
+              <h2 className="text-xl font-bold mb-1">اطلاعات بدنی</h2>
+              <p className="text-sm text-muted-foreground mb-6">برای پیشنهادات دقیق‌تر به ما بگو</p>
 
-.btn{
-padding:12px;
-border-radius:14px;
-border:1px solid #2a2e44;
-background:#0f1220;
-color:#fff;
-cursor:pointer;
-text-align:center;
-transition:.2s;
-font-size:14px;
-}
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium mb-1.5 block">قد (سانتی‌متر)</label>
+                  <Input type="number" placeholder="مثلاً ۱۷۵" value={data.height} onChange={(e) => setData({ ...data, height: e.target.value })} className="text-left" dir="ltr" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-1.5 block">وزن (کیلوگرم)</label>
+                  <Input type="number" placeholder="مثلاً ۷۰" value={data.weight} onChange={(e) => setData({ ...data, weight: e.target.value })} className="text-left" dir="ltr" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-1.5 block">سن (اختیاری)</label>
+                  <Input type="number" placeholder="مثلاً ۲۵" value={data.age} onChange={(e) => setData({ ...data, age: e.target.value })} className="text-left" dir="ltr" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-1.5 block">فرم بدن</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {bodyShapes.map((shape) => (
+                      <button
+                        key={shape.value}
+                        onClick={() => setData({ ...data, bodyShape: shape.value })}
+                        className={`rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                          data.bodyShape === shape.value
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-border bg-card text-card-foreground hover:border-primary/50"
+                        }`}
+                      >
+                        {shape.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
-.btn.active{
-border-color:#7b61ff;
-background:#171a2f;
-}
+          {step === 1 && (
+            <motion.div key="step1" variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3 }}>
+              <h2 className="text-xl font-bold mb-1">هویت و سبک</h2>
+              <p className="text-sm text-muted-foreground mb-6">سبک مورد علاقه‌ات رو انتخاب کن</p>
 
-.next-btn{
-margin-top:28px;
-width:100%;
-padding:16px;
-border:none;
-border-radius:18px;
-background:linear-gradient(90deg,#7b61ff,#5b7cff);
-color:#fff;
-font-size:16px;
-cursor:pointer;
-}
+              <div className="space-y-6">
+                <div>
+                  <label className="text-sm font-medium mb-2 block">هویت جنسیتی</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {genderOptions.map((opt) => (
+                      <button
+                        key={opt.value}
+                        onClick={() => setData({ ...data, gender: opt.value })}
+                        className={`rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                          data.gender === opt.value
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-border bg-card text-card-foreground hover:border-primary/50"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
-.next-btn:disabled{
-opacity:.5;
-cursor:not-allowed;
-}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">سبک مورد علاقه (چند تا انتخاب کن)</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {styleOptions.map((opt) => (
+                      <button
+                        key={opt.value}
+                        onClick={() => toggleArray("styles", opt.value)}
+                        className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                          data.styles.includes(opt.value)
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-border bg-card text-card-foreground hover:border-primary/50"
+                        }`}
+                      >
+                        <span>{opt.icon}</span>
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
-.back{
-margin-bottom:14px;
-opacity:.6;
-cursor:pointer;
-font-size:14px;
-}
-</style>
-</head>
+          {step === 2 && (
+            <motion.div key="step2" variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3 }}>
+              <h2 className="text-xl font-bold mb-1">اهداف</h2>
+              <p className="text-sm text-muted-foreground mb-6">می‌خوای در چه زمینه‌هایی کمکت کنم؟</p>
 
-<body>
-<div class="container">
+              <div className="grid grid-cols-2 gap-3">
+                {goalOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => toggleArray("goals", opt.value)}
+                    className={`flex flex-col items-center gap-2 rounded-2xl border px-4 py-5 text-sm font-medium transition-all ${
+                      data.goals.includes(opt.value)
+                        ? "border-primary bg-primary/10 text-primary shadow-glow"
+                        : "border-border bg-card text-card-foreground hover:border-primary/50"
+                    }`}
+                  >
+                    <span className="text-2xl">{opt.icon}</span>
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-<div class="progress-bar">
-<div class="progress-fill" id="progress"></div>
-</div>
+      {/* Bottom CTA */}
+      <div className="fixed bottom-0 inset-x-0 p-4 bg-background/80 backdrop-blur-lg border-t border-border">
+        <Button
+          onClick={() => (step < totalSteps - 1 ? setStep(step + 1) : handleFinish())}
+          disabled={!canNext()}
+          className="w-full rounded-xl py-6 text-base font-semibold gradient-primary text-primary-foreground shadow-glow disabled:opacity-40"
+        >
+          {step < totalSteps - 1 ? (
+            <span className="flex items-center gap-2">
+              بعدی
+              <ChevronLeft className="h-4 w-4" />
+            </span>
+          ) : (
+            "شروع کنیم! 🚀"
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+};
 
-<!-- STEP 1 -->
-<div class="step active" id="step1">
-<h1>اطلاعات بدنی</h1>
-<div class="subtitle">برای پیشنهاد دقیق‌تر</div>
-
-<label>قد</label>
-<input id="height" type="number">
-
-<label>وزن</label>
-<input id="weight" type="number">
-
-<label>فرم بدن</label>
-<div class="grid" id="bodyTypes">
-<div class="btn">لاغر</div>
-<div class="btn">متوسط</div>
-<div class="btn">ورزشکاری</div>
-<div class="btn">پلاس‌سایز</div>
-</div>
-
-<button id="next1" class="next-btn" disabled>بعدی</button>
-</div>
-
-<!-- STEP 2 -->
-<div class="step" id="step2">
-<div class="back" onclick="prevStep()">← بازگشت</div>
-
-<h1>هویت و سبک</h1>
-<div class="subtitle">انتخاب کن</div>
-
-<label>جنسیت</label>
-<div class="grid" id="gender">
-<div class="btn">مرد</div>
-<div class="btn">زن</div>
-<div class="btn">غیردودویی</div>
-<div class="btn">ترجیح می‌دهم نگویم</div>
-</div>
-
-<label>سبک (چند انتخاب)</label>
-<div class="grid" id="styles">
-<div class="btn">✨مینیمال</div>
-<div class="btn">خیابانی</div>
-<div class="btn">رسمی</div>
-<div class="btn">کژوال</div>
-<div class="btn">اسپرت</div>
-<div class="btn">لاکچری</div>
-</div>
-
-<button id="next2" class="next-btn" disabled>بعدی</button>
-</div>
-
-<!-- STEP 3 -->
-<div class="step" id="step3">
-<div class="back" onclick="prevStep()">← بازگشت</div>
-
-<h1>پایان</h1>
-<div class="subtitle">اطلاعات ثبت شد</div>
-
-<button class="next-btn" onclick="submitForm()">ثبت نهایی</button>
-</div>
-
-</div>
-
-<script>
-let currentStep=1
-const progress=document.getElementById("progress")
-
-function showStep(step){
-document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"))
-document.getElementById("step"+step).classList.add("active")
-progress.style.width=(step*33)+"%"
-currentStep=step
-}
-
-function nextStep(){showStep(currentStep+1)}
-function prevStep(){showStep(currentStep-1)}
-
-/* STEP 1 LOGIC */
-let selectedBody=null
-const bodyBtns=document.querySelectorAll("#bodyTypes .btn")
-const next1=document.getElementById("next1")
-
-bodyBtns.forEach(btn=>{
-btn.onclick=()=>{
-bodyBtns.forEach(b=>b.classList.remove("active"))
-btn.classList.add("active")
-selectedBody=btn.textContent
-checkStep1()
-}
-})
-
-document.getElementById("height").oninput=checkStep1
-document.getElementById("weight").oninput=checkStep1
-
-function checkStep1(){
-const h=document.getElementById("height").value
-const w=document.getElementById("weight").value
-next1.disabled=!(h&&w&&selectedBody)
-}
-
-next1.onclick=nextStep
-
-/* STEP 2 LOGIC */
-let selectedGender=null
-let selectedStyles=[]
-const next2=document.getElementById("next2")
-
-document.querySelectorAll("#gender .btn").forEach(btn=>{
-btn.onclick=()=>{
-document.querySelectorAll("#gender .btn").forEach(b=>b.classList.remove("active"))
-btn.classList.add("active")
-selectedGender=btn.textContent
-checkStep2()
-}
-})
-
-document.querySelectorAll("#styles .btn").forEach(btn=>{
-btn.onclick=()=>{
-btn.classList.toggle("active")
-const val=btn.textContent
-selectedStyles.includes(val)?
-selectedStyles=selectedStyles.filter(v=>v!==val):
-selectedStyles.push(val)
-checkStep2()
-}
-})
-
-function checkStep2(){
-next2.disabled=!(selectedGender&&selectedStyles.length)
-}
-
-next2.onclick=nextStep
-
-function submitForm(){
-const data={
-height:height.value,
-weight:weight.value,
-body:selectedBody,
-gender:selectedGender,
-styles:selectedStyles
-}
-localStorage.setItem("formData",JSON.stringify(data))
-alert("ثبت شد 🚀")
-}
-</script>
-
-</body>
-</html>
+export default Onboarding;
