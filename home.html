@@ -97,6 +97,8 @@
       box-shadow: rgba(0,0,0,0.05) 0 1px 2px 0;
       overflow:hidden;
       margin-bottom:20px;
+      display:flex;
+      flex-direction:column;
     }
 
     .card-top {
@@ -158,8 +160,8 @@
     }
 
     .suggestions .outfit-card {
-      flex:1 1 calc(33.333% - 8px); /* هر کارت یک سوم عرض به صورت خودکار */
-      min-width:200px; /* حداقل اندازه */
+      flex:1 1 calc(33.333% - 8px); /* هر کارت یک سوم عرض */
+      min-width:200px;
     }
 
     h2.suggestion-title {
@@ -169,6 +171,33 @@
       line-height:28px;
       color: rgb(242,242,242);
       margin:0 0 12px 0;
+    }
+
+    /* تگ‌ها بالای دکمه ذخیره */
+    .tags {
+      display:flex;
+      gap:8px;
+      padding-top:4px;
+      flex-wrap: wrap;
+    }
+
+    .tags span {
+      display:block;
+      font-family: Vazirmatn,sans-serif;
+      font-size:12px;
+      line-height:16px;
+      padding: 4px 8px;
+      border-radius:9999px;
+    }
+
+    .tags .accent {
+      background-color: rgba(61,122,245,0.1);
+      color: rgb(61,122,245);
+    }
+
+    .tags .primary {
+      background-color: rgba(115,90,242,0.1);
+      color: rgb(115,90,242);
     }
 
     /* Bottom Navigation */
@@ -223,24 +252,22 @@
     <!-- Quick Actions -->
     <div class="quick-actions">
       <button class="gradient-btn today-btn">
-        ✨
-        امروز چی بپوشم؟
+        ✨ امروز چی بپوشم؟
       </button>
 
       <button class="gradient-btn party-btn">
-        🎉
-        یه مهمانی دارم
+        🎉 یه مهمانی دارم
       </button>
 
       <button class="gradient-btn surprise-btn">
-        🎲
-        سورپرایزم کن
+        🎲 سورپرایزم کن
       </button>
     </div>
 
     <!-- پیشنهاد امروز -->
     <h2 class="suggestion-title">پیشنهاد امروز</h2>
     <div class="suggestions">
+
       <div class="outfit-card">
         <div class="card-top">
           <span>🌟 استایل ویژه امروز 🌟</span>
@@ -248,6 +275,13 @@
         <h3>استایل روزانه</h3>
         <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
         <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
+
+        <!-- تگ‌ها -->
+        <div class="tags">
+          <span class="accent">مناسب فرم بدن شما</span>
+          <span class="primary">کژوال</span>
+        </div>
+
         <button class="save-btn">⭐ ذخیره</button>
       </div>
 
@@ -258,6 +292,13 @@
         <h3>استایل روزانه</h3>
         <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
         <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
+
+        <!-- تگ‌ها -->
+        <div class="tags">
+          <span class="accent">مناسب فرم بدن شما</span>
+          <span class="primary">کژوال</span>
+        </div>
+
         <button class="save-btn">⭐ ذخیره</button>
       </div>
 
@@ -268,8 +309,16 @@
         <h3>استایل روزانه</h3>
         <p>پیراهن مشکی + شلوار جین + کت جین</p>
         <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
+
+        <!-- تگ‌ها -->
+        <div class="tags">
+          <span class="accent">مناسب فرم بدن شما</span>
+          <span class="primary">کژوال</span>
+        </div>
+
         <button class="save-btn">⭐ ذخیره</button>
       </div>
+
     </div>
 
   </div>
