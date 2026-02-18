@@ -24,7 +24,7 @@ document.getElementById("guestLogin").onclick = () => {
         formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
-    window.location.href = "form.html";
+    window.location.href = "form.tsx";
 };
 
 // ثبت نام با گوگل (شبیه‌سازی)
@@ -41,5 +41,6 @@ googleLoginBtn.onclick = (e) => {
         formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
-    window.location.href = "form.html";
+    window.location.href = "form.tsx";
 };
+
