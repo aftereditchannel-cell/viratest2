@@ -23,9 +23,14 @@
       overflow-y:auto;
     }
 
-    .greeting {
-      font-size:1.5rem;
-      margin-bottom:16px;
+    /* Greeting (muted) */
+    .text-muted-foreground {
+      font-family: Vazirmatn, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: rgb(135, 135, 146);
+      margin-bottom: 12px;
     }
 
     .outfit-card {
@@ -116,7 +121,11 @@
 <body>
 
   <div class="content">
-    <div class="greeting">سلام، امیر! 👋</div>
+
+    <!-- Greeting -->
+    <p class="text-muted-foreground text-sm">
+      سلام، امیر! 👋
+    </p>
 
     <div class="outfit-card">
       <h3>استایل روزانه</h3>
@@ -130,8 +139,6 @@
     </div>
 
     <div class="quick-actions">
-
-      <!-- امروز چی بپوشم -->
       <button class="gradient-btn">
         ✨
         امروز چی بپوشم؟
@@ -146,8 +153,8 @@
         🎲
         سورپرایزم کن
       </button>
-
     </div>
+
   </div>
 
   <div class="bottom-nav">
