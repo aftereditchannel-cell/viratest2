@@ -48,7 +48,7 @@
       margin-bottom:24px;
     }
 
-    /* Primary button only for "امروز چی بپوشم؟" */
+    /* Buttons */
     .primary-action-btn {
       width:100%;
       height:52px;
@@ -68,12 +68,8 @@
       cursor:pointer;
       transition:transform .15s cubic-bezier(.4,0,.2,1);
     }
+    .primary-action-btn:active { transform:scale(0.98); }
 
-    .primary-action-btn:active {
-      transform:scale(0.98);
-    }
-
-    /* Party button only for "یه مهمانی دارم" */
     .party-btn {
       width:100%;
       height:52px;
@@ -93,12 +89,8 @@
       cursor:pointer;
       transition:transform .15s cubic-bezier(.4,0,.2,1);
     }
+    .party-btn:active { transform:scale(0.98); }
 
-    .party-btn:active {
-      transform:scale(0.98);
-    }
-
-    /* Surprise button only for "سورپرایزم کن" */
     .surprise-btn {
       width:100%;
       height:52px;
@@ -118,9 +110,17 @@
       cursor:pointer;
       transition:transform .15s cubic-bezier(.4,0,.2,1);
     }
+    .surprise-btn:active { transform:scale(0.98); }
 
-    .surprise-btn:active {
-      transform:scale(0.98);
+    /* Suggestion title */
+    .suggestion-title {
+      font-family: Vazirmatn, sans-serif;
+      font-size:18px;
+      font-weight:700;
+      line-height:28px;
+      color: rgb(242,242,242);
+      margin:0 0 12px 0;
+      display:block;
     }
 
     /* Outfit Card */
@@ -132,19 +132,9 @@
       box-shadow:0 4px 10px rgba(0,0,0,0.5);
     }
 
-    .outfit-card h3 {
-      font-size:1.1rem;
-      margin-bottom:8px;
-    }
-
-    .outfit-card p {
-      color:#ccc;
-      margin-bottom:6px;
-    }
-
-    .save-btn {
-      margin-top:12px;
-    }
+    .outfit-card h3 { font-size:1.1rem; margin-bottom:8px; }
+    .outfit-card p { color:#ccc; margin-bottom:6px; }
+    .save-btn { margin-top:12px; }
 
     .bottom-nav {
       display:flex;
@@ -153,7 +143,6 @@
       padding:10px 0;
       border-top:1px solid #444;
     }
-
     .bottom-nav button {
       background:none;
       border:none;
@@ -164,15 +153,8 @@
       align-items:center;
       cursor:pointer;
     }
-
-    .bottom-nav button span:first-child {
-      font-size:1.5rem;
-      margin-bottom:4px;
-    }
-
-    .bottom-nav button.active {
-      color:#4f46e5;
-    }
+    .bottom-nav button span:first-child { font-size:1.5rem; margin-bottom:4px; }
+    .bottom-nav button.active { color:#4f46e5; }
   </style>
 </head>
 
@@ -185,31 +167,33 @@
       سلام، امیر! 👋
     </p>
 
-    <!-- New Title -->
+    <!-- Main Title -->
     <h1 class="main-title">
       امروز چیکار کنیم؟
     </h1>
 
     <!-- Quick Actions -->
     <div class="quick-actions">
-      <!-- "امروز چی بپوشم؟" -->
       <button class="primary-action-btn">
         ✨
         امروز چی بپوشم؟
       </button>
 
-      <!-- "یه مهمانی دارم" -->
       <button class="party-btn">
         🎉
         یه مهمانی دارم
       </button>
 
-      <!-- "سورپرایزم کن" -->
       <button class="surprise-btn">
         🎲
         سورپرایزم کن
       </button>
     </div>
+
+    <!-- Suggestion Title under last button -->
+    <h2 class="suggestion-title">
+      پیشنهاد امروز
+    </h2>
 
     <!-- Outfit Card -->
     <div class="outfit-card">
