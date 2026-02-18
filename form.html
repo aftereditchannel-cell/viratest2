@@ -1,194 +1,126 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Onboarding</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ویرا استایل</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Vazirmatn', sans-serif; }
+  body { background:#0b0b1a; color:#fff; min-height:100vh; display:flex; flex-direction:column; direction:rtl; }
 
-  <style>
-    :root{
-      --primary:#7c3aed;
-      --bg:#0f0f14;
-      --card:#171720;
-      --border:#2a2a35;
-      --text:#fff;
-      --muted:#9ca3af;
-    }
-    *{box-sizing:border-box;font-family:sans-serif}
-    body{margin:0;background:var(--bg);color:var(--text)}
-    .app{min-height:100vh;display:flex;flex-direction:column}
-    header{padding:20px}
-    .progress{height:4px;background:var(--border);border-radius:999px;overflow:hidden}
-    .progress span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#7c3aed,#a78bfa);transition:.3s}
-    main{flex:1;padding:20px}
-    h2{margin:0 0 6px}
-    p{margin:0 0 20px;color:var(--muted);font-size:14px}
-    .field{margin-bottom:16px}
-    label{display:block;margin-bottom:6px;font-size:14px}
-    input{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text)}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .option{padding:14px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer}
-    .option.active{border-color:var(--primary);background:rgba(124,58,237,.15);color:var(--primary)}
-    footer{padding:16px;border-top:1px solid var(--border)}
-    .cta{width:100%;padding:16px;border-radius:16px;border:none;background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;font-size:16px;font-weight:bold;cursor:pointer;opacity:.4}
-    .cta.enabled{opacity:1}
-    .hidden{display:none}
-  </style>
-  <link rel="stylesheet" href="form.css">
+  .container { flex:1; padding:20px; display:flex; flex-direction:column; gap:25px; }
+
+  /* Header */
+  .header { font-size:1.8rem; font-weight:700; }
+  .greeting { font-size:1rem; color:#aaa; margin-bottom:10px; }
+
+  /* Action buttons */
+  .actions { display:flex; flex-direction:column; gap:15px; }
+  .action-btn {
+    padding:14px 20px;
+    border-radius:12px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    text-align:left;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:0.3s;
+  }
+  .action-btn span { flex:1; }
+  .action-btn:hover { transform:scale(1.02); }
+  .primary { background:linear-gradient(90deg,#8b5cf6,#4f7dff); color:#fff; }
+  .secondary { background:linear-gradient(90deg,#4f7dff,#6c5efb); color:#fff; }
+  .random { background:linear-gradient(90deg,#3b82f6,#9333ea); color:#fff; }
+
+  /* Suggestion card */
+  .suggestion { background:#121229; border-radius:16px; padding:20px; margin-top:10px; display:flex; flex-direction:column; gap:12px; }
+  .suggestion img { width:50px; margin:0 auto; }
+  .suggestion h3 { font-weight:700; font-size:1.2rem; text-align:center; }
+  .suggestion p { font-size:0.9rem; color:#ccc; text-align:center; }
+  .tags { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+  .tag { background:#4f7dff; padding:4px 10px; border-radius:10px; font-size:0.8rem; }
+  .save-btn { background:#ff4f81; color:#fff; border:none; border-radius:12px; padding:10px 20px; cursor:pointer; font-weight:600; align-self:center; margin-top:10px; }
+  .save-btn:hover { transform:scale(1.05); }
+
+  /* Bottom nav */
+  .bottom-nav { display:flex; justify-content:space-around; padding:10px 0; background:#121224; }
+  .bottom-nav div { text-align:center; color:#aaa; cursor:pointer; transition:0.3s; font-size:0.8rem; }
+  .bottom-nav div.active, .bottom-nav div:hover { color:#fff; }
+  .bottom-nav div img { display:block; margin:0 auto; margin-bottom:3px; width:24px; height:24px; }
+</style>
 </head>
-
 <body>
-<div class="app">
 
-<header>
-  <div class="progress"><span id="progress"></span></div>
-</header>
+<div class="container">
+  <div class="header">سلام <span id="welcomeText">کاربر</span> 👋<br>امروز چی بپوشم؟</div>
 
-<main>
-
-<section class="step" data-step="0">
-  <h2>اطلاعات بدنی</h2>
-  <p>برای پیشنهادات دقیق‌تر</p>
-
-  <div class="field">
-    <label>قد</label>
-    <input id="height" type="number">
+  <!-- Action Buttons -->
+  <div class="actions">
+    <button class="action-btn primary"><span>امروز چی بپوشم؟</span> ✨</button>
+    <button class="action-btn secondary"><span>یه مهمانی دارم</span> 🎉</button>
+    <button class="action-btn random"><span>سوپرایزم کن</span> 🎲</button>
   </div>
 
-  <div class="field">
-    <label>وزن</label>
-    <input id="weight" type="number">
+  <!-- Suggestion -->
+  <div class="suggestion">
+    <img src="https://img.icons8.com/fluency/48/shirt.png" alt="shirt icon">
+    <h3>استایل کژوال شیک</h3>
+    <p>یک تیشرت ساده مشکی با شلوار جین آبی تیره و کتونی سفید. ساده، تمیز و مناسب برای هر مناسبت روزانه.</p>
+    <div class="tags">
+      <div class="tag">مناسب فرم بدن شما</div>
+      <div class="tag">کژوال</div>
+    </div>
+    <button class="save-btn">💖 ذخیره این استایل</button>
   </div>
+</div>
 
-  <div class="field">
-    <label>سن (اختیاری)</label>
-    <input id="age" type="number">
-  </div>
-
-  <div class="field">
-    <label>فرم بدن</label>
-    <div class="grid" id="bodyShapes"></div>
-  </div>
-</section>
-
-<section class="step hidden" data-step="1">
-  <h2>هویت و سبک</h2>
-  <p>چیزی که بهت میاد</p>
-
-  <div class="field">
-    <label>جنسیت</label>
-    <div class="grid" id="genders"></div>
-  </div>
-
-  <div class="field">
-    <label>سبک‌ها</label>
-    <div class="grid" id="styles"></div>
-  </div>
-</section>
-
-<section class="step hidden" data-step="2">
-  <h2>اهداف</h2>
-  <p>قراره کجا کمکت کنیم؟</p>
-  <div class="grid" id="goals"></div>
-</section>
-
-</main>
-
-<footer>
-  <button id="nextBtn" class="cta">بعدی</button>
-</footer>
-
+<!-- Bottom nav -->
+<div class="bottom-nav">
+  <div class="active"><img src="https://img.icons8.com/ios-filled/24/home.png"/><span>خانه</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/shopping-bag.png"/><span>کمد</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/calendar.png"/><span>رویدادها</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/tshirt.png"/><span>پیشنهاد</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/user.png"/><span>پروفایل</span></div>
 </div>
 
 <script>
-const STORAGE_KEY="onboardingData";
-const DONE_KEY="onboardingDone";
+  // چک کردن session
+  function checkSession() {
+    const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+    const formDone = localStorage.getItem("onboardingDone") === "true";
 
-if(localStorage.getItem(DONE_KEY)==="true"){
-  window.location.href="home.html";
-}
+    if (!session.id) { window.location.href = "auth.html"; return; }
+    if (!formDone) { window.location.href = "form.html"; return; }
 
-const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-const data=saved || {
-  height:"",weight:"",age:"",
-  bodyShape:"",gender:"",
-  styles:[],goals:[]
-};
-
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
-
-const bodyShapes=[["slim","لاغر"],["athletic","ورزشکاری"],["average","متوسط"],["plus","پلاس‌سایز"]];
-const genders=[["male","مرد"],["female","زن"],["non","غیردودویی"],["none","نمی‌گم"]];
-const styles=[["minimal","✨ مینیمال"],["street","🔥 خیابانی"],["formal","👔 رسمی"],["casual","😎 کژوال"],["sport","🏃 اسپرت"],["luxury","💎 لاکچری"],["exp","🎨 تجربی"]];
-const goals=[["daily","☀️ روزانه"],["party","🎉 مهمانی"],["date","💕 قرار"],["show","💃 فشن‌شو"],["closet","👚 کمد"],["ai","🤖 استایلیست"]];
-
-let step=0;
-const steps=document.querySelectorAll(".step");
-const progress=document.getElementById("progress");
-const nextBtn=document.getElementById("nextBtn");
-
-function render(list,el,key,multi=false){
-  list.forEach(([val,label])=>{
-    const btn=document.createElement("button");
-    btn.className="option";
-    btn.innerText=label;
-    if(multi && data[key].includes(val) || data[key]===val) btn.classList.add("active");
-    btn.onclick=()=>{
-      if(multi){
-        data[key]=data[key].includes(val)?data[key].filter(v=>v!==val):[...data[key],val];
-        btn.classList.toggle("active");
-      }else{
-        data[key]=val;
-        [...el.children].forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-      }
-      save();validate();
-    };
-    el.appendChild(btn);
-  });
-}
-
-render(bodyShapes,bodyShapesEl=document.getElementById("bodyShapes"),"bodyShape");
-render(genders,document.getElementById("genders"),"gender");
-render(styles,document.getElementById("styles"),"styles",true);
-render(goals,document.getElementById("goals"),"goals",true);
-
-["height","weight","age"].forEach(id=>{
-  const el=document.getElementById(id);
-  el.value=data[id];
-  el.oninput=e=>{data[id]=e.target.value;save();validate()};
-});
-
-function validate(){
-  let ok=false;
-  if(step===0) ok=data.height&&data.weight&&data.bodyShape;
-  if(step===1) ok=data.gender&&data.styles.length;
-  if(step===2) ok=data.goals.length;
-  nextBtn.classList.toggle("enabled",ok);
-}
-
-function updateUI(){
-  steps.forEach(s=>s.classList.add("hidden"));
-  steps[step].classList.remove("hidden");
-  progress.style.width=((step+1)/3*100)+"%";
-  nextBtn.innerText=step===2?"شروع کنیم 🚀":"بعدی";
-  validate();
-}
-
-nextBtn.onclick=()=>{
-  if(!nextBtn.classList.contains("enabled"))return;
-  if(step<2){step++;updateUI();}
-  else{
-    localStorage.setItem(DONE_KEY,"true");
-    save();
-    alert("آن‌بوردینگ با موفقیت انجام شد 🚀");
-    window.location.href="home.html";
+    document.getElementById("welcomeText").innerText = session.fullname || session.name || "کاربر";
   }
-};
+  checkSession();
 
-updateUI();
+  // دکمه های عملیاتی
+  const actionBtns = document.querySelectorAll('.action-btn');
+  actionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert(`شما دکمه "${btn.innerText.trim()}" را زدید`);
+    });
+  });
+
+  // ذخیره استایل
+  document.querySelector('.save-btn').addEventListener('click', () => {
+    alert("استایل ذخیره شد ❤️");
+  });
+
+  // Nav پایین
+  const navItems = document.querySelectorAll('.bottom-nav div');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
 </script>
-<script src="form.js" defer></script>
+
 </body>
 </html>
