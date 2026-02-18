@@ -31,14 +31,16 @@ function checkSession() {
         return;
     }
 
-    // اگر همه چیز اوکیه → خوش آمدگویی
+    // خوش آمدگویی
     const welcomeText = document.getElementById("welcomeText");
     welcomeText.innerText = `سلام ${session.fullname || session.name || "کاربر"}!`;
 }
 
-// خروج
+// خروج کامل: session + فرم + دیتا
 function logout() {
     localStorage.removeItem("vira_session");
+    localStorage.removeItem("onboardingDone");
+    localStorage.removeItem("onboardingData");
     window.location.href = "auth.html";
 }
 
