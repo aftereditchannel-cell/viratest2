@@ -48,13 +48,19 @@
       box-shadow: 0 0 60px -10px rgba(115,90,242,0.3);
       transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
       text-align:center;
-      flex:1;
-      white-space:nowrap;
+      width:100%;
     }
 
     .gradient-btn:active { transform: scale(0.98); }
 
-    .quick-actions { display:flex; gap:12px; overflow-x:auto; }
+    /* Grid container for buttons */
+    .quick-actions {
+      display:grid;
+      grid-template-columns:1fr; /* یک ستون */
+      gap:12px;
+      margin-top:24px;
+      height:180px; /* ارتفاع ثابت کل grid */
+    }
 
     /* Bottom Navigation */
     .bottom-nav {
@@ -79,11 +85,6 @@
 
     .bottom-nav button span:first-child { font-size:1.5rem; margin-bottom:4px; }
     .bottom-nav button.active { color:#4f46e5; }
-
-    /* Scrollbar styling for quick actions */
-    .quick-actions::-webkit-scrollbar { height:6px; }
-    .quick-actions::-webkit-scrollbar-thumb { background:#555; border-radius:3px; }
-    .quick-actions::-webkit-scrollbar-track { background:#2c2c2c; }
   </style>
 </head>
 <body>
@@ -99,7 +100,7 @@
       <button class="gradient-btn">ذخیره</button>
     </div>
 
-    <!-- Quick Action Buttons -->
+    <!-- Quick Action Buttons in Grid -->
     <div class="quick-actions">
       <button class="gradient-btn">امروز چی بپوشم؟</button>
       <button class="gradient-btn">یه مهمانی دارم</button>
