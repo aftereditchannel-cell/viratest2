@@ -49,7 +49,7 @@
     }
 
     /* Buttons */
-    .primary-action-btn {
+    .gradient-btn {
       width:100%;
       height:52px;
       display:flex;
@@ -63,96 +63,57 @@
       font-size:16px;
       font-weight:400;
       color:#fff;
-      background-image:linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245));
-      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
       cursor:pointer;
       transition:transform .15s cubic-bezier(.4,0,.2,1);
     }
-    .primary-action-btn:active { transform:scale(0.98); }
 
-    .party-btn {
-      width:100%;
-      height:52px;
+    .gradient-btn:active {
+      transform:scale(0.98);
+    }
+
+    /* Outfit Cards */
+    .outfit-cards-container {
       display:flex;
-      align-items:center;
-      justify-content:flex-start;
       gap:16px;
-      padding:16px;
-      border:none;
-      border-radius:16px;
-      font-family:Vazirmatn,sans-serif;
-      font-size:16px;
-      font-weight:400;
-      color:#fff;
-      background-image:linear-gradient(to left, rgb(61, 122, 245), rgb(115, 90, 242));
-      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
-      cursor:pointer;
-      transition:transform .15s cubic-bezier(.4,0,.2,1);
-    }
-    .party-btn:active { transform:scale(0.98); }
-
-    .surprise-btn {
-      width:100%;
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      gap:16px;
-      padding:16px;
-      border:none;
-      border-radius:16px;
-      font-family:Vazirmatn,sans-serif;
-      font-size:16px;
-      font-weight:400;
-      color:#fff;
-      background-image:linear-gradient(to left, rgb(61, 122, 245), rgb(61, 122, 245));
-      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
-      cursor:pointer;
-      transition:transform .15s cubic-bezier(.4,0,.2,1);
-    }
-    .surprise-btn:active { transform:scale(0.98); }
-
-    /* Suggestion title */
-    .suggestion-title {
-      font-family: Vazirmatn, sans-serif;
-      font-size:18px;
-      font-weight:700;
-      line-height:28px;
-      color: rgb(242,242,242);
-      margin:0 0 12px 0;
-      display:block;
+      flex-wrap:wrap;
+      margin-bottom:20px;
     }
 
-    /* Outfit Card Updated */
     .outfit-card {
-      font-family: Vazirmatn, sans-serif;
-      font-size:16px;
-      font-weight:400;
-      line-height:24px;
-      color: rgb(242,242,242);
-      background-color: rgb(20,20,26);
-      border: 0.8px solid rgba(34,34,42,0.5);
+      flex:1;
+      min-width:220px;
+      max-width:320px;
+      background-color: rgb(20, 20, 26);
+      border: 0.8px solid rgba(34, 34, 42, 0.5);
       border-radius:12px;
-      box-shadow: rgba(0,0,0,0.05) 0 1px 2px 0;
       overflow:hidden;
-      width:100%;
-      max-width:none;
-      min-width:0;
-      height:360.35px;
-      margin:0;
-      padding:0;
-      display:block;
-      position:relative;
+      color: rgb(242, 242, 242);
+      box-shadow: rgba(0, 0, 0, 0.05) 0 1px 2px 0px;
     }
 
-    /* Top Gradient Overlay inside outfit-card */
     .outfit-top-gradient {
       height:192px;
-      background-image: linear-gradient(to left bottom, rgba(115,90,242,0.2), rgba(61,122,245,0.1));
       display:flex;
       align-items:center;
       justify-content:center;
-      width:100%;
+      background: linear-gradient(to left bottom, rgba(115,90,242,0.2), rgba(61,122,245,0.1));
+      color: #fff;
+      font-size:16px;
+      font-weight:400;
+    }
+
+    .outfit-card h3 {
+      margin:16px;
+    }
+
+    .outfit-card p {
+      margin:16px;
+      font-size:.85rem;
+      color:#aaa;
+    }
+
+    .save-btn {
+      margin:16px;
     }
 
     .bottom-nav {
@@ -162,6 +123,7 @@
       padding:10px 0;
       border-top:1px solid #444;
     }
+
     .bottom-nav button {
       background:none;
       border:none;
@@ -172,11 +134,47 @@
       align-items:center;
       cursor:pointer;
     }
-    .bottom-nav button span:first-child { font-size:1.5rem; margin-bottom:4px; }
-    .bottom-nav button.active { color:#4f46e5; }
+
+    .bottom-nav button span:first-child {
+      font-size:1.5rem;
+      margin-bottom:4px;
+    }
+
+    .bottom-nav button.active {
+      color:#4f46e5;
+    }
+
+    /* اختصاصی دکمه‌ها */
+    .btn-today {
+      background-image: linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245));
+      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
+      justify-content:center;
+    }
+
+    .btn-party {
+      background-image: linear-gradient(to left, rgb(61, 122, 245), rgb(115, 90, 242));
+      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
+      justify-content:center;
+    }
+
+    .btn-surprise {
+      background-image: linear-gradient(to left, rgba(115,90,242,0.3), rgba(61,122,245,0.3));
+      box-shadow: rgba(115,90,242,0.3) 0 0 60px -10px;
+      justify-content:center;
+    }
+
+    /* پیشنهاد امروز */
+    .today-suggestion {
+      font-family: Vazirmatn, sans-serif;
+      font-size:18px;
+      font-weight:700;
+      line-height:28px;
+      color: rgb(242,242,242);
+      margin:0 0 12px;
+    }
+
   </style>
 </head>
-
 <body>
 
   <div class="content">
@@ -193,48 +191,61 @@
 
     <!-- Quick Actions -->
     <div class="quick-actions">
-      <button class="primary-action-btn">
-        ✨
-        امروز چی بپوشم؟
+      <button class="gradient-btn btn-today">
+        ✨ امروز چی بپوشم؟
       </button>
 
-      <button class="party-btn">
-        🎉
-        یه مهمانی دارم
+      <button class="gradient-btn btn-party">
+        🎉 یه مهمانی دارم
       </button>
 
-      <button class="surprise-btn">
-        🎲
-        سورپرایزم کن
+      <button class="gradient-btn btn-surprise">
+        🎲 سورپرایزم کن
       </button>
     </div>
 
-    <!-- Suggestion Title under last button -->
-    <h2 class="suggestion-title">
-      پیشنهاد امروز
-    </h2>
+    <!-- Today Suggestion Text -->
+    <h2 class="today-suggestion">پیشنهاد امروز</h2>
 
-    <!-- Updated Outfit Card with Top Gradient -->
-    <div class="outfit-card">
-      <div class="outfit-top-gradient">
-        <!-- میتونی متن یا تصویر اینجا بذاری -->
-        <span>🌟 استایل ویژه امروز 🌟</span>
+    <!-- Outfit Cards -->
+    <div class="outfit-cards-container">
+      <!-- Card 1 -->
+      <div class="outfit-card">
+        <div class="outfit-top-gradient">
+          🌟 استایل ویژه امروز 🌟
+        </div>
+        <h3>استایل روزانه</h3>
+        <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
+        <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <button class="gradient-btn save-btn">⭐ ذخیره</button>
       </div>
 
-      <h3 style="margin:16px;">استایل روزانه</h3>
-      <p style="margin:16px;">پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-      <p style="margin:16px;font-size:.85rem;color:#aaa;">
-        تناسب با شکل بدن و سبک انتخاب شده
-      </p>
+      <!-- Card 2 -->
+      <div class="outfit-card">
+        <div class="outfit-top-gradient">
+          🌟 استایل ویژه امروز 🌟
+        </div>
+        <h3>استایل روزانه</h3>
+        <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
+        <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+      </div>
 
-      <button class="gradient-btn save-btn" style="margin:16px;">
-        ⭐
-        ذخیره
-      </button>
+      <!-- Card 3 -->
+      <div class="outfit-card">
+        <div class="outfit-top-gradient">
+          🌟 استایل ویژه امروز 🌟
+        </div>
+        <h3>استایل روزانه</h3>
+        <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
+        <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+      </div>
     </div>
 
   </div>
 
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
     <button class="active"><span>🏡</span><span>خانه</span></button>
     <button><span>👗</span><span>استایل</span></button>
