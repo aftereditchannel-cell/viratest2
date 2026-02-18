@@ -63,7 +63,6 @@
       font-size:16px;
       font-weight:400;
       color:#fff;
-      background-image:linear-gradient(to left,#735af2,#3d7af5);
       box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
       cursor:pointer;
       transition:transform .15s cubic-bezier(.4,0,.2,1);
@@ -123,8 +122,31 @@
       margin:16px;
     }
 
+    /* دکمه ذخیره جدید */
     .save-btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:2px;
+      white-space:nowrap;
+      text-align:center;
+      font-size:14px;
+      font-weight:500;
+      font-family: Vazirmatn,sans-serif;
+      height:36px;
+      padding:0 12px;
       margin:16px;
+      border-radius:9999px;
+      border:1px solid #2c2c2c;
+      background-color: rgb(13,13,18);
+      color: rgb(242,242,242);
+      cursor:pointer;
+      transition: all 0.15s cubic-bezier(.4,0,.2,1);
+    }
+
+    .save-btn:hover {
+      background-color:#3d7af5;
+      color:#fff;
     }
 
     /* Flex container برای سه کارت پیشنهاد استایل */
@@ -226,7 +248,7 @@
         <h3>استایل روزانه</h3>
         <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
         <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
-        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+        <button class="save-btn">⭐ ذخیره</button>
       </div>
 
       <div class="outfit-card">
@@ -236,7 +258,7 @@
         <h3>استایل روزانه</h3>
         <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
         <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
-        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+        <button class="save-btn">⭐ ذخیره</button>
       </div>
 
       <div class="outfit-card">
@@ -246,7 +268,7 @@
         <h3>استایل روزانه</h3>
         <p>پیراهن مشکی + شلوار جین + کت جین</p>
         <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
-        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+        <button class="save-btn">⭐ ذخیره</button>
       </div>
     </div>
 
