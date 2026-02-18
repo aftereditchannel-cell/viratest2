@@ -142,7 +142,17 @@
       margin:0;
       padding:0;
       display:block;
-      position:static;
+      position:relative;
+    }
+
+    /* Top Gradient Overlay inside outfit-card */
+    .outfit-top-gradient {
+      height:192px;
+      background-image: linear-gradient(to left bottom, rgba(115,90,242,0.2), rgba(61,122,245,0.1));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
     }
 
     .bottom-nav {
@@ -204,8 +214,13 @@
       پیشنهاد امروز
     </h2>
 
-    <!-- Updated Outfit Card -->
+    <!-- Updated Outfit Card with Top Gradient -->
     <div class="outfit-card">
+      <div class="outfit-top-gradient">
+        <!-- میتونی متن یا تصویر اینجا بذاری -->
+        <span>🌟 استایل ویژه امروز 🌟</span>
+      </div>
+
       <h3 style="margin:16px;">استایل روزانه</h3>
       <p style="margin:16px;">پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
       <p style="margin:16px;font-size:.85rem;color:#aaa;">
