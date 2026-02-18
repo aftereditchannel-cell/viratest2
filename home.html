@@ -35,8 +35,7 @@
     .gradient-btn {
       display:flex;
       align-items:center;
-      justify-content:center;
-      gap:8px;
+      justify-content:space-between; /* فاصله متن و آیکون */
       border:none;
       border-radius:16px;
       padding:16px;
@@ -47,7 +46,6 @@
       background-image: linear-gradient(to left, #735af2, #3d7af5);
       box-shadow: 0 0 60px -10px rgba(115,90,242,0.3);
       transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
-      text-align:center;
       width:100%;
     }
 
@@ -60,6 +58,15 @@
       gap:12px;
       margin-top:24px;
       height:180px; /* ارتفاع ثابت کل grid */
+    }
+
+    /* Style for SVG icon inside button */
+    .gradient-btn svg {
+      width:20px;
+      height:20px;
+      fill:#fff;
+      margin-left:8px; /* فاصله از متن */
+      flex-shrink:0;
     }
 
     /* Bottom Navigation */
@@ -97,14 +104,35 @@
       <h3>استایل روزانه</h3>
       <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
       <p style="font-size:0.85rem; color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
-      <button class="gradient-btn">ذخیره</button>
+      <button class="gradient-btn">
+        ذخیره
+        <!-- نمونه SVG آیکون -->
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
+        </svg>
+      </button>
     </div>
 
     <!-- Quick Action Buttons in Grid -->
     <div class="quick-actions">
-      <button class="gradient-btn">امروز چی بپوشم؟</button>
-      <button class="gradient-btn">یه مهمانی دارم</button>
-      <button class="gradient-btn">سورپرایزم کن</button>
+      <button class="gradient-btn">
+        امروز چی بپوشم؟
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
+        </svg>
+      </button>
+      <button class="gradient-btn">
+        یه مهمانی دارم
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
+        </svg>
+      </button>
+      <button class="gradient-btn">
+        سورپرایزم کن
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
+        </svg>
+      </button>
     </div>
   </div>
 
