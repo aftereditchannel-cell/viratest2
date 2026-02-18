@@ -6,109 +6,32 @@
   <title>Onboarding</title>
 
   <style>
-    :root {
+    :root{
       --primary:#7c3aed;
       --bg:#0f0f14;
       --card:#171720;
       --border:#2a2a35;
-      --text:#ffffff;
+      --text:#fff;
       --muted:#9ca3af;
     }
-
     *{box-sizing:border-box;font-family:sans-serif}
-
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-    }
-
-    .app{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
+    body{margin:0;background:var(--bg);color:var(--text)}
+    .app{min-height:100vh;display:flex;flex-direction:column}
     header{padding:20px}
-
-    .progress{
-      height:4px;
-      background:var(--border);
-      border-radius:999px;
-      overflow:hidden;
-    }
-
-    .progress span{
-      display:block;
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,#7c3aed,#a78bfa);
-      transition:.3s;
-    }
-
-    main{
-      flex:1;
-      padding:20px;
-    }
-
+    .progress{height:4px;background:var(--border);border-radius:999px;overflow:hidden}
+    .progress span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#7c3aed,#a78bfa);transition:.3s}
+    main{flex:1;padding:20px}
     h2{margin:0 0 6px}
     p{margin:0 0 20px;color:var(--muted);font-size:14px}
-
     .field{margin-bottom:16px}
     label{display:block;margin-bottom:6px;font-size:14px}
-
-    input{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-
-    .option{
-      padding:14px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
-      cursor:pointer;
-      transition:.2s;
-    }
-
-    .option.active{
-      border-color:var(--primary);
-      background:rgba(124,58,237,.15);
-      color:var(--primary);
-    }
-
-    footer{
-      padding:16px;
-      border-top:1px solid var(--border);
-      background:rgba(15,15,20,.9);
-    }
-
-    .cta{
-      width:100%;
-      padding:16px;
-      border-radius:16px;
-      border:none;
-      background:linear-gradient(135deg,#7c3aed,#a78bfa);
-      color:white;
-      font-size:16px;
-      font-weight:bold;
-      cursor:pointer;
-      opacity:.4;
-    }
-
+    input{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .option{padding:14px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer}
+    .option.active{border-color:var(--primary);background:rgba(124,58,237,.15);color:var(--primary)}
+    footer{padding:16px;border-top:1px solid var(--border)}
+    .cta{width:100%;padding:16px;border-radius:16px;border:none;background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;font-size:16px;font-weight:bold;cursor:pointer;opacity:.4}
     .cta.enabled{opacity:1}
-
     .hidden{display:none}
   </style>
 </head>
@@ -117,61 +40,56 @@
 <div class="app">
 
 <header>
-  <div class="progress">
-    <span id="progress"></span>
-  </div>
+  <div class="progress"><span id="progress"></span></div>
 </header>
 
 <main>
 
-  <!-- STEP 1 -->
-  <section class="step" data-step="0">
-    <h2>اطلاعات بدنی</h2>
-    <p>برای پیشنهادات دقیق‌تر</p>
+<section class="step" data-step="0">
+  <h2>اطلاعات بدنی</h2>
+  <p>برای پیشنهادات دقیق‌تر</p>
 
-    <div class="field">
-      <label>قد</label>
-      <input id="height" type="number">
-    </div>
+  <div class="field">
+    <label>قد</label>
+    <input id="height" type="number">
+  </div>
 
-    <div class="field">
-      <label>وزن</label>
-      <input id="weight" type="number">
-    </div>
+  <div class="field">
+    <label>وزن</label>
+    <input id="weight" type="number">
+  </div>
 
-    <div class="field">
-      <label>سن (اختیاری)</label>
-      <input id="age" type="number">
-    </div>
+  <div class="field">
+    <label>سن (اختیاری)</label>
+    <input id="age" type="number">
+  </div>
 
-    <div class="field">
-      <label>فرم بدن</label>
-      <div class="grid" id="bodyShapes"></div>
-    </div>
-  </section>
+  <div class="field">
+    <label>فرم بدن</label>
+    <div class="grid" id="bodyShapes"></div>
+  </div>
+</section>
 
-  <!-- STEP 2 -->
-  <section class="step hidden" data-step="1">
-    <h2>هویت و سبک</h2>
-    <p>چیزی که بهت میاد</p>
+<section class="step hidden" data-step="1">
+  <h2>هویت و سبک</h2>
+  <p>چیزی که بهت میاد</p>
 
-    <div class="field">
-      <label>جنسیت</label>
-      <div class="grid" id="genders"></div>
-    </div>
+  <div class="field">
+    <label>جنسیت</label>
+    <div class="grid" id="genders"></div>
+  </div>
 
-    <div class="field">
-      <label>سبک‌ها</label>
-      <div class="grid" id="styles"></div>
-    </div>
-  </section>
+  <div class="field">
+    <label>سبک‌ها</label>
+    <div class="grid" id="styles"></div>
+  </div>
+</section>
 
-  <!-- STEP 3 -->
-  <section class="step hidden" data-step="2">
-    <h2>اهداف</h2>
-    <p>قراره کجا کمکت کنیم؟</p>
-    <div class="grid" id="goals"></div>
-  </section>
+<section class="step hidden" data-step="2">
+  <h2>اهداف</h2>
+  <p>قراره کجا کمکت کنیم؟</p>
+  <div class="grid" id="goals"></div>
+</section>
 
 </main>
 
@@ -182,11 +100,22 @@
 </div>
 
 <script>
-const data={
+const STORAGE_KEY="onboardingData";
+const DONE_KEY="onboardingDone";
+
+if(localStorage.getItem(DONE_KEY)==="true"){
+  window.location.href="home.html";
+}
+
+const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+const data=saved || {
   height:"",weight:"",age:"",
   bodyShape:"",gender:"",
   styles:[],goals:[]
 };
+
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
 
 const bodyShapes=[["slim","لاغر"],["athletic","ورزشکاری"],["average","متوسط"],["plus","پلاس‌سایز"]];
 const genders=[["male","مرد"],["female","زن"],["non","غیردودویی"],["none","نمی‌گم"]];
@@ -203,36 +132,31 @@ function render(list,el,key,multi=false){
     const btn=document.createElement("button");
     btn.className="option";
     btn.innerText=label;
+    if(multi && data[key].includes(val) || data[key]===val) btn.classList.add("active");
     btn.onclick=()=>{
       if(multi){
-        if(data[key].includes(val)){
-          data[key]=data[key].filter(v=>v!==val);
-          btn.classList.remove("active");
-        }else{
-          data[key].push(val);
-          btn.classList.add("active");
-        }
+        data[key]=data[key].includes(val)?data[key].filter(v=>v!==val):[...data[key],val];
+        btn.classList.toggle("active");
       }else{
         data[key]=val;
         [...el.children].forEach(b=>b.classList.remove("active"));
         btn.classList.add("active");
       }
-      validate();
+      save();validate();
     };
     el.appendChild(btn);
   });
 }
 
-render(bodyShapes,document.getElementById("bodyShapes"),"bodyShape");
+render(bodyShapes,bodyShapesEl=document.getElementById("bodyShapes"),"bodyShape");
 render(genders,document.getElementById("genders"),"gender");
 render(styles,document.getElementById("styles"),"styles",true);
 render(goals,document.getElementById("goals"),"goals",true);
 
 ["height","weight","age"].forEach(id=>{
-  document.getElementById(id).oninput=e=>{
-    data[id]=e.target.value;
-    validate();
-  };
+  const el=document.getElementById(id);
+  el.value=data[id];
+  el.oninput=e=>{data[id]=e.target.value;save();validate()};
 });
 
 function validate(){
@@ -253,11 +177,10 @@ function updateUI(){
 
 nextBtn.onclick=()=>{
   if(!nextBtn.classList.contains("enabled"))return;
-
-  if(step<2){
-    step++;
-    updateUI();
-  }else{
+  if(step<2){step++;updateUI();}
+  else{
+    localStorage.setItem(DONE_KEY,"true");
+    save();
     alert("آن‌بوردینگ با موفقیت انجام شد 🚀");
     window.location.href="home.html";
   }
