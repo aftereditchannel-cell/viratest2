@@ -2,7 +2,6 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>خانه | ویرا استایل</title>
 <link rel="stylesheet" href="auth.css">
@@ -15,28 +14,37 @@
 <button onclick="logout()" class="btn guest" style="margin-top:20px; padding:12px 20px;">خروج</button>
 
 <script>
-// بررسی session
-const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+// تابع بررسی session و هدایت
+function checkSession() {
+    const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+    const formDone = localStorage.getItem("onboardingDone") === "true";
 
-// اگر کاربر وارد نشده یا فرم پر نکرده → هدایت به صفحه مناسب
-if (!session.id) {
-    window.location.href = "auth.html";
-} else if (!session.formFilled) {
-    window.location.href = "form.html";
-} else {
-    // خوش آمدگویی با نام یا گوگل/مهمان
+    // اگر کاربر وارد نشده → auth.html
+    if (!session.id) {
+        window.location.href = "auth.html";
+        return;
+    }
+
+    // اگر فرم پر نشده → form.html
+    if (!formDone) {
+        window.location.href = "form.html";
+        return;
+    }
+
+    // اگر همه چیز اوکیه → خوش آمدگویی
     const welcomeText = document.getElementById("welcomeText");
-    welcomeText.innerText = `سلام ${session.fullname || session.name}!`;
+    welcomeText.innerText = `سلام ${session.fullname || session.name || "کاربر"}!`;
 }
 
-// تابع خروج
-function logout(){
+// خروج
+function logout() {
     localStorage.removeItem("vira_session");
     window.location.href = "auth.html";
 }
+
+// اجرا
+checkSession();
 </script>
 
 </body>
 </html>
-
-
