@@ -4,48 +4,151 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>خانه | ویرا استایل</title>
-<link rel="stylesheet" href="auth.css">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Vazirmatn', sans-serif; }
+  body { background:#0f0f1a; color:#fff; direction:rtl; min-height:100vh; display:flex; flex-direction:column; text-align:center; }
+  
+  .container { flex:1; padding:20px; display:flex; flex-direction:column; gap:20px; }
+
+  .header { font-size:1.8rem; font-weight:700; }
+  .tabs { display:flex; gap:10px; }
+  .tab { flex:1; text-align:center; padding:12px 0; border-radius:10px; cursor:pointer; transition:0.3s; font-weight:600; }
+  .tab.active { background:linear-gradient(90deg,#6c5efb,#4f7dff); color:#fff; }
+
+  .slider { position:relative; overflow:hidden; border-radius:15px; }
+  .slide { display:none; padding:30px; text-align:center; background:#1a1a2e; border-radius:15px; transition:0.5s; }
+  .slide.active { display:block; animation:fadeIn 0.5s ease; }
+  @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+  .btn { display:block; margin:15px auto 0; padding:10px 20px; border:none; border-radius:10px; cursor:pointer; font-weight:600; transition:0.3s; }
+  .btn.primary { background:linear-gradient(90deg,#6c5efb,#4f7dff); color:#fff; }
+  .btn.secondary { background:#8c84f7; color:#fff; }
+  .btn.random { background:#4f7dff; color:#fff; }
+
+  .btn:hover { transform:scale(1.05); }
+
+  .suggestion { background:#1a1a2e; padding:20px; border-radius:15px; text-align:center; }
+  .suggestion img { width:60px; margin-bottom:15px; }
+  .suggestion h3 { margin-bottom:10px; font-weight:700; }
+  .suggestion p { font-size:0.9rem; color:#ccc; margin-bottom:10px; }
+  .suggestion .tags { display:flex; justify-content:center; gap:10px; margin-bottom:10px; }
+  .tag { background:#4f7dff; padding:5px 10px; border-radius:10px; font-size:0.8rem; }
+  .save-btn { background:#ff4f81; color:#fff; border:none; padding:10px 20px; border-radius:10px; cursor:pointer; transition:0.3s; }
+  .save-btn:hover { transform:scale(1.05); }
+
+  .bottom-nav { display:flex; justify-content:space-around; background:#121224; padding:10px 0; }
+  .bottom-nav div { text-align:center; color:#aaa; cursor:pointer; transition:0.3s; }
+  .bottom-nav div.active, .bottom-nav div:hover { color:#fff; }
+  .bottom-nav div span { display:block; font-size:0.8rem; margin-top:3px; }
+
+  #welcomeText { margin-top:10px; font-size:1.2rem; color:#ccc; }
+</style>
 </head>
-<body style="background:#07070c;color:white;font-family:'Vazirmatn',sans-serif;text-align:center;padding-top:100px">
+<body>
 
-<h1>خوش آمدید به ویرا استایل ✨</h1>
-<p id="welcomeText"></p>
+<div class="container">
+  <div class="header">👋 سلام <span id="welcomeText">کاربر</span><br>امروز چی بپوشم؟</div>
 
-<button onclick="logout()" class="btn guest" style="margin-top:20px; padding:12px 20px;">خروج</button>
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" data-tab="today">امروز چی بپوشم؟</div>
+    <div class="tab" data-tab="event">یه مهمانی دارم</div>
+    <div class="tab" data-tab="surprise">سوپرایزم کن</div>
+  </div>
+
+  <!-- Slider -->
+  <div class="slider">
+    <div class="slide active">
+      <div class="btn primary">امروز چی بپوشم؟</div>
+      <div class="btn secondary">یه مهمانی دارم</div>
+      <div class="btn random">سوپرایزم کن</div>
+    </div>
+  </div>
+
+  <!-- Suggestion -->
+  <div class="suggestion">
+    <img src="https://img.icons8.com/emoji/48/shirt-emoji.png" alt="shirt icon">
+    <h3>استایل کژوال شیک</h3>
+    <p>یک تیشرت ساده مشکی با شلوار جین آبی تیره و کتونی سفید. ساده، تمیز و مناسب برای هر مناسبت روزانه.</p>
+    <div class="tags">
+      <div class="tag">مناسب فرم بدن شما</div>
+      <div class="tag">کژوال</div>
+    </div>
+    <button class="save-btn">💖 ذخیره این استایل</button>
+  </div>
+</div>
+
+<!-- Bottom nav -->
+<div class="bottom-nav">
+  <div class="active"><img src="https://img.icons8.com/ios-filled/24/home.png"/><span>خانه</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/shopping-bag.png"/><span>کمد</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/calendar.png"/><span>رویدادها</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/tshirt.png"/><span>پیشنهاد</span></div>
+  <div><img src="https://img.icons8.com/ios-filled/24/user.png"/><span>پروفایل</span></div>
+</div>
 
 <script>
-// تابع بررسی session و هدایت
-function checkSession() {
+  // چک کردن session و فرم ورود
+  function checkSession() {
     const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
     const formDone = localStorage.getItem("onboardingDone") === "true";
 
-    // اگر کاربر وارد نشده → auth.html
     if (!session.id) {
-        window.location.href = "auth.html";
-        return;
+      window.location.href = "auth.html";
+      return;
     }
 
-    // اگر فرم پر نشده → form.html
     if (!formDone) {
-        window.location.href = "form.html";
-        return;
+      window.location.href = "form.html";
+      return;
     }
 
-    // خوش آمدگویی
     const welcomeText = document.getElementById("welcomeText");
-    welcomeText.innerText = `سلام ${session.fullname || session.name || "کاربر"}!`;
-}
+    welcomeText.innerText = session.fullname || session.name || "کاربر";
+  }
 
-// خروج کامل: session + فرم + دیتا
-function logout() {
+  function logout() {
     localStorage.removeItem("vira_session");
     localStorage.removeItem("onboardingDone");
     localStorage.removeItem("onboardingData");
     window.location.href = "auth.html";
-}
+  }
 
-// اجرا
-checkSession();
+  checkSession();
+
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      console.log("Tab switched to:", tab.dataset.tab);
+    });
+  });
+
+  // Slide buttons
+  const slideButtons = document.querySelectorAll('.slide .btn');
+  slideButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert(`شما دکمه "${btn.textContent}" را زدید`);
+    });
+  });
+
+  // Bottom nav
+  const navItems = document.querySelectorAll('.bottom-nav div');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  // Save style button
+  const saveBtn = document.querySelector('.save-btn');
+  saveBtn.addEventListener('click', () => {
+    alert("استایل ذخیره شد ❤️");
+  });
 </script>
 
 </body>
