@@ -10,16 +10,23 @@
       margin:0;
       padding:0;
       font-family: 'Vazirmatn', sans-serif;
-      background-color: #1a1a1a;
-      color: #fff;
-      min-height: 100vh;
+      background-color:#1a1a1a;
+      color:#fff;
+      min-height:100vh;
       display:flex;
       flex-direction:column;
     }
 
-    .content { flex:1; padding:16px; overflow-y:auto; }
+    .content {
+      flex:1;
+      padding:16px;
+      overflow-y:auto;
+    }
 
-    .greeting { font-size:1.5rem; margin-bottom:16px; }
+    .greeting {
+      font-size:1.5rem;
+      margin-bottom:16px;
+    }
 
     .outfit-card {
       background:#2c2c2c;
@@ -29,37 +36,43 @@
       box-shadow:0 4px 10px rgba(0,0,0,0.5);
     }
 
-    .outfit-card h3 { font-size:1.2rem; font-weight:bold; margin-bottom:8px; }
-    .outfit-card p { color:#ccc; margin-bottom:6px; }
+    .outfit-card h3 {
+      font-size:1.2rem;
+      margin-bottom:8px;
+    }
 
+    .outfit-card p {
+      color:#ccc;
+      margin-bottom:6px;
+    }
+
+    /* Gradient Button */
     .gradient-btn {
+      width:100%;
+      height:52px;
       display:flex;
       align-items:center;
       justify-content:flex-start;
+      gap:16px;
+
+      padding:16px;
       border:none;
       border-radius:16px;
-      padding:16px;
+
+      font-family:Vazirmatn,sans-serif;
       font-size:16px;
       font-weight:400;
       color:#fff;
+
+      background-image:linear-gradient(to left,#735af2,#3d7af5);
+      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
+
       cursor:pointer;
-      background-image: linear-gradient(to left, #735af2, #3d7af5);
-      box-shadow: 0 0 60px -10px rgba(115,90,242,0.3);
-      transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
-      width:100%;
-      gap:16px;
+      transition:transform .15s cubic-bezier(.4,0,.2,1);
     }
 
-    .gradient-btn:active { transform: scale(0.98); }
-
-    .gradient-btn svg {
-      width:20px;
-      height:20px;
-      flex-shrink:0;
-    }
-
-    .special-btn {
-      height:52px;
+    .gradient-btn:active {
+      transform:scale(0.98);
     }
 
     .quick-actions {
@@ -69,6 +82,7 @@
       margin-top:24px;
     }
 
+    /* Bottom Nav */
     .bottom-nav {
       display:flex;
       justify-content:space-around;
@@ -78,22 +92,27 @@
     }
 
     .bottom-nav button {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
       background:none;
       border:none;
       color:#fff;
-      font-size:0.9rem;
+      font-size:.9rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
       cursor:pointer;
     }
 
-    .bottom-nav button span:first-child { font-size:1.5rem; margin-bottom:4px; }
-    .bottom-nav button.active { color:#4f46e5; }
+    .bottom-nav button span:first-child {
+      font-size:1.5rem;
+      margin-bottom:4px;
+    }
 
+    .bottom-nav button.active {
+      color:#4f46e5;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="content">
@@ -102,47 +121,29 @@
     <div class="outfit-card">
       <h3>استایل روزانه</h3>
       <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-      <p style="font-size:0.85rem; color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
+      <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
 
       <button class="gradient-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L15 8H9L12 2Z"/>
-        </svg>
+        ⭐
         ذخیره
       </button>
     </div>
 
     <div class="quick-actions">
 
-      <!-- امروز چی بپوشم با آیکون جدید -->
+      <!-- امروز چی بپوشم -->
       <button class="gradient-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5.8 11.3 2 22l10.7-3.79"/>
-          <path d="M4 3h.01"/>
-          <path d="M22 8h.01"/>
-          <path d="M15 2h.01"/>
-          <path d="M22 20h.01"/>
-          <path d="m22 2-2.24 2.24"/>
-          <path d="m22 22-2.24-2.24"/>
-          <path d="m2 22 2.24-2.24"/>
-          <path d="m2 2 2.24 2.24"/>
-        </svg>
+        ✨
         امروز چی بپوشم؟
       </button>
 
-      <button class="gradient-btn special-btn">
-        <svg viewBox="0 0 24 24" fill="#fff">
-          <path d="M12 2L15 8H9L12 2Z"/>
-        </svg>
+      <button class="gradient-btn">
+        🎉
         یه مهمانی دارم
       </button>
 
-      <button class="gradient-btn special-btn">
-        <svg viewBox="0 0 24 24" fill="#fff">
-          <path d="M12 2L15 8H9L12 2Z"/>
-        </svg>
+      <button class="gradient-btn">
+        🎲
         سورپرایزم کن
       </button>
 
