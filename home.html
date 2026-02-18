@@ -73,6 +73,31 @@
       transform:scale(0.98);
     }
 
+    /* Party button only for "یه مهمانی دارم" */
+    .party-btn {
+      width:100%;
+      height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:16px;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      font-family:Vazirmatn,sans-serif;
+      font-size:16px;
+      font-weight:400;
+      color:#fff;
+      background-image:linear-gradient(to left, rgb(61, 122, 245), rgb(115, 90, 242));
+      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
+      cursor:pointer;
+      transition:transform .15s cubic-bezier(.4,0,.2,1);
+    }
+
+    .party-btn:active {
+      transform:scale(0.98);
+    }
+
     /* Other gradient buttons remain default */
     .gradient-btn {
       width:100%;
@@ -166,18 +191,19 @@
 
     <!-- Quick Actions -->
     <div class="quick-actions">
-      <!-- Only this button has the special primary style -->
+      <!-- "امروز چی بپوشم؟" -->
       <button class="primary-action-btn">
         ✨
         امروز چی بپوشم؟
       </button>
 
-      <!-- Other buttons stay as gradient-btn -->
-      <button class="gradient-btn">
+      <!-- "یه مهمانی دارم" -->
+      <button class="party-btn">
         🎉
         یه مهمانی دارم
       </button>
 
+      <!-- "سورپرایزم کن" -->
       <button class="gradient-btn">
         🎲
         سورپرایزم کن
