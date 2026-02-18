@@ -22,7 +22,7 @@ const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
 if (!session.id) {
     window.location.href = "auth.html";
 } else if (!session.formFilled) {
-    window.location.href = "form.html";
+    window.location.href = "form.tsx";
 } else {
     // خوش آمدگویی با نام یا گوگل/مهمان
     const welcomeText = document.getElementById("welcomeText");
@@ -38,3 +38,4 @@ function logout(){
 
 </body>
 </html>
+
