@@ -70,16 +70,20 @@
 
     .gradient-btn:active { transform:scale(0.98); }
 
-    .suggestions {
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
+    .suggestions-wrapper {
+      overflow-x:auto;
       margin-bottom:24px;
     }
 
+    .suggestions {
+      display:flex;
+      gap:12px;
+      flex-wrap:nowrap; /* هیچ وقت پایین نمیره */
+      min-width: max-content;
+    }
+
     .outfit-card {
-      flex:1 1 calc(33.333% - 8px);
-      min-width:200px;
+      flex:0 0 300px; /* هر کارت عرض ثابت */
       border-radius:12px;
       border:0.8px solid rgba(34,34,42,0.5);
       background-color: rgb(20,20,26);
@@ -117,7 +121,7 @@
     .tags {
       display:flex;
       gap:8px;
-      padding:8px 16px 0 16px; /* فاصله از کادر */
+      padding:8px 16px 0 16px;
       flex-wrap: wrap;
     }
 
@@ -139,9 +143,9 @@
       white-space:nowrap;
       font-size:14px;
       font-weight:500;
-      height:36px; /* ارتفاع مناسب */
+      height:36px;
       padding:0 12px;
-      margin:8px 16px 16px 16px; /* فاصله مناسب */
+      margin:8px 16px 16px 16px;
       border-radius:9999px;
       border:1px solid #2c2c2c;
       background-color: rgb(13,13,18);
@@ -202,44 +206,46 @@
     </div>
 
     <h2 class="suggestion-title">پیشنهاد امروز</h2>
-    <div class="suggestions">
+    <div class="suggestions-wrapper">
+      <div class="suggestions">
 
-      <div class="outfit-card">
-        <div class="card-top"><span>🌟 استایل ویژه امروز 🌟</span></div>
-        <h3>استایل روزانه</h3>
-        <p>پیراهن سفید + شلوار جین + کت مشکی</p>
-        <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
-        <div class="tags">
-          <span class="accent">مناسب فرم بدن شما</span>
-          <span class="primary">کژوال</span>
+        <div class="outfit-card">
+          <div class="card-top"><span>🌟 استایل ویژه امروز 🌟</span></div>
+          <h3>استایل روزانه</h3>
+          <p>پیراهن سفید + شلوار جین + کت مشکی</p>
+          <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
+          <div class="tags">
+            <span class="accent">مناسب فرم بدن شما</span>
+            <span class="primary">کژوال</span>
+          </div>
+          <button class="save-btn">⭐ ذخیره</button>
         </div>
-        <button class="save-btn">⭐ ذخیره</button>
-      </div>
 
-      <div class="outfit-card">
-        <div class="card-top"><span>🌟 استایل ویژه امروز 🌟</span></div>
-        <h3>استایل روزانه</h3>
-        <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
-        <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
-        <div class="tags">
-          <span class="accent">مناسب فرم بدن شما</span>
-          <span class="primary">کژوال</span>
+        <div class="outfit-card">
+          <div class="card-top"><span>🌟 استایل ویژه امروز 🌟</span></div>
+          <h3>استایل روزانه</h3>
+          <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
+          <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
+          <div class="tags">
+            <span class="accent">مناسب فرم بدن شما</span>
+            <span class="primary">کژوال</span>
+          </div>
+          <button class="save-btn">⭐ ذخیره</button>
         </div>
-        <button class="save-btn">⭐ ذخیره</button>
-      </div>
 
-      <div class="outfit-card">
-        <div class="card-top"><span>🌟 استایل ویژه امروز 🌟</span></div>
-        <h3>استایل روزانه</h3>
-        <p>پیراهن مشکی + شلوار جین + کت جین</p>
-        <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
-        <div class="tags">
-          <span class="accent">مناسب فرم بدن شما</span>
-          <span class="primary">کژوال</span>
+        <div class="outfit-card">
+          <div class="card-top"><span>🌟 استایل ویژه امروز 🌟</span></div>
+          <h3>استایل روزانه</h3>
+          <p>پیراهن مشکی + شلوار جین + کت جین</p>
+          <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
+          <div class="tags">
+            <span class="accent">مناسب فرم بدن شما</span>
+            <span class="primary">کژوال</span>
+          </div>
+          <button class="save-btn">⭐ ذخیره</button>
         </div>
-        <button class="save-btn">⭐ ذخیره</button>
-      </div>
 
+      </div>
     </div>
   </div>
 
