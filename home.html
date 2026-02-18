@@ -1,192 +1,265 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>چی بپوشم - خانه</title>
-<style>
-  body {
-    margin:0;
-    padding:0;
-    font-family:'Vazirmatn', sans-serif;
-    background-color:#1a1a1a;
-    color:#fff;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-  }
-  .content {
-    flex:1;
-    padding:16px;
-    overflow-y:auto;
-  }
-  /* Greeting */
-  .text-muted-foreground {
-    font-size:14px;
-    line-height:20px;
-    color:rgb(135,135,146);
-    margin-bottom:4px;
-  }
-  /* Main heading */
-  .main-title {
-    font-size:24px;
-    font-weight:700;
-    line-height:32px;
-    color:#f2f2f2;
-    margin:4px 0 16px;
-  }
-  .quick-actions {
-    display:grid;
-    grid-template-columns:1fr;
-    gap:12px;
-    margin-bottom:24px;
-  }
-  /* Buttons بالا */
-  .today-btn, .party-btn, .surprise-btn {
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:16px;
-    border:none;
-    border-radius:16px;
-    font-size:16px;
-    font-weight:400;
-    font-family: Vazirmatn,sans-serif;
-    color:#fff;
-    box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
-    cursor:pointer;
-    transition:transform .15s cubic-bezier(.4,0,.2,1);
-    justify-content:flex-start; /* چپ‌چین بودن متن */
-  }
-  .today-btn { background-image:linear-gradient(to left,#735af2,#3d7af5); }
-  .party-btn { background-image:linear-gradient(to left,rgb(61,122,245),rgb(115,90,242)); }
-  .surprise-btn { background-image:linear-gradient(to left,#3d7af5,#735af2); }
-  .today-btn:active, .party-btn:active, .surprise-btn:active { transform:scale(0.98); }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>چی بپوشم - خانه</title>
+  <style>
+    body {
+      margin:0;
+      padding:0;
+      font-family:'Vazirmatn', sans-serif;
+      background-color:#1a1a1a;
+      color:#fff;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
 
-  /* پیشنهاد امروز */
-  .suggestions {
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-  }
-  .suggestions .card {
-    flex:1 1 calc(33.33% - 8px); /* خودکار تقسیم عرض 3 تا کارت با فاصله */
-    background-color:rgb(20,20,26);
-    border:0.8px solid rgba(34,34,42,0.5);
-    border-radius:12px;
-    overflow:hidden;
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
-    margin-bottom:12px;
-    min-width:200px; /* حداقل برای موبایل */
-  }
-  .card .top-block {
-    height:192px;
-    background-image:linear-gradient(to left bottom, rgba(115, 90, 242, 0.2), rgba(61, 122, 245, 0.1));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:16px;
-    color:#f2f2f2;
-  }
-  .card h3 {
-    margin:16px;
-    font-size:1.1rem;
-  }
-  .card p {
-    margin:0 16px 6px;
-    color:#ccc;
-  }
-  .card p.subtext {
-    font-size:.85rem;
-    color:#aaa;
-  }
-  .card .save-btn {
-    margin:16px;
-    background-image:linear-gradient(to left,#735af2,#3d7af5);
-    border:none;
-    border-radius:16px;
-    padding:12px;
-    color:#fff;
-    cursor:pointer;
-    transition:transform .15s cubic-bezier(.4,0,.2,1);
-  }
-  .card .save-btn:active { transform:scale(0.98); }
+    .content {
+      flex:1;
+      padding:16px;
+      overflow-y:auto;
+      margin-bottom: 70px; /* جای خالی برای منوی ثابت */
+    }
 
-  .bottom-nav {
-    display:flex;
-    justify-content:space-around;
-    background:#2c2c2c;
-    padding:10px 0;
-    border-top:1px solid #444;
-  }
-  .bottom-nav button {
-    background:none;
-    border:none;
-    color:#fff;
-    font-size:.9rem;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    cursor:pointer;
-  }
-  .bottom-nav button span:first-child {
-    font-size:1.5rem;
-    margin-bottom:4px;
-  }
-  .bottom-nav button.active { color:#4f46e5; }
-</style>
+    /* Greeting */
+    .text-muted-foreground {
+      font-size:14px;
+      line-height:20px;
+      color:rgb(135,135,146);
+      margin-bottom:4px;
+    }
+
+    /* Main heading */
+    .main-title {
+      font-family: Vazirmatn, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 32px;
+      color: rgb(242, 242, 242);
+      margin: 4px 0 16px;
+    }
+
+    /* Quick Actions Buttons */
+    .quick-actions {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-bottom:24px;
+    }
+
+    .gradient-btn {
+      width:100%;
+      height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start; /* راست چین متن */
+      gap:16px;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      font-family:Vazirmatn,sans-serif;
+      font-size:16px;
+      font-weight:400;
+      color:#fff;
+      background-image:linear-gradient(to left,#735af2,#3d7af5);
+      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
+      cursor:pointer;
+      transition:transform .15s cubic-bezier(.4,0,.2,1);
+      text-align: right;
+    }
+
+    /* مخصوص باتن امروز چی بپوشم؟ */
+    .today-btn {
+      background-image: linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245));
+    }
+
+    /* مخصوص باتن یه مهمانی دارم */
+    .party-btn {
+      background-image: linear-gradient(to left, rgb(61, 122, 245), rgb(115, 90, 242));
+    }
+
+    /* مخصوص باتن سورپرایزم کن */
+    .surprise-btn {
+      background-image: linear-gradient(to left, rgb(115, 90, 242), rgb(61, 122, 245));
+    }
+
+    .gradient-btn:active {
+      transform:scale(0.98);
+    }
+
+    /* Outfit Cards */
+    .outfit-card {
+      border-radius:12px;
+      border:0.8px solid rgba(34,34,42,0.5);
+      background-color: rgb(20,20,26);
+      color: rgb(242,242,242);
+      box-shadow: rgba(0,0,0,0.05) 0 1px 2px 0;
+      overflow:hidden;
+      margin-bottom:20px;
+    }
+
+    .card-top {
+      height:192px;
+      background: linear-gradient(to left bottom, rgba(115,90,242,0.2), rgba(61,122,245,0.1));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .outfit-card h3 {
+      font-size:1.1rem;
+      margin:16px;
+    }
+
+    .outfit-card p {
+      margin:16px;
+    }
+
+    .outfit-card p.note {
+      font-size:.85rem;
+      color:#aaa;
+      margin:16px;
+    }
+
+    .save-btn {
+      margin:16px;
+    }
+
+    /* Flex container برای سه کارت پیشنهاد استایل */
+    .suggestions {
+      display:flex;
+      gap:12px;
+      margin-bottom:24px;
+      flex-wrap: wrap;
+    }
+
+    .suggestions .outfit-card {
+      flex:1 1 calc(33.333% - 8px); /* هر کارت یک سوم عرض به صورت خودکار */
+      min-width:200px; /* حداقل اندازه */
+    }
+
+    h2.suggestion-title {
+      font-family: Vazirmatn,sans-serif;
+      font-size:18px;
+      font-weight:700;
+      line-height:28px;
+      color: rgb(242,242,242);
+      margin:0 0 12px 0;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #2c2c2c;
+      padding: 10px 0;
+      border-top: 1px solid #444;
+      z-index: 999;
+    }
+
+    .bottom-nav button {
+      background:none;
+      border:none;
+      color:#fff;
+      font-size:.9rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      cursor:pointer;
+    }
+
+    .bottom-nav button span:first-child {
+      font-size:1.5rem;
+      margin-bottom:4px;
+    }
+
+    .bottom-nav button.active {
+      color:#4f46e5;
+    }
+  </style>
 </head>
 <body>
-<div class="content">
-  <!-- Greeting -->
-  <p class="text-muted-foreground">سلام، امیر! 👋</p>
 
-  <!-- Main Title -->
-  <h1 class="main-title">امروز چیکار کنیم؟</h1>
+  <div class="content">
 
-  <!-- Quick Actions -->
-  <div class="quick-actions">
-    <button class="today-btn">✨ امروز چی بپوشم؟</button>
-    <button class="party-btn">🎉 یه مهمانی دارم</button>
-    <button class="surprise-btn">🎲 سورپرایزم کن</button>
+    <!-- Greeting -->
+    <p class="text-muted-foreground">
+      سلام، امیر! 👋
+    </p>
+
+    <!-- New Title -->
+    <h1 class="main-title">
+      امروز چیکار کنیم؟
+    </h1>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <button class="gradient-btn today-btn">
+        ✨
+        امروز چی بپوشم؟
+      </button>
+
+      <button class="gradient-btn party-btn">
+        🎉
+        یه مهمانی دارم
+      </button>
+
+      <button class="gradient-btn surprise-btn">
+        🎲
+        سورپرایزم کن
+      </button>
+    </div>
+
+    <!-- پیشنهاد امروز -->
+    <h2 class="suggestion-title">پیشنهاد امروز</h2>
+    <div class="suggestions">
+      <div class="outfit-card">
+        <div class="card-top">
+          <span>🌟 استایل ویژه امروز 🌟</span>
+        </div>
+        <h3>استایل روزانه</h3>
+        <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
+        <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
+        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+      </div>
+
+      <div class="outfit-card">
+        <div class="card-top">
+          <span>🌟 استایل ویژه امروز 🌟</span>
+        </div>
+        <h3>استایل روزانه</h3>
+        <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
+        <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
+        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+      </div>
+
+      <div class="outfit-card">
+        <div class="card-top">
+          <span>🌟 استایل ویژه امروز 🌟</span>
+        </div>
+        <h3>استایل روزانه</h3>
+        <p>پیراهن مشکی + شلوار جین + کت جین</p>
+        <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
+        <button class="gradient-btn save-btn">⭐ ذخیره</button>
+      </div>
+    </div>
+
   </div>
 
-  <!-- پیشنهاد امروز -->
-  <h2 style="font-size:18px;font-weight:700;margin-bottom:12px;">پیشنهاد امروز</h2>
-  <div class="suggestions">
-    <div class="card">
-      <div class="top-block">🌟 استایل ویژه امروز 🌟</div>
-      <h3>استایل روزانه</h3>
-      <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-      <p class="subtext">تناسب با شکل بدن و سبک انتخاب شده</p>
-      <button class="save-btn">⭐ ذخیره</button>
-    </div>
-    <div class="card">
-      <div class="top-block">🌟 استایل ویژه امروز 🌟</div>
-      <h3>استایل روزانه</h3>
-      <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-      <p class="subtext">تناسب با شکل بدن و سبک انتخاب شده</p>
-      <button class="save-btn">⭐ ذخیره</button>
-    </div>
-    <div class="card">
-      <div class="top-block">🌟 استایل ویژه امروز 🌟</div>
-      <h3>استایل روزانه</h3>
-      <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-      <p class="subtext">تناسب با شکل بدن و سبک انتخاب شده</p>
-      <button class="save-btn">⭐ ذخیره</button>
-    </div>
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <button class="active"><span>🏡</span><span>خانه</span></button>
+    <button><span>👗</span><span>استایل</span></button>
+    <button><span>🎭</span><span>رویدادها</span></button>
+    <button><span>👚</span><span>کمد</span></button>
+    <button><span>👤</span><span>پروفایل</span></button>
   </div>
-</div>
 
-<div class="bottom-nav">
-  <button class="active"><span>🏡</span><span>خانه</span></button>
-  <button><span>👗</span><span>استایل</span></button>
-  <button><span>🎭</span><span>رویدادها</span></button>
-  <button><span>👚</span><span>کمد</span></button>
-  <button><span>👤</span><span>پروفایل</span></button>
-</div>
 </body>
 </html>
