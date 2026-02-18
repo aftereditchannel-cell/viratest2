@@ -23,14 +23,43 @@
       overflow-y:auto;
     }
 
-    /* Greeting (muted) */
     .text-muted-foreground {
-      font-family: Vazirmatn, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      color: rgb(135, 135, 146);
-      margin-bottom: 12px;
+      font-size:14px;
+      line-height:20px;
+      color:rgb(135,135,146);
+      margin-bottom:12px;
+    }
+
+    .quick-actions {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:8px;
+      margin-bottom:24px;
+    }
+
+    .gradient-btn {
+      width:100%;
+      height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:16px;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      font-family:Vazirmatn,sans-serif;
+      font-size:16px;
+      font-weight:400;
+      color:#fff;
+      background-image:linear-gradient(to left,#735af2,#3d7af5);
+      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
+      cursor:pointer;
+      transition:transform .15s cubic-bezier(.4,0,.2,1);
+    }
+
+    .gradient-btn:active {
+      transform:scale(0.98);
     }
 
     .outfit-card {
@@ -42,7 +71,7 @@
     }
 
     .outfit-card h3 {
-      font-size:1.2rem;
+      font-size:1.1rem;
       margin-bottom:8px;
     }
 
@@ -51,43 +80,10 @@
       margin-bottom:6px;
     }
 
-    /* Gradient Button */
-    .gradient-btn {
-      width:100%;
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      gap:16px;
-
-      padding:16px;
-      border:none;
-      border-radius:16px;
-
-      font-family:Vazirmatn,sans-serif;
-      font-size:16px;
-      font-weight:400;
-      color:#fff;
-
-      background-image:linear-gradient(to left,#735af2,#3d7af5);
-      box-shadow:rgba(115,90,242,0.3) 0 0 60px -10px;
-
-      cursor:pointer;
-      transition:transform .15s cubic-bezier(.4,0,.2,1);
+    .save-btn {
+      margin-top:12px;
     }
 
-    .gradient-btn:active {
-      transform:scale(0.98);
-    }
-
-    .quick-actions {
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      margin-top:24px;
-    }
-
-    /* Bottom Nav */
     .bottom-nav {
       display:flex;
       justify-content:space-around;
@@ -123,21 +119,11 @@
   <div class="content">
 
     <!-- Greeting -->
-    <p class="text-muted-foreground text-sm">
+    <p class="text-muted-foreground">
       سلام، امیر! 👋
     </p>
 
-    <div class="outfit-card">
-      <h3>استایل روزانه</h3>
-      <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
-      <p style="font-size:.85rem;color:#aaa;">تناسب با شکل بدن و سبک انتخاب شده</p>
-
-      <button class="gradient-btn">
-        ⭐
-        ذخیره
-      </button>
-    </div>
-
+    <!-- Quick Actions FIRST -->
     <div class="quick-actions">
       <button class="gradient-btn">
         ✨
@@ -152,6 +138,20 @@
       <button class="gradient-btn">
         🎲
         سورپرایزم کن
+      </button>
+    </div>
+
+    <!-- Outfit Card AFTER buttons -->
+    <div class="outfit-card">
+      <h3>استایل روزانه</h3>
+      <p>پیراهن سفید + شلوار جین + کت مشکی، مناسب تیپ رسمی کژوال</p>
+      <p style="font-size:.85rem;color:#aaa;">
+        تناسب با شکل بدن و سبک انتخاب شده
+      </p>
+
+      <button class="gradient-btn save-btn">
+        ⭐
+        ذخیره
       </button>
     </div>
 
