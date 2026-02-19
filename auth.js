@@ -24,6 +24,8 @@ document.getElementById("guestLogin").onclick = () => {
         formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
+    // اضافه کردن این خط برای جلوگیری از برگشت سریع
+    localStorage.setItem("isRegistered", "true");
     window.location.href = "form.html";
 };
 
@@ -41,7 +43,7 @@ googleLoginBtn.onclick = (e) => {
         formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
+    // اضافه کردن این خط برای جلوگیری از برگشت سریع
+    localStorage.setItem("isRegistered", "true");
     window.location.href = "form.html";
 };
-
-
