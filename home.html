@@ -165,6 +165,18 @@ h2{
   color:rgb(242,242,242);
   background:#2c2c2c;
   z-index:999;
+  position:fixed;
+}
+
+/* خط فعال */
+.nav-indicator{
+  position:absolute;
+  top:-8px;
+  height:2px;
+  width:24px;
+  background:linear-gradient(135deg,#735af2,#3d7af5);
+  border-radius:9999px;
+  transition:all 0.35s cubic-bezier(.4,0,.2,1);
 }
 
 .bottom-nav button{
@@ -177,6 +189,7 @@ h2{
   align-items:center;
   cursor:pointer;
   font-weight:500;
+  position:relative;
 }
 
 .bottom-nav button span:first-child{
@@ -247,6 +260,7 @@ h2{
 </div>
 
 <div class="bottom-nav">
+  <div class="nav-indicator"></div>
   <button class="active"><span>🏡</span><span>خانه</span></button>
   <button><span>👗</span><span>استایل</span></button>
   <button><span>🎭</span><span>رویدادها</span></button>
@@ -255,17 +269,15 @@ h2{
 </div>
 
 <script>
+// ذخیره دکمه‌ها
 document.querySelectorAll(".save-btn").forEach(btn => {
   const id = btn.dataset.id;
-
   if(localStorage.getItem("saved-"+id) === "true"){
     btn.classList.add("saved");
     btn.textContent = "✓ ذخیره شد";
   }
-
   btn.addEventListener("click", () => {
     btn.classList.toggle("saved");
-
     if(btn.classList.contains("saved")){
       btn.textContent = "✓ ذخیره شد";
       localStorage.setItem("saved-"+id,"true");
@@ -274,6 +286,28 @@ document.querySelectorAll(".save-btn").forEach(btn => {
       localStorage.removeItem("saved-"+id);
     }
   });
+});
+
+// حرکت خط فعال منو
+const buttons = document.querySelectorAll(".bottom-nav button");
+const indicator = document.querySelector(".nav-indicator");
+
+function moveIndicator(element){
+  const rect = element.getBoundingClientRect();
+  const parentRect = element.parentElement.getBoundingClientRect();
+  indicator.style.left = (rect.left - parentRect.left + rect.width/2 - 12) + "px";
+}
+
+buttons.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelector(".bottom-nav button.active").classList.remove("active");
+    btn.classList.add("active");
+    moveIndicator(btn);
+  });
+});
+
+window.addEventListener("load",()=>{
+  moveIndicator(document.querySelector(".bottom-nav button.active"));
 });
 </script>
 
