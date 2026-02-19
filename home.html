@@ -244,6 +244,12 @@ h2{font-size:18px;margin-bottom:12px;}
 
 <script>
 
+// ===== بررسی ثبت نام =====
+const isRegistered = localStorage.getItem("isRegistered");
+if(isRegistered !== "true"){
+  window.location.href = "auth.html";
+}
+
 // ذخیره استایل‌ها
 document.querySelectorAll(".save-btn").forEach(btn=>{
   const id=btn.dataset.id;
