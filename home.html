@@ -5,13 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>چی بپوشم - خانه</title>
 
+<!-- فونت وزیر متن -->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-*{ box-sizing:border-box; }
+*{ 
+  box-sizing:border-box;
+  font-family:'Vazirmatn', sans-serif;
+}
 
 body{
   margin:0;
   padding:0;
-  font-family:'Vazirmatn', sans-serif;
   background:#1a1a1a;
   color:#fff;
   min-height:100vh;
@@ -51,6 +56,7 @@ body{
   color:#fff;
   cursor:pointer;
   text-align:right;
+  font-weight:500;
 }
 
 .today-btn{ background:linear-gradient(to left,#735af2,#3d7af5); }
@@ -82,11 +88,13 @@ body{
   font-size:clamp(9px,2.2vw,12px);
   text-align:center;
   padding:6px;
+  font-weight:500;
 }
 
 .outfit-card h3{
   font-size:clamp(11px,2.8vw,14px);
   margin:8px;
+  font-weight:600;
 }
 
 .outfit-card p{
@@ -110,6 +118,7 @@ body{
   font-size:clamp(7px,2vw,10px);
   padding:2px 6px;
   border-radius:9999px;
+  font-weight:500;
 }
 
 .accent{ background:rgba(61,122,245,0.1); color:#3d7af5; }
@@ -125,6 +134,7 @@ body{
   font-size:clamp(9px,2.5vw,12px);
   cursor:pointer;
   transition:0.3s;
+  font-weight:500;
 }
 
 .save-btn.saved{
@@ -136,10 +146,10 @@ body{
 h2{
   font-size:clamp(14px,3.5vw,18px);
   margin-bottom:12px;
+  font-weight:600;
 }
 
-/* ===== منوی شناور تنظیم‌شده ===== */
-
+/* منوی شناور */
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -150,14 +160,10 @@ h2{
   display:flex;
   align-items:center;
   justify-content:space-around;
-  font-family:Vazirmatn, sans-serif;
-  font-size:16px;
-  font-weight:400;
-  line-height:24px;
+  font-size:14px;
+  font-weight:500;
   color:rgb(242,242,242);
   background:#2c2c2c;
-  border-top:0;
-  box-sizing:border-box;
   z-index:999;
 }
 
@@ -170,6 +176,7 @@ h2{
   flex-direction:column;
   align-items:center;
   cursor:pointer;
+  font-weight:500;
 }
 
 .bottom-nav button span:first-child{
@@ -198,6 +205,7 @@ h2{
 <h2>پیشنهاد امروز</h2>
 
 <div class="suggestions">
+
   <div class="outfit-card">
     <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
     <h3>استایل روزانه</h3>
@@ -233,6 +241,7 @@ h2{
     </div>
     <button class="save-btn" data-id="3">⭐ ذخیره</button>
   </div>
+
 </div>
 
 </div>
