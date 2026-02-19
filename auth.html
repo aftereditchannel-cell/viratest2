@@ -34,7 +34,33 @@
     </p>
 </div>
 
-<script src="auth.js"></script>
+<script>
+// ===== بررسی وضعیت ثبت‌نام =====
+window.addEventListener("load", () => {
+    const isRegistered = localStorage.getItem("isRegistered");
+
+    if(isRegistered === "true"){
+        // کاربر ثبت‌نام کرده، مستقیم بفرستیم خانه
+        window.location.href = "home.html";
+    }
+    // اگر ثبت‌نام نشده، تو همین صفحه بمونه و کاربر میتونه ورود مهمان یا گوگل بزنه
+});
+
+// ===== ورود مهمان =====
+document.getElementById("guestLogin").addEventListener("click", () => {
+    localStorage.setItem("isRegistered", "true"); // ثبت وضعیت ورود
+    window.location.href = "home.html";           // هدایت به خانه
+});
+
+// ===== ورود با گوگل =====
+// این مثال صرفاً شبیه‌سازیه، می‌تونی با API واقعی گوگل جایگزینش کنی
+document.getElementById("googleLogin").addEventListener("click", (e) => {
+    e.preventDefault();
+    // بعد از ورود موفقیت‌آمیز گوگل:
+    localStorage.setItem("isRegistered", "true");
+    window.location.href = "home.html";
+});
+</script>
+
 </body>
 </html>
-
