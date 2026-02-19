@@ -1,3 +1,6 @@
+// کلید بررسی فرم پر شده
+const DONE_KEY = "vira_form_done";
+
 // بررسی وضعیت ورود قبلی
 const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
 
@@ -24,14 +27,18 @@ document.getElementById("guestLogin").onclick = () => {
         formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
-    // اضافه کردن این خط برای جلوگیری از برگشت سریع
     localStorage.setItem("isRegistered", "true");
-    window.location.href = "form.html";
+
+    // اگر فرم قبلا پر نشده → بره form.html
+    if (!localStorage.getItem(DONE_KEY)) {
+        window.location.href = "form.html";
+    } else {
+        window.location.href = "home.html";
+    }
 };
 
 // ثبت نام با گوگل (شبیه‌سازی)
 googleLoginBtn.onclick = (e) => {
-    // اگر موبایل هست، لینک مستقیم Render رو باز کن
     if (/Mobi|Android/i.test(navigator.userAgent)) return;
     
     e.preventDefault();
@@ -43,7 +50,11 @@ googleLoginBtn.onclick = (e) => {
         formFilled: false
     };
     localStorage.setItem("vira_session", JSON.stringify(user));
-    // اضافه کردن این خط برای جلوگیری از برگشت سریع
     localStorage.setItem("isRegistered", "true");
-    window.location.href = "form.html";
+
+    if (!localStorage.getItem(DONE_KEY)) {
+        window.location.href = "form.html";
+    } else {
+        window.location.href = "home.html";
+    }
 };
