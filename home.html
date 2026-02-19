@@ -1,270 +1,251 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>چی بپوشم - خانه</title>
-  <style>
-    * { box-sizing:border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>چی بپوشم - خانه</title>
 
-    body {
-      margin:0;
-      padding:0;
-      font-family:'Vazirmatn', sans-serif;
-      background-color:#1a1a1a;
-      color:#fff;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
+<style>
+*{ box-sizing:border-box; }
 
-    .content {
-      flex:1;
-      padding:16px;
-      overflow-y:auto;
-      margin-bottom:70px;
-    }
+body{
+  margin:0;
+  padding:0;
+  font-family:'Vazirmatn', sans-serif;
+  background:#1a1a1a;
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-    .text-muted-foreground {
-      font-size:14px;
-      line-height:20px;
-      color:rgb(135,135,146);
-      margin-bottom:4px;
-    }
+.content{
+  flex:1;
+  padding:16px;
+  margin-bottom:70px;
+}
 
-    .main-title {
-      font-size:24px;
-      font-weight:700;
-      line-height:32px;
-      color:rgb(242,242,242);
-      margin:4px 0 16px;
-    }
+.text-muted-foreground{
+  font-size:clamp(11px,2.5vw,14px);
+  color:rgb(135,135,146);
+  margin-bottom:4px;
+}
 
-    .quick-actions {
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      margin-bottom:24px;
-    }
+.main-title{
+  font-size:clamp(18px,4vw,24px);
+  font-weight:700;
+  margin:4px 0 16px;
+}
 
-    .gradient-btn {
-      width:100%;
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      gap:16px;
-      padding:16px;
-      border:none;
-      border-radius:16px;
-      font-size:16px;
-      color:#fff;
-      cursor:pointer;
-      transition:transform .15s;
-      text-align:right;
-    }
+.quick-actions{
+  display:grid;
+  gap:12px;
+  margin-bottom:24px;
+}
 
-    .today-btn { background:linear-gradient(to left,#735af2,#3d7af5); }
-    .party-btn { background:linear-gradient(to left,#3d7af5,#735af2); }
-    .surprise-btn { background:linear-gradient(to left,#3d7af5,#735af2); }
+.gradient-btn{
+  width:100%;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  font-size:clamp(13px,3vw,16px);
+  color:#fff;
+  cursor:pointer;
+}
 
-    .gradient-btn:active { transform:scale(0.98); }
+.today-btn{ background:linear-gradient(to left,#735af2,#3d7af5); }
+.party-btn{ background:linear-gradient(to left,#3d7af5,#735af2); }
+.surprise-btn{ background:linear-gradient(to left,#3d7af5,#735af2); }
 
-    /* 🔥 اصلاح شده */
-    .suggestions {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
+.suggestions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
 
-    .outfit-card {
-      border-radius:12px;
-      border:0.8px solid rgba(34,34,42,0.5);
-      background-color:rgb(20,20,26);
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-      min-width:0;
-    }
+.outfit-card{
+  border-radius:12px;
+  border:0.8px solid rgba(34,34,42,0.5);
+  background:rgb(20,20,26);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-width:0;
+}
 
-    .card-top {
-      height:140px;
-      background:linear-gradient(to left bottom,rgba(115,90,242,0.2),rgba(61,122,245,0.1));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-      text-align:center;
-      padding:6px;
-    }
+.card-top{
+  height:clamp(80px,18vw,140px);
+  background:linear-gradient(to left bottom,rgba(115,90,242,0.2),rgba(61,122,245,0.1));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:clamp(9px,2.2vw,12px);
+  padding:6px;
+}
 
-    .outfit-card h3 {
-      font-size:14px;
-      margin:12px 12px 4px 12px;
-    }
+.outfit-card h3{
+  font-size:clamp(11px,2.8vw,14px);
+  margin:8px 8px 4px 8px;
+}
 
-    .outfit-card p {
-      margin:0 12px 6px 12px;
-      font-size:12px;
-      line-height:1.6;
-    }
+.outfit-card p{
+  font-size:clamp(9px,2.5vw,12px);
+  margin:0 8px 4px 8px;
+  line-height:1.4;
+}
 
-    .outfit-card p.note {
-      font-size:11px;
-      color:#aaa;
-    }
+.outfit-card p.note{
+  font-size:clamp(8px,2.2vw,11px);
+  color:#aaa;
+}
 
-    .tags {
-      display:flex;
-      gap:6px;
-      padding:0 12px;
-      flex-wrap:wrap;
-    }
+.tags{
+  display:flex;
+  gap:4px;
+  padding:0 8px;
+  flex-wrap:wrap;
+}
 
-    .tags span {
-      font-size:10px;
-      padding:3px 6px;
-      border-radius:9999px;
-    }
+.tags span{
+  font-size:clamp(7px,2vw,10px);
+  padding:2px 6px;
+  border-radius:9999px;
+}
 
-    .accent { background:rgba(61,122,245,0.1); color:#3d7af5; }
-    .primary { background:rgba(115,90,242,0.1); color:#735af2; }
+.accent{ background:rgba(61,122,245,0.1); color:#3d7af5; }
+.primary{ background:rgba(115,90,242,0.1); color:#735af2; }
 
-    .save-btn {
-      height:32px;
-      margin:8px 12px 12px 12px;
-      border-radius:9999px;
-      border:1px solid #2c2c2c;
-      background:rgb(13,13,18);
-      color:#fff;
-      font-size:12px;
-      cursor:pointer;
-      transition:0.2s;
-    }
+.save-btn{
+  height:clamp(26px,6vw,32px);
+  margin:6px 8px 10px 8px;
+  border-radius:9999px;
+  border:1px solid #2c2c2c;
+  background:rgb(13,13,18);
+  color:#fff;
+  font-size:clamp(9px,2.5vw,12px);
+  cursor:pointer;
+}
 
-    .save-btn:hover { background:#3d7af5; }
+h2.suggestion-title{
+  font-size:clamp(14px,3.5vw,18px);
+  margin:0 0 12px 0;
+}
 
-    h2.suggestion-title {
-      font-size:18px;
-      font-weight:700;
-      margin:0 0 12px 0;
-    }
+.more-btn{
+  display:inline-block;
+  margin:12px 0;
+  padding:6px 14px;
+  border-radius:12px;
+  border:1px solid #3d7af5;
+  color:#3d7af5;
+  text-decoration:none;
+  font-size:clamp(10px,2.8vw,14px);
+}
 
-    .more-btn {
-      display:inline-block;
-      margin:12px 0;
-      padding:8px 16px;
-      border-radius:12px;
-      border:1px solid #3d7af5;
-      color:#3d7af5;
-      text-decoration:none;
-      font-weight:500;
-      transition:0.2s;
-    }
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  background:#2c2c2c;
+  padding:8px 0;
+  border-top:1px solid #444;
+}
 
-    .more-btn:hover { background:#3d7af5; color:#fff; }
+.bottom-nav button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:clamp(9px,2.5vw,13px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  cursor:pointer;
+}
 
-    .bottom-nav {
-      position:fixed;
-      bottom:0;
-      left:0;
-      width:100%;
-      display:flex;
-      justify-content:space-around;
-      background:#2c2c2c;
-      padding:10px 0;
-      border-top:1px solid #444;
-      z-index:999;
-    }
+.bottom-nav button span:first-child{
+  font-size:clamp(14px,4vw,20px);
+}
 
-    .bottom-nav button {
-      background:none;
-      border:none;
-      color:#fff;
-      font-size:.9rem;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      cursor:pointer;
-    }
+.bottom-nav button.active{
+  color:#4f46e5;
+}
 
-    .bottom-nav button span:first-child {
-      font-size:1.5rem;
-      margin-bottom:4px;
-    }
-
-    .bottom-nav button.active {
-      color:#4f46e5;
-    }
-
-  </style>
+</style>
 </head>
 <body>
 
-  <div class="content">
+<div class="content">
 
-    <p class="text-muted-foreground">سلام، امیر! 👋</p>
-    <h1 class="main-title">امروز چیکار کنیم؟</h1>
+<p class="text-muted-foreground">سلام، امیر! 👋</p>
+<h1 class="main-title">امروز چیکار کنیم؟</h1>
 
-    <div class="quick-actions">
-      <button class="gradient-btn today-btn">✨ امروز چی بپوشم؟</button>
-      <button class="gradient-btn party-btn">🎉 یه مهمانی دارم</button>
-      <button class="gradient-btn surprise-btn">🎲 سورپرایزم کن</button>
+<div class="quick-actions">
+  <button class="gradient-btn today-btn">✨ امروز چی بپوشم؟</button>
+  <button class="gradient-btn party-btn">🎉 یه مهمانی دارم</button>
+  <button class="gradient-btn surprise-btn">🎲 سورپرایزم کن</button>
+</div>
+
+<h2 class="suggestion-title">پیشنهاد امروز</h2>
+
+<div class="suggestions">
+
+  <div class="outfit-card">
+    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+    <h3>استایل روزانه</h3>
+    <p>پیراهن سفید + شلوار جین + کت مشکی</p>
+    <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
+    <div class="tags">
+      <span class="accent">مناسب فرم بدن شما</span>
+      <span class="primary">کژوال</span>
     </div>
-
-    <h2 class="suggestion-title">پیشنهاد امروز</h2>
-
-    <div class="suggestions">
-
-      <div class="outfit-card">
-        <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
-        <h3>استایل روزانه</h3>
-        <p>پیراهن سفید + شلوار جین + کت مشکی</p>
-        <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
-        <div class="tags">
-          <span class="accent">مناسب فرم بدن شما</span>
-          <span class="primary">کژوال</span>
-        </div>
-        <button class="save-btn">⭐ ذخیره</button>
-      </div>
-
-      <div class="outfit-card">
-        <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
-        <h3>استایل روزانه</h3>
-        <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
-        <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
-        <div class="tags">
-          <span class="accent">مناسب فرم بدن شما</span>
-          <span class="primary">کژوال</span>
-        </div>
-        <button class="save-btn">⭐ ذخیره</button>
-      </div>
-
-      <div class="outfit-card">
-        <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
-        <h3>استایل روزانه</h3>
-        <p>پیراهن مشکی + شلوار جین + کت جین</p>
-        <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
-        <div class="tags">
-          <span class="accent">مناسب فرم بدن شما</span>
-          <span class="primary">کژوال</span>
-        </div>
-        <button class="save-btn">⭐ ذخیره</button>
-      </div>
-
-    </div>
-
-    <a class="more-btn" href="#">دیدن موارد بیشتر...</a>
-
+    <button class="save-btn">⭐ ذخیره</button>
   </div>
 
-  <div class="bottom-nav">
-    <button class="active"><span>🏡</span><span>خانه</span></button>
-    <button><span>👗</span><span>استایل</span></button>
-    <button><span>🎭</span><span>رویدادها</span></button>
-    <button><span>👚</span><span>کمد</span></button>
-    <button><span>👤</span><span>پروفایل</span></button>
+  <div class="outfit-card">
+    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+    <h3>استایل روزانه</h3>
+    <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
+    <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
+    <div class="tags">
+      <span class="accent">مناسب فرم بدن شما</span>
+      <span class="primary">کژوال</span>
+    </div>
+    <button class="save-btn">⭐ ذخیره</button>
   </div>
+
+  <div class="outfit-card">
+    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+    <h3>استایل روزانه</h3>
+    <p>پیراهن مشکی + شلوار جین + کت جین</p>
+    <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
+    <div class="tags">
+      <span class="accent">مناسب فرم بدن شما</span>
+      <span class="primary">کژوال</span>
+    </div>
+    <button class="save-btn">⭐ ذخیره</button>
+  </div>
+
+</div>
+
+<a class="more-btn" href="#">دیدن موارد بیشتر...</a>
+
+</div>
+
+<div class="bottom-nav">
+  <button class="active"><span>🏡</span><span>خانه</span></button>
+  <button><span>👗</span><span>استایل</span></button>
+  <button><span>🎭</span><span>رویدادها</span></button>
+  <button><span>👚</span><span>کمد</span></button>
+  <button><span>👤</span><span>پروفایل</span></button>
+</div>
 
 </body>
 </html>
