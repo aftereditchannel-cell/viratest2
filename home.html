@@ -28,7 +28,6 @@ body{
 .text-muted-foreground{
   font-size:clamp(11px,2.5vw,14px);
   color:rgb(135,135,146);
-  margin-bottom:4px;
 }
 
 .main-title{
@@ -44,17 +43,14 @@ body{
 }
 
 .gradient-btn{
-  width:100%;
   height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  padding:16px;
   border:none;
   border-radius:16px;
+  padding:16px;
   font-size:clamp(13px,3vw,16px);
   color:#fff;
   cursor:pointer;
+  text-align:right;
 }
 
 .today-btn{ background:linear-gradient(to left,#735af2,#3d7af5); }
@@ -83,20 +79,19 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
   font-size:clamp(9px,2.2vw,12px);
+  text-align:center;
   padding:6px;
 }
 
 .outfit-card h3{
   font-size:clamp(11px,2.8vw,14px);
-  margin:8px 8px 4px 8px;
+  margin:8px;
 }
 
 .outfit-card p{
   font-size:clamp(9px,2.5vw,12px);
   margin:0 8px 4px 8px;
-  line-height:1.4;
 }
 
 .outfit-card p.note{
@@ -129,22 +124,19 @@ body{
   color:#fff;
   font-size:clamp(9px,2.5vw,12px);
   cursor:pointer;
+  transition:0.3s;
 }
 
-h2.suggestion-title{
+/* حالت ذخیره شده */
+.save-btn.saved{
+  background:linear-gradient(to left,#735af2,#3d7af5);
+  border:none;
+  color:#fff;
+}
+
+h2{
   font-size:clamp(14px,3.5vw,18px);
-  margin:0 0 12px 0;
-}
-
-.more-btn{
-  display:inline-block;
-  margin:12px 0;
-  padding:6px 14px;
-  border-radius:12px;
-  border:1px solid #3d7af5;
-  color:#3d7af5;
-  text-decoration:none;
-  font-size:clamp(10px,2.8vw,14px);
+  margin-bottom:12px;
 }
 
 .bottom-nav{
@@ -193,7 +185,7 @@ h2.suggestion-title{
   <button class="gradient-btn surprise-btn">🎲 سورپرایزم کن</button>
 </div>
 
-<h2 class="suggestion-title">پیشنهاد امروز</h2>
+<h2>پیشنهاد امروز</h2>
 
 <div class="suggestions">
 
@@ -206,7 +198,7 @@ h2.suggestion-title{
       <span class="accent">مناسب فرم بدن شما</span>
       <span class="primary">کژوال</span>
     </div>
-    <button class="save-btn">⭐ ذخیره</button>
+    <button class="save-btn" data-id="1">⭐ ذخیره</button>
   </div>
 
   <div class="outfit-card">
@@ -218,7 +210,7 @@ h2.suggestion-title{
       <span class="accent">مناسب فرم بدن شما</span>
       <span class="primary">کژوال</span>
     </div>
-    <button class="save-btn">⭐ ذخیره</button>
+    <button class="save-btn" data-id="2">⭐ ذخیره</button>
   </div>
 
   <div class="outfit-card">
@@ -230,12 +222,10 @@ h2.suggestion-title{
       <span class="accent">مناسب فرم بدن شما</span>
       <span class="primary">کژوال</span>
     </div>
-    <button class="save-btn">⭐ ذخیره</button>
+    <button class="save-btn" data-id="3">⭐ ذخیره</button>
   </div>
 
 </div>
-
-<a class="more-btn" href="#">دیدن موارد بیشتر...</a>
 
 </div>
 
@@ -246,6 +236,29 @@ h2.suggestion-title{
   <button><span>👚</span><span>کمد</span></button>
   <button><span>👤</span><span>پروفایل</span></button>
 </div>
+
+<script>
+document.querySelectorAll(".save-btn").forEach(btn => {
+  const id = btn.dataset.id;
+
+  if(localStorage.getItem("saved-"+id) === "true"){
+    btn.classList.add("saved");
+    btn.textContent = "✓ ذخیره شد";
+  }
+
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("saved");
+
+    if(btn.classList.contains("saved")){
+      btn.textContent = "✓ ذخیره شد";
+      localStorage.setItem("saved-"+id,"true");
+    } else {
+      btn.textContent = "⭐ ذخیره";
+      localStorage.removeItem("saved-"+id);
+    }
+  });
+});
+</script>
 
 </body>
 </html>
