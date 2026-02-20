@@ -35,31 +35,63 @@
 </div>
 
 <script>
-// ===== بررسی وضعیت ثبت‌نام =====
-window.addEventListener("load", () => {
-    const isRegistered = localStorage.getItem("isRegistered");
 
-    if(isRegistered === "true"){
-        // کاربر ثبت‌نام کرده، مستقیم بفرستیم خانه
-        window.location.href = "home.html";
+// ===== بررسی وضعیت سشن جدید =====
+window.addEventListener("load", () => {
+
+    const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+    const onboardingDone = localStorage.getItem("onboardingDone");
+
+    // اگر سشن فعال بود
+    if (session.id) {
+
+        // اگر فرم کامل شده → برو خانه
+        if (onboardingDone === "true") {
+            window.location.href = "home.html";
+        } 
+        // اگر فرم کامل نشده → برو فرم
+        else {
+            window.location.href = "form.html";
+        }
     }
-    // اگر ثبت‌نام نشده، تو همین صفحه بمونه و کاربر میتونه ورود مهمان یا گوگل بزنه
 });
+
 
 // ===== ورود مهمان =====
 document.getElementById("guestLogin").addEventListener("click", () => {
-    localStorage.setItem("isRegistered", "true"); // ثبت وضعیت ورود
-    window.location.href = "home.html";           // هدایت به خانه
+
+    const guestSession = {
+        id: "guest_" + Date.now(),
+        type: "guest",
+        createdAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("vira_session", JSON.stringify(guestSession));
+    localStorage.setItem("isRegistered", "true"); // برای سازگاری با کد قبلی
+
+    // بعد از ورود → بره فرم تکمیل اطلاعات
+    window.location.href = "form.html";
 });
 
-// ===== ورود با گوگل =====
-// این مثال صرفاً شبیه‌سازیه، می‌تونی با API واقعی گوگل جایگزینش کنی
+
+// ===== ورود با گوگل (شبیه‌سازی شده) =====
 document.getElementById("googleLogin").addEventListener("click", (e) => {
     e.preventDefault();
-    // بعد از ورود موفقیت‌آمیز گوگل:
-    localStorage.setItem("isRegistered", "true");
-    window.location.href = "home.html";
+
+    const googleSession = {
+        id: "google_" + Date.now(),
+        type: "google",
+        name: "User",
+        createdAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("vira_session", JSON.stringify(googleSession));
+    localStorage.setItem("isRegistered", "true"); // حفظ سازگاری
+
+    // بعد از ورود موفق → بره فرم
+    window.location.href = "form.html";
 });
+
 </script>
 
 </body>
