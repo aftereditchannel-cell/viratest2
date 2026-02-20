@@ -190,14 +190,13 @@ h2{font-size:18px;margin-bottom:12px;}
 
 // ===== بررسی صحیح سشن و فرم =====
 const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
-const isDone = localStorage.getItem("vira_form_done");
+const done = localStorage.getItem("vira_form_done");
 
-if (!session.id) {
+if(!session.id) {
   window.location.href = "auth.html";
-} else if (isDone !== "true" || !session.formDone) {
+} else if(!done || !session.formDone) {
   window.location.href = "form.html";
 }
-  
 // ذخیره استایل‌ها
 document.querySelectorAll(".save-btn").forEach(btn=>{
   const id=btn.dataset.id;
@@ -248,5 +247,6 @@ window.addEventListener("load",()=>{
 
 </body>
 </html>
+
 
 
