@@ -95,13 +95,25 @@ function updateUI() {
   validate();
 }
 
+// ===== دکمه بعدی =====
 nextBtn.onclick = () => {
   if (!nextBtn.classList.contains("enabled")) return;
   if (step < steps.length - 1) {
     step++;
     updateUI();
   } else {
+    // ست کردن تکمیل فرم
     localStorage.setItem(DONE_KEY, "true");
+
+    // آپدیت session برای جلوگیری از لوپ در home
+    const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+    if (!session.id) {
+      session.id = "user_" + Date.now();
+      session.name = "کاربر";
+    }
+    session.formDone = true; // فلگ فرم کامل
+    localStorage.setItem("vira_session", JSON.stringify(session));
+
     save();
     alert("آن‌بوردینگ با موفقیت انجام شد 🚀");
     window.location.href = "home.html";
