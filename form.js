@@ -103,25 +103,21 @@ function updateUI() {
 
 // ===== دکمه بعدی =====
 nextBtn.onclick = () => {
-  if (!nextBtn.classList.contains("enabled")) return;
+  if(!nextBtn.classList.contains("enabled")) return;
 
-  if (step < steps.length - 1) {
-    step++;
-    updateUI();
-  } else {
-    // تکمیل فرم
-    localStorage.setItem(DONE_KEY, "true");
-
-    const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
-    // فقط یک بار مقدار session رو ست کن
-    session.id = session.id || "user_" + Date.now();
-    session.name = session.name || "کاربر";
-    session.formDone = true;
-
-    localStorage.setItem("vira_session", JSON.stringify(session));
+  if(step < 2) { step++; updateUI(); }
+  else {
+    // ست کامل state قبل از redirect
+    data.completed = true; 
     save();
 
-    alert("آن‌بوردینگ با موفقیت انجام شد ");
+    const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+    session.id = session.id || "user_" + Date.now();
+    session.formDone = true;
+    localStorage.setItem("vira_session", JSON.stringify(session));
+
+    localStorage.setItem(DONE_KEY, "true"); // علامت تکمیل فرم
+    alert("آن‌بوردینگ با موفقیت انجام شد 🚀");
     window.location.href = "home.html";
   }
 };
