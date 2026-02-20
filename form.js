@@ -104,6 +104,10 @@ nextBtn.onclick = () => {
   } else {
     // ست کردن تکمیل فرم
     localStorage.setItem(DONE_KEY, "true");
+    // بعد از localStorage.setItem(DONE_KEY,"true");
+const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
+session.formDone = true;
+localStorage.setItem("vira_session", JSON.stringify(session));
 
     // آپدیت session برای جلوگیری از لوپ در home
     const session = JSON.parse(localStorage.getItem("vira_session") || "{}");
