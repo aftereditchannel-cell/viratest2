@@ -158,7 +158,9 @@ h2{font-size:18px;margin-bottom:12px;}
 </head>
 <body>
 
+<!-- ===== صفحه خانه ===== -->
 <div id="home" class="page active">
+
 <p class="text-muted-foreground">سلام، امیر! 👋</p>
 <h1 class="main-title">امروز چیکار کنیم؟</h1>
 
@@ -171,15 +173,69 @@ h2{font-size:18px;margin-bottom:12px;}
 <h2>پیشنهاد امروز</h2>
 
 <div class="suggestions">
-  <!-- کارت‌ها بدون تغییر -->
-  ...
+
+  <div class="outfit-card">
+    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+    <h3>استایل روزانه</h3>
+    <p>پیراهن سفید + شلوار جین + کت مشکی</p>
+    <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
+    <div class="tags">
+      <span class="accent">مناسب فرم بدن شما</span>
+      <span class="primary">کژوال</span>
+    </div>
+    <button class="save-btn" data-id="1">⭐ ذخیره</button>
+  </div>
+
+  <div class="outfit-card">
+    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+    <h3>استایل روزانه</h3>
+    <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
+    <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
+    <div class="tags">
+      <span class="accent">مناسب فرم بدن شما</span>
+      <span class="primary">کژوال</span>
+    </div>
+    <button class="save-btn" data-id="2">⭐ ذخیره</button>
+  </div>
+
+  <div class="outfit-card">
+    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+    <h3>استایل روزانه</h3>
+    <p>پیراهن مشکی + شلوار جین + کت جین</p>
+    <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
+    <div class="tags">
+      <span class="accent">مناسب فرم بدن شما</span>
+      <span class="primary">کژوال</span>
+    </div>
+    <button class="save-btn" data-id="3">⭐ ذخیره</button>
+  </div>
+
 </div>
 </div>
 
+<!-- ===== صفحه پروفایل ===== -->
 <div id="profile" class="page">
-  ...
+
+<div class="profile-card">
+  <h3>کاربر مهمان</h3>
+  <p>guest@example.com</p>
 </div>
 
+<div class="section-title">اطلاعات بدنی</div>
+<div class="profile-card">
+  <div class="info-row"><span>قد</span><span>175 سانتی‌متر</span></div>
+  <div class="info-row"><span>وزن</span><span>70 کیلوگرم</span></div>
+  <div class="info-row"><span>فرم بدن</span><span>ورزشکاری</span></div>
+  <div class="info-row"><span>هویت جنسیتی</span><span>مرد</span></div>
+</div>
+
+<div class="section-title">تنظیمات</div>
+<div class="setting-item"><span>🌙 حالت تاریک</span><span>‹</span></div>
+<div class="setting-item logout"><span>⏻ خروج از حساب</span><span>‹</span></div>
+
+</div>
+
+<!-- ===== منوی پایین ===== -->
 <div class="bottom-nav">
   <div class="nav-indicator"></div>
   <button class="active" data-page="home"><span>🏡</span><span>خانه</span></button>
@@ -188,7 +244,8 @@ h2{font-size:18px;margin-bottom:12px;}
 
 <script>
 
-// ===== بررسی صحیح سشن و فرم =====
+// ===== بررسی ثبت نام =====
+
 
 // ذخیره استایل‌ها
 document.querySelectorAll(".save-btn").forEach(btn=>{
@@ -239,8 +296,4 @@ window.addEventListener("load",()=>{
 </script>
 
 </body>
-</html>
-
-
-
-
+</html> 
