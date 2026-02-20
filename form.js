@@ -1,3 +1,9 @@
+<script>
+  // اگر قبلا فرم کامل شده، مستقیم to home
+  if (localStorage.getItem("vira_form_done") === "true") {
+    window.location.href = "home.html";
+  }
+</script>
 // ===== کلید ذخیره فرم =====
 const STORAGE_KEY = "onboardingData";
 const DONE_KEY = "vira_form_done";
