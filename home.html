@@ -293,7 +293,24 @@ window.addEventListener("load",()=>{
   switchPage("home",document.querySelector(".bottom-nav button.active"));
 });
 
+  // ===== خروج از حساب =====
+const logoutBtn = document.querySelector(".logout");
+logoutBtn.addEventListener("click", () => {
+  // پاک کردن اطلاعات فرم و سشن
+  localStorage.removeItem("vira_session");
+  localStorage.removeItem("vira_form_done");
+  localStorage.removeItem("onboardingData");
+
+  // پاک کردن آیتم‌های ذخیره شده استایل‌ها
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith("saved-")) localStorage.removeItem(key);
+  });
+
+  // ریدایرکت به لودر
+  window.location.href = "loder.html";
+});
 </script>
 
 </body>
 </html> 
+
