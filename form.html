@@ -102,19 +102,15 @@
 
 <script>
 const STORAGE_KEY="onboardingData";
-const DONE_KEY="onboardingDone";
+const DONE_KEY="vira_form_done"; // کلید یکسان با auth.js برای هماهنگی
 
+// اگر فرم قبلا تکمیل شده → مستقیم به home
 if(localStorage.getItem(DONE_KEY)==="true"){
   window.location.href="home.html";
 }
 
 const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-const data=saved || {
-  height:"",weight:"",age:"",
-  bodyShape:"",gender:"",
-  styles:[],goals:[]
-};
+const data=saved || {height:"",weight:"",age:"",bodyShape:"",gender:"",styles:[],goals:[]};
 
 function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
 
@@ -149,7 +145,7 @@ function render(list,el,key,multi=false){
   });
 }
 
-render(bodyShapes,bodyShapesEl=document.getElementById("bodyShapes"),"bodyShape");
+render(bodyShapes,document.getElementById("bodyShapes"),"bodyShape");
 render(genders,document.getElementById("genders"),"gender");
 render(styles,document.getElementById("styles"),"styles",true);
 render(goals,document.getElementById("goals"),"goals",true);
@@ -166,6 +162,11 @@ function validate(){
   if(step===1) ok=data.gender&&data.styles.length;
   if(step===2) ok=data.goals.length;
   nextBtn.classList.toggle("enabled",ok);
+
+  // افکت bounce کوتاه وقتی فعال شد
+  if(ok){
+    nextBtn.animate([{ transform: 'scale(0.95)' },{ transform: 'scale(1)' }], { duration: 150, easing: 'ease-out' });
+  }
 }
 
 function updateUI(){
@@ -177,10 +178,10 @@ function updateUI(){
 }
 
 nextBtn.onclick=()=>{
-  if(!nextBtn.classList.contains("enabled"))return;
+  if(!nextBtn.classList.contains("enabled")) return;
   if(step<2){step++;updateUI();}
   else{
-    localStorage.setItem(DONE_KEY,"true");
+    localStorage.setItem(DONE_KEY,"true"); // علامت تکمیل فرم
     save();
     alert("آن‌بوردینگ با موفقیت انجام شد 🚀");
     window.location.href="home.html";
