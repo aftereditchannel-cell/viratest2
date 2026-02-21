@@ -361,53 +361,6 @@ window.addEventListener("load",()=>{
   switchPage("home",document.querySelector(".bottom-nav button.active"));
 });
 
-  // ===== آپلود تصویر =====
-
-const uploadBox=document.getElementById("uploadBox");
-const fileInput=document.getElementById("fileInput");
-let selectedFile=null;
-
-if(uploadBox){
-
-uploadBox.addEventListener("click",()=>fileInput.click());
-
-fileInput.addEventListener("change",()=>{
-  const file=fileInput.files[0];
-  if(file){
-    selectedFile=file;
-    const reader=new FileReader();
-    reader.onload=e=>{
-      uploadBox.innerHTML=`<img src="${e.target.result}">`;
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-uploadBox.addEventListener("dragover",(e)=>{
-  e.preventDefault();
-  uploadBox.classList.add("dragover");
-});
-
-uploadBox.addEventListener("dragleave",()=>{
-  uploadBox.classList.remove("dragover");
-});
-
-uploadBox.addEventListener("drop",(e)=>{
-  e.preventDefault();
-  uploadBox.classList.remove("dragover");
-  const file=e.dataTransfer.files[0];
-  if(file){
-    selectedFile=file;
-    const reader=new FileReader();
-    reader.onload=e=>{
-      uploadBox.innerHTML=`<img src="${e.target.result}">`;
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-}
-
   // ===== خروج از حساب =====
 const logoutBtn = document.querySelector(".logout");
 logoutBtn.addEventListener("click", () => {
@@ -428,6 +381,7 @@ logoutBtn.addEventListener("click", () => {
 
 </body>
 </html> 
+
 
 
 
