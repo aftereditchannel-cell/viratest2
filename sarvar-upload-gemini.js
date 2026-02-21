@@ -1,112 +1,78 @@
-// ===== sarvar-upload-gemini.js نهایی =====
-
-const uploadBox = document.getElementById("uploadBox");
+// ===== sarvar-upload-gemini.js =====
+const submitBtn = document.getElementById("submitBtn");
 const fileInput = document.getElementById("fileInput");
 const textInput = document.getElementById("optionalText");
-const submitBtn = document.getElementById("submitBtn");
-let selectedFile = null;
+const uploadBox = document.getElementById("uploadBox");
 
-// ===== انتخاب عکس و پیش‌نمایش =====
-if (uploadBox && fileInput) {
-  uploadBox.addEventListener("click", () => fileInput.click());
+// نمایش پیش‌نمایش عکس وقتی انتخاب شد
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if (!file) return;
 
-  fileInput.addEventListener("change", () => {
-    const file = fileInput.files[0];
-    if (!file) return;
-    selectedFile = file;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.createElement("img");
-      img.src = e.target.result;
-      img.style.objectFit = "contain"; // جلوگیری از زوم شدن
-      img.style.width = "100%";
-      img.style.height = "100%";
+  const reader = new FileReader();
+  reader.onload = e => {
+    let img = uploadBox.querySelector("img");
+    if (!img) {
+      img = document.createElement("img");
       uploadBox.innerHTML = "";
       uploadBox.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
-
-  uploadBox.addEventListener("dragover", e => {
-    e.preventDefault();
-    uploadBox.classList.add("dragover");
-  });
-
-  uploadBox.addEventListener("dragleave", () => {
-    uploadBox.classList.remove("dragover");
-  });
-
-  uploadBox.addEventListener("drop", e => {
-    e.preventDefault();
-    uploadBox.classList.remove("dragover");
-    const file = e.dataTransfer.files[0];
-    if (!file) return;
-    selectedFile = file;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = document.createElement("img");
-      img.src = e.target.result;
-      img.style.objectFit = "contain";
-      img.style.width = "100%";
-      img.style.height = "100%";
-      uploadBox.innerHTML = "";
-      uploadBox.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// ===== ارسال به API =====
-if (submitBtn) {
-  submitBtn.addEventListener("click", async () => {
-    if (!selectedFile) {
-      alert("لطفا اول یک عکس انتخاب کنید");
-      return;
     }
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
 
-    try {
-      // تبدیل عکس به Base64
-      const base64Image = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(",")[1]); // فقط دیتا
-        reader.onerror = () => reject("خطا در خواندن تصویر");
-        reader.readAsDataURL(selectedFile);
-      });
+// باز کردن گالری وقتی روی باکس کلیک شد
+uploadBox.addEventListener("click", () => {
+  fileInput.click();
+});
 
-      // ساخت body JSON مطابق API
-      const body = {
-        model: "gemini",
-        messages: [
-          {
-            role: "user",
-            content: [
-              { type: "image", image: { mimeType: selectedFile.type, data: base64Image } },
-              { type: "text", text: textInput.value || "" }
-            ]
-          }
-        ]
-      };
+// درگ و دراپ عکس
+uploadBox.addEventListener("dragover", e => {
+  e.preventDefault();
+  uploadBox.classList.add("dragover");
+});
+uploadBox.addEventListener("dragleave", e => {
+  e.preventDefault();
+  uploadBox.classList.remove("dragover");
+});
+uploadBox.addEventListener("drop", e => {
+  e.preventDefault();
+  uploadBox.classList.remove("dragover");
+  if (e.dataTransfer.files.length) {
+    fileInput.files = e.dataTransfer.files;
+    fileInput.dispatchEvent(new Event('change'));
+  }
+});
 
-      const response = await fetch("https://gemini.googleapis.com/v1/models/gemini:generateMessage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer AIzaSyDzJEG1ucF4umvMyxn0Xqe6JbQO1SiACNE"
-        },
-        body: JSON.stringify(body)
-      });
+// ارسال به upload.php
+submitBtn.addEventListener("click", async () => {
+  const selectedFile = fileInput.files[0];
+  if (!selectedFile) {
+    alert("لطفا اول یک عکس انتخاب کنید");
+    return;
+  }
 
-      if (!response.ok) throw new Error("خطا در ارسال به سرور");
+  const formData = new FormData();
+  formData.append("image", selectedFile);
+  formData.append("text", textInput.value || "");
 
-      const data = await response.json();
+  try {
+    const response = await fetch("upload.php", {
+      method: "POST",
+      body: formData
+    });
 
-      // نمایش جواب AI
-      let message = data?.responses?.[0]?.content?.find(c => c.type === "text")?.text || JSON.stringify(data);
-      alert("جواب AI:\n" + message);
+    if (!response.ok) throw new Error("خطا در ارسال به سرور");
 
-    } catch (err) {
-      console.error(err);
-      alert("خطا در ارسال یا دریافت پاسخ");
+    const data = await response.json();
+    if(data.error){
+      alert("خطا: " + data.error);
+    } else {
+      alert("جواب AI:\n" + (data.result || JSON.stringify(data)));
     }
-  });
-}
+  } catch (err) {
+    console.error(err);
+    alert("خطا در ارسال یا دریافت پاسخ");
+  }
+});
