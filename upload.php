@@ -10,7 +10,7 @@ if (!$file) {
     exit;
 }
 
-// اعتبارسنجی ساده فایل
+// ناعتبارسنجی ساده فایل
 $allowedTypes = ['image/jpeg','image/png','image/gif'];
 if (!in_array($file['type'], $allowedTypes)) {
     echo json_encode(['error' => 'فرمت فایل معتبر نیست']);
