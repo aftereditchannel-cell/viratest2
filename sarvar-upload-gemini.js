@@ -99,7 +99,7 @@ if(submitBtn){
     formData.append("text", document.getElementById("optionalText").value);
 
     try {
-      const response = await fetch("https://api.gemini.com/v1/your-endpoint", { // آدرس واقعی API خودت رو بذار
+      const response = await fetch("https://gemini.googleapis.com/v1/models/gemini:generateMessage", {
         method: "POST",
         headers: {
           "Authorization": "Bearer AIzaSyDzJEG1ucF4umvMyxn0Xqe6JbQO1SiACNE"
@@ -112,7 +112,7 @@ if(submitBtn){
       const data = await response.json();
       alert("جواب AI:\n" + (data.result || JSON.stringify(data)));
 
-    } catch(err) {
+    } catch(err){
       console.error(err);
       alert("خطا در ارسال یا دریافت پاسخ");
     }
