@@ -35,9 +35,23 @@ h2{font-size:18px;margin-bottom:12px;}
 .info-row{display:flex;justify-content:space-between;margin-bottom:14px;}
 .setting-item{background:#141927;border-radius:20px;padding:16px;display:flex;justify-content:space-between;margin-bottom:12px;cursor:pointer;}
 .logout{color:#FF4C4C;}
-.upload-box{border:2px dashed #3d7af5;border-radius:20px;height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:#aaa;cursor:pointer;transition:0.3s;background:#141927;}
+.upload-box{
+  border:2px dashed #3d7af5;
+  border-radius:20px;
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#aaa;
+  cursor:pointer;
+  transition:0.3s;
+  background:#141927;
+  position:relative;
+  overflow:hidden;
+}
 .upload-box.dragover{background:#1f2540;border-color:#735af2;}
-.upload-box img{max-width:100%;max-height:100%;border-radius:16px;}
+.upload-box img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain;}
 #optionalText{width:100%;margin-top:16px;border-radius:16px;border:1px solid #2c2c2c;background:#141927;color:#fff;padding:12px;resize:none;min-height:100px;}
 .submit-btn{width:100%;margin-top:16px;height:50px;border:none;border-radius:16px;background:linear-gradient(to left,#735af2,#3d7af5);color:#fff;font-weight:600;cursor:pointer;}
 .bottom-nav{position:fixed;bottom:0;left:0;width:100%;height:65px;display:flex;align-items:center;justify-content:space-around;background:#2c2c2c;z-index:999;}
@@ -50,89 +64,87 @@ h2{font-size:18px;margin-bottom:12px;}
 
 <!-- صفحه خانه -->
 <div id="home" class="page active">
-<p class="text-muted-foreground">سلام، امیر! 👋</p>
-<h1 class="main-title">امروز چیکار کنیم؟</h1>
-<div class="quick-actions">
-  <button class="gradient-btn today-btn">✨ امروز چی بپوشم؟</button>
-  <button class="gradient-btn party-btn">🎉 یه مهمانی دارم</button>
-  <button class="gradient-btn surprise-btn">🎲 سورپرایزم کن</button>
-</div>
-<h2>پیشنهاد امروز</h2>
-<div class="suggestions">
-  <div class="outfit-card">
-    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
-    <h3>استایل روزانه</h3>
-    <p>پیراهن سفید + شلوار جین + کت مشکی</p>
-    <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
-    <div class="tags">
-      <span class="accent">مناسب فرم بدن شما</span>
-      <span class="primary">کژوال</span>
-    </div>
-    <button class="save-btn" data-id="1">⭐ ذخیره</button>
+  <p class="text-muted-foreground">سلام، امیر! 👋</p>
+  <h1 class="main-title">امروز چیکار کنیم؟</h1>
+  <div class="quick-actions">
+    <button class="gradient-btn today-btn">✨ امروز چی بپوشم؟</button>
+    <button class="gradient-btn party-btn">🎉 یه مهمانی دارم</button>
+    <button class="gradient-btn surprise-btn">🎲 سورپرایزم کن</button>
   </div>
-  <div class="outfit-card">
-    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
-    <h3>استایل روزانه</h3>
-    <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
-    <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
-    <div class="tags">
-      <span class="accent">مناسب فرم بدن شما</span>
-      <span class="primary">کژوال</span>
+
+  <h2>پیشنهاد امروز</h2>
+  <div class="suggestions">
+    <div class="outfit-card">
+      <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+      <h3>استایل روزانه</h3>
+      <p>پیراهن سفید + شلوار جین + کت مشکی</p>
+      <p class="note">تناسب با شکل بدن و سبک انتخاب شده</p>
+      <div class="tags">
+        <span class="accent">مناسب فرم بدن شما</span>
+        <span class="primary">کژوال</span>
+      </div>
+      <button class="save-btn" data-id="1">⭐ ذخیره</button>
     </div>
-    <button class="save-btn" data-id="2">⭐ ذخیره</button>
-  </div>
-  <div class="outfit-card">
-    <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
-    <h3>استایل روزانه</h3>
-    <p>پیراهن مشکی + شلوار جین + کت جین</p>
-    <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
-    <div class="tags">
-      <span class="accent">مناسب فرم بدن شما</span>
-      <span class="primary">کژوال</span>
+    <div class="outfit-card">
+      <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+      <h3>استایل روزانه</h3>
+      <p>پیراهن آبی + شلوار کتان + کفش اسپرت</p>
+      <p class="note">مناسب روزهای گرم و رسمی کژوال</p>
+      <div class="tags">
+        <span class="accent">مناسب فرم بدن شما</span>
+        <span class="primary">کژوال</span>
+      </div>
+      <button class="save-btn" data-id="2">⭐ ذخیره</button>
     </div>
-    <button class="save-btn" data-id="3">⭐ ذخیره</button>
+    <div class="outfit-card">
+      <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
+      <h3>استایل روزانه</h3>
+      <p>پیراهن مشکی + شلوار جین + کت جین</p>
+      <p class="note">مناسب مهمانی‌ها و استایل کژوال</p>
+      <div class="tags">
+        <span class="accent">مناسب فرم بدن شما</span>
+        <span class="primary">کژوال</span>
+      </div>
+      <button class="save-btn" data-id="3">⭐ ذخیره</button>
+    </div>
   </div>
-</div>
 </div>
 
 <!-- صفحه پیشنهاد -->
 <div id="suggest" class="page">
-<h1 class="main-title">پیشنهاد برای AI استایلیست</h1>
-
-<!-- استفاده از label برای باز شدن گالری روی همه دستگاه‌ها -->
-<label id="uploadBox" for="fileInput">
-  📷 عکس رو بکش اینجا یا کلیک کن
-</label>
-<input type="file" id="fileInput" accept="image/*" hidden>
-
-<textarea id="optionalText" placeholder="توضیح اختیاری بنویس... مثلا مناسبت یا حال و هوای استایل"></textarea>
-<button class="submit-btn" id="submitBtn">ارسال برای AI استایلیست</button>
+  <h1 class="main-title">پیشنهاد برای AI استایلیست</h1>
+  <div class="upload-box" id="uploadBox">
+    <span id="uploadText">📷 روی این کادر کلیک یا عکس بکش</span>
+    <input type="file" id="fileInput" accept="image/*" hidden>
+  </div>
+  <textarea id="optionalText" placeholder="توضیح اختیاری بنویس... مثلا مناسبت یا حال و هوای استایل"></textarea>
+  <button class="submit-btn" id="submitBtn">ارسال برای AI استایلیست</button>
 </div>
 
 <!-- صفحه پروفایل -->
 <div id="profile" class="page">
-<div class="profile-card">
-  <h3>کاربر مهمان</h3>
-  <p>guest@example.com</p>
-</div>
-<div class="section-title">اطلاعات بدنی</div>
-<div class="profile-card">
-  <div class="info-row"><span>قد</span><span>175 سانتی‌متر</span></div>
-  <div class="info-row"><span>وزن</span><span>70 کیلوگرم</span></div>
-  <div class="info-row"><span>فرم بدن</span><span>ورزشکاری</span></div>
-  <div class="info-row"><span>هویت جنسیتی</span><span>مرد</span></div>
-</div>
-<div class="section-title">تنظیمات</div>
-<div class="setting-item"><span>🌙 حالت تاریک</span><span>‹</span></div>
-<div class="setting-item logout"><span>⏻ خروج از حساب</span><span>‹</span></div>
+  <div class="profile-card">
+    <h3>کاربر مهمان</h3>
+    <p>guest@example.com</p>
+  </div>
+  <div class="section-title">اطلاعات بدنی</div>
+  <div class="profile-card">
+    <div class="info-row"><span>قد</span><span>175 سانتی‌متر</span></div>
+    <div class="info-row"><span>وزن</span><span>70 کیلوگرم</span></div>
+    <div class="info-row"><span>فرم بدن</span><span>ورزشکاری</span></div>
+    <div class="info-row"><span>هویت جنسیتی</span><span>مرد</span></div>
+  </div>
+  <div class="section-title">تنظیمات</div>
+  <div class="setting-item"><span>🌙 حالت تاریک</span><span>‹</span></div>
+  <div class="setting-item logout"><span>⏻ خروج از حساب</span><span>‹</span></div>
 </div>
 
 <!-- منوی پایین -->
 <div class="bottom-nav">
-<div class="nav-indicator"></div>
-<button class="active" data-page="home"><span>🏡</span><span>خانه</span></button>
-<button data-page="suggest"><span>✨</span><span>پیشنهاد</span></button>
-<button data-page="profile"><span>👤</span><span>پروفایل</span></button>
+  <div class="nav-indicator"></div>
+  <button class="active" data-page="home"><span>🏡</span><span>خانه</span></button>
+  <button data-page="suggest"><span>✨</span><span>پیشنهاد</span></button>
+  <button data-page="profile"><span>👤</span><span>پروفایل</span></button>
 </div>
 
 <script src="sarvar-upload-gemini.js"></script>
@@ -160,6 +172,7 @@ document.querySelectorAll(".save-btn").forEach(btn=>{
 const pages=document.querySelectorAll(".page");
 const buttons=document.querySelectorAll(".bottom-nav button");
 const indicator=document.querySelector(".nav-indicator");
+
 function switchPage(pageId,btn){
   pages.forEach(p=>p.classList.remove("active"));
   document.getElementById(pageId).classList.add("active");
@@ -169,21 +182,18 @@ function switchPage(pageId,btn){
   const parentRect=btn.parentElement.getBoundingClientRect();
   indicator.style.left=(rect.left-parentRect.left+rect.width/2-12)+"px";
 }
-buttons.forEach(btn=>{
-  btn.addEventListener("click",()=>{ switchPage(btn.dataset.page,btn); });
-});
-window.addEventListener("load",()=>{ switchPage("home",document.querySelector(".bottom-nav button.active")); });
+
+buttons.forEach(btn=>{btn.addEventListener("click",()=>{switchPage(btn.dataset.page,btn);});});
+window.addEventListener("load",()=>{switchPage("home",document.querySelector(".bottom-nav button.active"));});
 
 // خروج از حساب
-const logoutBtn = document.querySelector(".logout");
-logoutBtn.addEventListener("click", () => {
+document.querySelector(".logout").addEventListener("click",()=>{
   localStorage.removeItem("vira_session");
   localStorage.removeItem("vira_form_done");
   localStorage.removeItem("onboardingData");
-  Object.keys(localStorage).forEach(key => { if (key.startsWith("saved-")) localStorage.removeItem(key); });
-  window.location.href = "index.html";
+  Object.keys(localStorage).forEach(key=>{if(key.startsWith("saved-")) localStorage.removeItem(key);});
+  window.location.href="index.html";
 });
 </script>
-
 </body>
 </html>
