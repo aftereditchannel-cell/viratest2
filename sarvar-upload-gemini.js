@@ -1,59 +1,90 @@
-import express from "express";
-import multer from "multer";
-import cors from "cors";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import fs from "fs";
+// فایل sarvar-upload-gemini.js
 
-const app = express();
-const upload = multer({ dest: "uploads/" });
+const uploadBox = document.getElementById("uploadBox");
+const fileInput = document.getElementById("fileInput");
+const submitBtn = document.getElementById("submitBtn");
+const optionalText = document.getElementById("optionalText");
+let selectedFile = null;
 
-app.use(cors());
+// ===== مدیریت آپلود تصویر =====
+if (uploadBox && fileInput) {
+  uploadBox.addEventListener("click", () => fileInput.click());
 
-const genAI = new GoogleGenerativeAI("AIzaSyDzJEG1ucF4umvMyxn0Xqe6JbQO1SiACNE");
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (file) {
+      selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = e => uploadBox.innerHTML = `<img src="${e.target.result}">`;
+      reader.readAsDataURL(file);
+    }
+  });
 
-app.post("/api/stylist", upload.single("image"), async (req, res) => {
-  try {
+  uploadBox.addEventListener("dragover", e => {
+    e.preventDefault();
+    uploadBox.classList.add("dragover");
+  });
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash"
-    });
+  uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
 
-    const imageBuffer = fs.readFileSync(req.file.path);
-    const base64Image = imageBuffer.toString("base64");
+  uploadBox.addEventListener("drop", e => {
+    e.preventDefault();
+    uploadBox.classList.remove("dragover");
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = e => uploadBox.innerHTML = `<img src="${e.target.result}">`;
+      reader.readAsDataURL(file);
+    }
+  });
+}
 
-    const prompt = `
-تو یک AI استایلیست حرفه‌ای هستی.
-بر اساس تصویر کاربر و توضیح او پیشنهاد استایل بده.
-پیشنهادت دقیق، کاربردی و مرحله‌به‌مرحله باشد.
-لحن دوستانه باشد.
-متن کاربر:
-${req.body.text}
-`;
+// ===== ارسال به Gemini API =====
+if (submitBtn) {
+  submitBtn.addEventListener("click", async () => {
+    if (!selectedFile) {
+      alert("اول عکس انتخاب کن");
+      return;
+    }
 
-    const result = await model.generateContent([
-      prompt,
-      {
-        inlineData: {
-          mimeType: req.file.mimetype,
-          data: base64Image,
-        },
-      },
-    ]);
+    const reader = new FileReader();
+    reader.onload = async e => {
+      const base64Image = e.target.result.split(",")[1];
+      alert("در حال پردازش... ⏳");
 
-    fs.unlinkSync(req.file.path);
+      try {
+        const res = await fetch("https://generativelanguage.googleapis.com/v1beta2/models/gemini-1.5-flash:generateMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer AIzaSyDzJEG1ucF4umvMyxn0Xqe6JbQO1SiACNE"
+          },
+          body: JSON.stringify({
+            prompt: {
+              messages: [
+                {
+                  author: "user",
+                  content: [
+                    { type: "text", text: `تو یک AI استایلیست حرفه‌ای هستی. متن کاربر: ${optionalText.value}` },
+                    { type: "image", image: { imageBytes: base64Image, mimeType: selectedFile.type } }
+                  ]
+                }
+              ]
+            }
+          })
+        });
 
-    res.json({
-      reply: result.response.text()
-    });
+        const data = await res.json();
+        const answer = data.candidates?.[0]?.content?.map(c => c.type === "text" ? c.text : "").join("\n") || "پاسخ خالی";
+        alert("جواب AI:\n" + answer);
 
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "خطا در پردازش درخواست"
-    });
-  }
-});
+      } catch (err) {
+        console.error(err);
+        alert("خطا در دریافت پاسخ AI ❌");
+      }
+    };
 
-app.listen(3000, () => {
-  console.log("Gemini Upload Server running on port 3000");
-});
+    reader.readAsDataURL(selectedFile);
+  });
+}
