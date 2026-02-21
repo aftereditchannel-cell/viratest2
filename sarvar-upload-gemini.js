@@ -1,90 +1,136 @@
-// فایل sarvar-upload-gemini.js
+// ===== sarvar-upload-gemini.js =====
 
+// ===== انتخاب صفحات و منوی پایین =====
+const pages = document.querySelectorAll(".page");
+const buttons = document.querySelectorAll(".bottom-nav button");
+const indicator = document.querySelector(".nav-indicator");
+
+function switchPage(pageId, btn) {
+  pages.forEach(p => p.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+
+  document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  const rect = btn.getBoundingClientRect();
+  const parentRect = btn.parentElement.getBoundingClientRect();
+  indicator.style.left = (rect.left - parentRect.left + rect.width/2 - 12) + "px";
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    switchPage(btn.dataset.page, btn);
+  });
+});
+
+window.addEventListener("load", () => {
+  const activeBtn = document.querySelector(".bottom-nav button.active") || buttons[0];
+  switchPage(activeBtn.dataset.page, activeBtn);
+});
+
+// ===== ذخیره استایل‌ها =====
+document.querySelectorAll(".save-btn").forEach(btn => {
+  const id = btn.dataset.id;
+  if(localStorage.getItem("saved-"+id) === "true") {
+    btn.classList.add("saved");
+    btn.textContent = "✓ ذخیره شد";
+  }
+
+  btn.addEventListener("click", () => {
+    btn.classList.toggle("saved");
+    if(btn.classList.contains("saved")) {
+      btn.textContent = "✓ ذخیره شد";
+      localStorage.setItem("saved-"+id, "true");
+    } else {
+      btn.textContent = "⭐ ذخیره";
+      localStorage.removeItem("saved-"+id);
+    }
+  });
+});
+
+// ===== آپلود تصویر =====
 const uploadBox = document.getElementById("uploadBox");
 const fileInput = document.getElementById("fileInput");
-const submitBtn = document.getElementById("submitBtn");
-const optionalText = document.getElementById("optionalText");
 let selectedFile = null;
 
-// ===== مدیریت آپلود تصویر =====
-if (uploadBox && fileInput) {
+if(uploadBox){
   uploadBox.addEventListener("click", () => fileInput.click());
 
   fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
-    if (file) {
-      selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = e => uploadBox.innerHTML = `<img src="${e.target.result}">`;
-      reader.readAsDataURL(file);
-    }
+    if(file) showSelectedFile(file);
   });
 
-  uploadBox.addEventListener("dragover", e => {
+  uploadBox.addEventListener("dragover", (e) => {
     e.preventDefault();
     uploadBox.classList.add("dragover");
   });
 
   uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
 
-  uploadBox.addEventListener("drop", e => {
+  uploadBox.addEventListener("drop", (e) => {
     e.preventDefault();
     uploadBox.classList.remove("dragover");
     const file = e.dataTransfer.files[0];
-    if (file) {
-      selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = e => uploadBox.innerHTML = `<img src="${e.target.result}">`;
-      reader.readAsDataURL(file);
-    }
+    if(file) showSelectedFile(file);
   });
 }
 
+function showSelectedFile(file){
+  selectedFile = file;
+  const reader = new FileReader();
+  reader.onload = e => {
+    uploadBox.innerHTML = `<img src="${e.target.result}">`;
+  };
+  reader.readAsDataURL(file);
+}
+
 // ===== ارسال به Gemini API =====
-if (submitBtn) {
+const submitBtn = document.getElementById("submitBtn");
+if(submitBtn){
   submitBtn.addEventListener("click", async () => {
-    if (!selectedFile) {
+    if(!selectedFile){
       alert("اول عکس انتخاب کن");
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = async e => {
-      const base64Image = e.target.result.split(",")[1];
-      alert("در حال پردازش... ⏳");
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    formData.append("text", document.getElementById("optionalText").value);
 
-      try {
-        const res = await fetch("https://generativelanguage.googleapis.com/v1beta2/models/gemini-1.5-flash:generateMessage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer AIzaSyDzJEG1ucF4umvMyxn0Xqe6JbQO1SiACNE"
-          },
-          body: JSON.stringify({
-            prompt: {
-              messages: [
-                {
-                  author: "user",
-                  content: [
-                    { type: "text", text: `تو یک AI استایلیست حرفه‌ای هستی. متن کاربر: ${optionalText.value}` },
-                    { type: "image", image: { imageBytes: base64Image, mimeType: selectedFile.type } }
-                  ]
-                }
-              ]
-            }
-          })
-        });
+    try {
+      const response = await fetch("https://api.gemini.com/v1/your-endpoint", { // آدرس واقعی API خودت رو بذار
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer AIzaSyDzJEG1ucF4umvMyxn0Xqe6JbQO1SiACNE"
+        },
+        body: formData
+      });
 
-        const data = await res.json();
-        const answer = data.candidates?.[0]?.content?.map(c => c.type === "text" ? c.text : "").join("\n") || "پاسخ خالی";
-        alert("جواب AI:\n" + answer);
+      if(!response.ok) throw new Error("خطا در ارسال به سرور");
 
-      } catch (err) {
-        console.error(err);
-        alert("خطا در دریافت پاسخ AI ❌");
-      }
-    };
+      const data = await response.json();
+      alert("جواب AI:\n" + (data.result || JSON.stringify(data)));
 
-    reader.readAsDataURL(selectedFile);
+    } catch(err) {
+      console.error(err);
+      alert("خطا در ارسال یا دریافت پاسخ");
+    }
+  });
+}
+
+// ===== خروج از حساب =====
+const logoutBtn = document.querySelector(".logout");
+if(logoutBtn){
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("vira_session");
+    localStorage.removeItem("vira_form_done");
+    localStorage.removeItem("onboardingData");
+
+    Object.keys(localStorage).forEach(key => {
+      if(key.startsWith("saved-")) localStorage.removeItem(key);
+    });
+
+    window.location.href = "index.html";
   });
 }
