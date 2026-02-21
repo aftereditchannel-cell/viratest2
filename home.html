@@ -7,52 +7,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Vazirmatn',sans-serif;}
-body{ margin:0; background:#1a1a1a; color:#fff; min-height:100vh; }
-/* صفحات */
-.page{ display:none; padding:16px; margin-bottom:80px; }
+body{margin:0;background:#1a1a1a;color:#fff;min-height:100vh;}
+.page{display:none;padding:16px;margin-bottom:80px;}
 .page.active{display:block;}
 .text-muted-foreground{font-size:14px;color:rgb(135,135,146);}
 .main-title{font-size:22px;font-weight:700;margin:4px 0 16px;}
 .quick-actions{display:grid;gap:12px;margin-bottom:24px;}
-.gradient-btn{ height:52px;border:none;border-radius:16px; padding:16px;font-size:15px;color:#fff; cursor:pointer;text-align:right;font-weight:500; }
+.gradient-btn{height:52px;border:none;border-radius:16px;padding:16px;font-size:15px;color:#fff;cursor:pointer;text-align:right;font-weight:500;}
 .today-btn{background:linear-gradient(to left,#735af2,#3d7af5);}
 .party-btn{background:linear-gradient(to left,#3d7af5,#735af2);}
 .surprise-btn{background:linear-gradient(to left,#3d7af5,#735af2);}
 h2{font-size:18px;margin-bottom:12px;}
-.suggestions{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.outfit-card{ border-radius:12px; border:1px solid rgba(34,34,42,0.5); background:rgb(20,20,26); display:flex; flex-direction:column; overflow:hidden; }
-.card-top{ height:100px; background:linear-gradient(to left bottom,rgba(115,90,242,0.2),rgba(61,122,245,0.1)); display:flex;align-items:center;justify-content:center; font-size:12px;font-weight:500; }
+.suggestions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.outfit-card{border-radius:12px;border:1px solid rgba(34,34,42,0.5);background:rgb(20,20,26);display:flex;flex-direction:column;overflow:hidden;}
+.card-top{height:100px;background:linear-gradient(to left bottom,rgba(115,90,242,0.2),rgba(61,122,245,0.1));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;}
 .outfit-card h3{font-size:14px;margin:8px;font-weight:600;}
 .outfit-card p{font-size:12px;margin:0 8px 4px 8px;}
 .outfit-card p.note{font-size:11px;color:#aaa;}
 .tags{display:flex;gap:4px;padding:0 8px;flex-wrap:wrap;}
-.tags span{ font-size:10px;padding:2px 6px; border-radius:9999px;font-weight:500; }
+.tags span{font-size:10px;padding:2px 6px;border-radius:9999px;font-weight:500;}
 .accent{background:rgba(61,122,245,0.1);color:#3d7af5;}
 .primary{background:rgba(115,90,242,0.1);color:#735af2;}
-.save-btn{ height:30px;margin:6px 8px 10px; border-radius:9999px;border:1px solid #2c2c2c; background:rgb(13,13,18);color:#fff; font-size:12px;cursor:pointer;transition:0.3s; }
-.save-btn.saved{ background:linear-gradient(to left,#735af2,#3d7af5); border:none; }
-/* ===== پروفایل ===== */
-.profile-card{ background:#141927; border-radius:24px; padding:20px; margin-bottom:24px; }
-.section-title{ font-size:16px; color:rgba(255,255,255,0.7); margin-bottom:14px; }
-.info-row{ display:flex; justify-content:space-between; margin-bottom:14px; }
-.setting-item{ background:#141927; border-radius:20px; padding:16px; display:flex; justify-content:space-between; margin-bottom:12px; cursor:pointer; }
+.save-btn{height:30px;margin:6px 8px 10px;border-radius:9999px;border:1px solid #2c2c2c;background:rgb(13,13,18);color:#fff;font-size:12px;cursor:pointer;transition:0.3s;}
+.save-btn.saved{background:linear-gradient(to left,#735af2,#3d7af5);border:none;}
+.profile-card{background:#141927;border-radius:24px;padding:20px;margin-bottom:24px;}
+.section-title{font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:14px;}
+.info-row{display:flex;justify-content:space-between;margin-bottom:14px;}
+.setting-item{background:#141927;border-radius:20px;padding:16px;display:flex;justify-content:space-between;margin-bottom:12px;cursor:pointer;}
 .logout{color:#FF4C4C;}
-/* ===== صفحه پیشنهاد ===== */
-.upload-box{ border:2px dashed #3d7af5; border-radius:20px; height:220px; display:flex; align-items:center; justify-content:center; text-align:center; color:#aaa; cursor:pointer; transition:0.3s; background:#141927; }
-.upload-box.dragover{ background:#1f2540; border-color:#735af2; }
-.upload-box img{ max-width:100%; max-height:100%; border-radius:16px; }
-#optionalText{ width:100%; margin-top:16px; border-radius:16px; border:1px solid #2c2c2c; background:#141927; color:#fff; padding:12px; resize:none; min-height:100px; }
-.submit-btn{ width:100%; margin-top:16px; height:50px; border:none; border-radius:16px; background:linear-gradient(to left,#735af2,#3d7af5); color:#fff; font-weight:600; cursor:pointer; }
-/* ===== منوی پایین ===== */
-.bottom-nav{ position:fixed; bottom:0; left:0; width:100%; height:65px; display:flex; align-items:center; justify-content:space-around; background:#2c2c2c; z-index:999; }
-.nav-indicator{ position:absolute; top:0; height:2px; width:24px; background:linear-gradient(135deg,#735af2,#3d7af5); transition:0.3s; }
-.bottom-nav button{ background:none; border:none; color:#fff; display:flex; flex-direction:column; align-items:center; cursor:pointer; font-weight:500; }
+.upload-box{border:2px dashed #3d7af5;border-radius:20px;height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:#aaa;cursor:pointer;transition:0.3s;background:#141927;}
+.upload-box.dragover{background:#1f2540;border-color:#735af2;}
+.upload-box img{max-width:100%;max-height:100%;border-radius:16px;}
+#optionalText{width:100%;margin-top:16px;border-radius:16px;border:1px solid #2c2c2c;background:#141927;color:#fff;padding:12px;resize:none;min-height:100px;}
+.submit-btn{width:100%;margin-top:16px;height:50px;border:none;border-radius:16px;background:linear-gradient(to left,#735af2,#3d7af5);color:#fff;font-weight:600;cursor:pointer;}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;height:65px;display:flex;align-items:center;justify-content:space-around;background:#2c2c2c;z-index:999;}
+.nav-indicator{position:absolute;top:0;height:2px;width:24px;background:linear-gradient(135deg,#735af2,#3d7af5);transition:0.3s;}
+.bottom-nav button{background:none;border:none;color:#fff;display:flex;flex-direction:column;align-items:center;cursor:pointer;font-weight:500;}
 .bottom-nav button.active{color:#4f46e5;}
 </style>
 </head>
 <body>
 
-<!-- ===== صفحه خانه ===== -->
+<!-- صفحه خانه -->
 <div id="home" class="page active">
 <p class="text-muted-foreground">سلام، امیر! 👋</p>
 <h1 class="main-title">امروز چیکار کنیم؟</h1>
@@ -61,7 +57,6 @@ h2{font-size:18px;margin-bottom:12px;}
   <button class="gradient-btn party-btn">🎉 یه مهمانی دارم</button>
   <button class="gradient-btn surprise-btn">🎲 سورپرایزم کن</button>
 </div>
-
 <h2>پیشنهاد امروز</h2>
 <div class="suggestions">
   <div class="outfit-card">
@@ -75,7 +70,6 @@ h2{font-size:18px;margin-bottom:12px;}
     </div>
     <button class="save-btn" data-id="1">⭐ ذخیره</button>
   </div>
-
   <div class="outfit-card">
     <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
     <h3>استایل روزانه</h3>
@@ -87,7 +81,6 @@ h2{font-size:18px;margin-bottom:12px;}
     </div>
     <button class="save-btn" data-id="2">⭐ ذخیره</button>
   </div>
-
   <div class="outfit-card">
     <div class="card-top">🌟 استایل ویژه امروز 🌟</div>
     <h3>استایل روزانه</h3>
@@ -102,18 +95,21 @@ h2{font-size:18px;margin-bottom:12px;}
 </div>
 </div>
 
-<!-- ===== صفحه پیشنهاد ===== -->
+<!-- صفحه پیشنهاد -->
 <div id="suggest" class="page">
 <h1 class="main-title">پیشنهاد برای AI استایلیست</h1>
-<div class="upload-box" id="uploadBox">
-  <span>📷 عکس رو بکش اینجا یا کلیک کن</span>
-  <input type="file" id="fileInput" accept="image/*" hidden>
-</div>
+
+<!-- استفاده از label برای باز شدن گالری روی همه دستگاه‌ها -->
+<label id="uploadBox" for="fileInput">
+  📷 عکس رو بکش اینجا یا کلیک کن
+</label>
+<input type="file" id="fileInput" accept="image/*" hidden>
+
 <textarea id="optionalText" placeholder="توضیح اختیاری بنویس... مثلا مناسبت یا حال و هوای استایل"></textarea>
 <button class="submit-btn" id="submitBtn">ارسال برای AI استایلیست</button>
 </div>
 
-<!-- ===== صفحه پروفایل ===== -->
+<!-- صفحه پروفایل -->
 <div id="profile" class="page">
 <div class="profile-card">
   <h3>کاربر مهمان</h3>
@@ -131,14 +127,15 @@ h2{font-size:18px;margin-bottom:12px;}
 <div class="setting-item logout"><span>⏻ خروج از حساب</span><span>‹</span></div>
 </div>
 
-<!-- ===== منوی پایین ===== -->
+<!-- منوی پایین -->
 <div class="bottom-nav">
-  <div class="nav-indicator"></div>
-  <button class="active" data-page="home"><span>🏡</span><span>خانه</span></button>
-  <button data-page="suggest"><span>✨</span><span>پیشنهاد</span></button>
-  <button data-page="profile"><span>👤</span><span>پروفایل</span></button>
+<div class="nav-indicator"></div>
+<button class="active" data-page="home"><span>🏡</span><span>خانه</span></button>
+<button data-page="suggest"><span>✨</span><span>پیشنهاد</span></button>
+<button data-page="profile"><span>👤</span><span>پروفایل</span></button>
 </div>
 
+<script src="sarvar-upload-gemini.js"></script>
 <script>
 // ذخیره استایل‌ها
 document.querySelectorAll(".save-btn").forEach(btn=>{
@@ -175,41 +172,15 @@ function switchPage(pageId,btn){
 buttons.forEach(btn=>{
   btn.addEventListener("click",()=>{ switchPage(btn.dataset.page,btn); });
 });
-window.addEventListener("load",()=>{
-  switchPage("home",document.querySelector(".bottom-nav button.active"));
-});
-
-// آپلود تصویر و ارسال به سرور واسط
-const submitBtn = document.getElementById("submitBtn");
-if(submitBtn){
-  submitBtn.addEventListener("click", async ()=>{
-    const fileInput = document.getElementById("fileInput");
-    const textInput = document.getElementById("optionalText");
-    const selectedFile = fileInput.files[0];
-    if(!selectedFile){ alert("لطفا اول یک عکس انتخاب کنید"); return; }
-
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-    formData.append("text", textInput.value || "");
-
-    try{
-      const response = await fetch("upload.php", { method:"POST", body: formData });
-      const data = await response.json();
-      alert("جواب AI:\n"+JSON.stringify(data));
-    }catch(err){
-      console.error(err);
-      alert("خطا در ارسال یا دریافت پاسخ");
-    }
-  });
-}
+window.addEventListener("load",()=>{ switchPage("home",document.querySelector(".bottom-nav button.active")); });
 
 // خروج از حساب
 const logoutBtn = document.querySelector(".logout");
-logoutBtn.addEventListener("click", ()=>{
+logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("vira_session");
   localStorage.removeItem("vira_form_done");
   localStorage.removeItem("onboardingData");
-  Object.keys(localStorage).forEach(key => { if(key.startsWith("saved-")) localStorage.removeItem(key); });
+  Object.keys(localStorage).forEach(key => { if (key.startsWith("saved-")) localStorage.removeItem(key); });
   window.location.href = "index.html";
 });
 </script>
