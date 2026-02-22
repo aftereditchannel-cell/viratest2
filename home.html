@@ -110,15 +110,10 @@ h2{font-size:18px;margin-bottom:12px;}
   </div>
 </div>
 
-<!-- صفحه پیشنهاد -->
+<!-- صفحه پیشنهاد (وب‌ویو) -->
 <div id="suggest" class="page">
   <h1 class="main-title">پیشنهاد برای AI استایلیست</h1>
-  <div class="upload-box" id="uploadBox">
-    <span id="uploadText">📷 روی این کادر کلیک یا عکس بکش</span>
-    <input type="file" id="fileInput" accept="image/*" hidden>
-  </div>
-  <textarea id="optionalText" placeholder="توضیح اختیاری بنویس... مثلا مناسبت یا حال و هوای استایل"></textarea>
-  <button class="submit-btn" id="submitBtn">ارسال برای AI استایلیست</button>
+  <iframe id="webview" src="https://outfit-oracle-free.lovable.app/"></iframe>
 </div>
 
 <!-- صفحه پروفایل -->
@@ -197,3 +192,4 @@ document.querySelector(".logout").addEventListener("click",()=>{
 </script>
 </body>
 </html>
+
