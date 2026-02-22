@@ -56,36 +56,6 @@ h2{font-size:18px;margin-bottom:12px;}
   border: none;
   border-radius: 16px;
 }
-  .add-btn{
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  border:none;
-  background:linear-gradient(135deg,#5b4dff,#4a8dff);
-  color:white;
-  font-size:28px;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(90,70,255,0.4);
-}
-
-.event-list{margin-top:20px;}
-
-.event-card{
-  background:#111117;
-  border-radius:20px;
-  padding:16px;
-  margin-bottom:12px;
-  display:flex;
-  justify-content:space-between;
-}
-
-.delete-btn{
-  border:1px solid #ff4d6d;
-  color:#ff4d6d;
-  background:transparent;
-  border-radius:12px;
-  padding:4px 10px;
-}
 .upload-box.dragover{background:#1f2540;border-color:#735af2;}
 .upload-box img{max-width:100%;max-height:100%;border-radius:16px;object-fit:contain;}
 #optionalText{width:100%;margin-top:16px;border-radius:16px;border:1px solid #2c2c2c;background:#141927;color:#fff;padding:12px;resize:none;min-height:100px;}
@@ -151,24 +121,6 @@ h2{font-size:18px;margin-bottom:12px;}
   <iframe id="webview" src="https://outfit-oracle-free.lovable.app/"></iframe>
 </div>
 
-<!-- Modal -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <h2>افزودن رویداد</h2>
-
-    <input id="eventName" type="text" placeholder="نام رویداد">
-    <input id="eventDate" type="date">
-
-    <div class="type-buttons">
-      <button data-type="نیمه‌رسمی">نیمه‌رسمی</button>
-      <button data-type="رسمی">رسمی</button>
-      <button data-type="کژوال">کژوال</button>
-    </div>
-
-    <button id="saveEvent" class="save-btn">افزودن رویداد</button>
-  </div>
-</div>
-  
 <!-- صفحه پروفایل -->
 <div id="profile" class="page">
   <div class="profile-card">
@@ -192,7 +144,6 @@ h2{font-size:18px;margin-bottom:12px;}
   <div class="nav-indicator"></div>
   <button class="active" data-page="home"><span>🏡</span><span>خانه</span></button>
   <button data-page="suggest"><span>✨</span><span>پیشنهاد</span></button>
-  <button data-page="events"><span>📅</span><span>رویداد ها</span></button>
   <button data-page="profile"><span>👤</span><span>پروفایل</span></button>
 </div>
 
@@ -235,124 +186,6 @@ function switchPage(pageId,btn){
 buttons.forEach(btn=>{btn.addEventListener("click",()=>{switchPage(btn.dataset.page,btn);});});
 window.addEventListener("load",()=>{switchPage("home",document.querySelector(".bottom-nav button.active"));});
 
-  // ===== Event Manager =====
-let selectedType = "";
-
-document.querySelectorAll(".type-buttons button").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    selectedType = btn.dataset.type;
-  });
-});
-
-const openModal = document.getElementById("openModal");
-const modal = document.getElementById("modal");
-const saveEvent = document.getElementById("saveEvent");
-const eventList = document.getElementById("eventList");
-
-openModal?.addEventListener("click",()=> modal.style.display="flex");
-
-modal?.addEventListener("click",(e)=>{
-  if(e.target === modal) modal.style.display="none";
-});
-
-saveEvent?.addEventListener("click",()=>{
-  const name = document.getElementById("eventName").value;
-  const date = document.getElementById("eventDate").value;
-
-  if(!name || !date) return;
-
-  const card = document.createElement("div");
-  card.className = "event-card";
-
-  card.innerHTML = `
-    <div>
-      <h3>${name}</h3>
-      <span>${date} | ${selectedType}</span>
-    </div>
-    <button class="delete-btn">حذف</button>
-  `;
-
-  card.querySelector(".delete-btn").onclick = () => card.remove();
-
-  eventList.appendChild(card);
-
-  document.getElementById("eventName").value = "";
-  document.getElementById("eventDate").value = "";
-  modal.style.display = "none";
-});
-  // ===== Event Manager =====
-let selectedType = "";
-
-document.querySelectorAll(".type-buttons button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".type-buttons button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    selectedType = btn.dataset.type;
-  });
-});
-
-const openModal = document.getElementById("openModal");
-const modal = document.getElementById("modal");
-const saveEvent = document.getElementById("saveEvent");
-const eventList = document.getElementById("eventList");
-
-// ذخیره localStorage
-let events = JSON.parse(localStorage.getItem("events") || "[]");
-
-function renderEvents() {
-  eventList.innerHTML = "";
-
-  events.forEach((ev, index) => {
-    const card = document.createElement("div");
-    card.className = "event-card";
-
-    card.innerHTML = `
-      <div>
-        <h3>${ev.name}</h3>
-        <span>${ev.date} | ${ev.type}</span>
-      </div>
-      <button class="delete-btn">حذف</button>
-    `;
-
-    card.querySelector(".delete-btn").onclick = () => {
-      events.splice(index, 1);
-      localStorage.setItem("events", JSON.stringify(events));
-      renderEvents();
-    };
-
-    eventList.appendChild(card);
-  });
-}
-
-// باز کردن مودال
-openModal?.addEventListener("click", () => {
-  modal.style.display = "flex";
-});
-
-// بستن مودال وقتی بیرونش کلیک شد
-modal?.addEventListener("click", (e) => {
-  if (e.target === modal) modal.style.display = "none";
-});
-
-// ذخیره رویداد
-saveEvent?.addEventListener("click", () => {
-  const name = document.getElementById("eventName").value;
-  const date = document.getElementById("eventDate").value;
-
-  if (!name || !date || !selectedType) return;
-
-  events.push({ name, date, type: selectedType });
-  localStorage.setItem("events", JSON.stringify(events));
-
-  document.getElementById("eventName").value = "";
-  document.getElementById("eventDate").value = "";
-  modal.style.display = "none";
-
-  renderEvents();
-});
-
-// نمایش اولیه
-renderEvents();
 // خروج از حساب
 document.querySelector(".logout").addEventListener("click",()=>{
   localStorage.removeItem("vira_session");
@@ -364,7 +197,5 @@ document.querySelector(".logout").addEventListener("click",()=>{
 </script>
 </body>
 </html>
-
-
 
 
