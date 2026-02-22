@@ -39,3 +39,10 @@
 
 .loader-hide{animation: loaderOut .9s cubic-bezier(.77,0,.18,1) forwards;}
 @keyframes loaderOut{to{opacity:0;transform:scale(1.08);visibility:hidden;}}
+
+iframe#webview{
+  width: 100%;
+  height: calc(100vh - 140px);
+  border: none;
+  border-radius: 16px;
+}
